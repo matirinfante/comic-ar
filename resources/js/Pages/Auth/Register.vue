@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
+// import JetAuthenticationCard from '@/Components/AuthenticationCard.vue';
+import JetAuthenticationCard from '@/Components/RegisterCard.vue';
 import JetAuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
 import JetButton from '@/Components/Button.vue';
 import JetInput from '@/Components/Input.vue';
@@ -31,7 +32,14 @@ const submit = () => {
             <JetAuthenticationCardLogo />
         </template>
 
+        
+
         <form @submit.prevent="submit">
+            <div class="block mt-10 mb-5 text-center">
+                <!-- ... -->
+                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">¿Ya posees
+                una cuenta? ¡Ingresa aquí!</Link>
+            </div>
             <div>
                 <JetLabel for="name" value="Name" />
                 <JetInput
@@ -101,6 +109,7 @@ const submit = () => {
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                     Already registered?
                 </Link>
+                
 
                 <JetButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
