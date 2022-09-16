@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('volumes', function(Blueprint $table){
             $table->id();
             $table->string('title');
+            $table->string('ISBN')->nullable();
+            $table->string('argument')->nullable();
+            $table->string('coverImage')->default('/assets/cover/default.png');
+            //TODO authors
             $table->foreignId('edition_id')->constrained();
+            $table->timestamps();
         });
     }
 
