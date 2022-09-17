@@ -15,9 +15,13 @@ return new class extends Migration
     {
         Schema::create('editions', function(Blueprint $table){
             $table->id();
-            $table->string('publisher');
+            $table->string('title');
+            $table->string('publisher'); //might refer to a list of publishers?
+            $table->string('language');
+            $table->enum('format', ['Rustica/TPB (tapa blanda)', 'Grapa', 'Tapa dura', 'Bolsillo']);
+            $table->boolean('isStandalone');
+            $table->boolean('isClosed')->default(false);
             $table->string('description');
-            $table->foreignId('user_id')->constrained();
         });
     }
 
