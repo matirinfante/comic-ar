@@ -57,19 +57,13 @@ const logout = () => {
                                 </JetNavLink>
                             </div>
 
-                            <!-- novedades -->
+                            <!-- Ediciones -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <JetNavLink :href="route('dashboard')">
-                                    Novedades
+                                <JetNavLink :href="route('editions.index')" :active="route().current('editions.index')">
+                                    Ediciones
                                 </JetNavLink>
                             </div>
 
-                            <!-- about -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
-                                <JetNavLink :href="route('dashboard')">
-                                    Sobre nosotros
-                                </JetNavLink>
-                            </div>
 
                         </div>
 

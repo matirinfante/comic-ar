@@ -35,11 +35,6 @@ const submit = () => {
         
 
         <form @submit.prevent="submit">
-            <div class="block mt-10 mb-5 text-center">
-                <!-- ... -->
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">¿Ya posees
-                una cuenta? ¡Ingresa aquí!</Link>
-            </div>
             <div>
                 <JetLabel for="name" value="Name" />
                 <JetInput
