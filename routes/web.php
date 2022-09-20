@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EditionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,4 +36,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('/editions', EditionController::class);
+    Route::resource('/users',UserController::class);
 });
+
+//Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
