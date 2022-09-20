@@ -14,6 +14,6 @@ class Volume extends Model
     ];
 
     public function edition(){
-        return $this->belongsTo();
+        return $this->belongsTo(Edition::class, 'edition_id');
     }
 }

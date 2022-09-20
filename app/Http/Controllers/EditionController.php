@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Edition;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -36,7 +37,32 @@ class EditionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Falta validar
+
+        $edition = Edition::create([
+            'title' => $request->title,
+            'publisher' => $request->publisher,
+            'language' => $request->language,
+            'format' => $request->format,
+            'isStandalone' => $request->isStandalone,
+            'description' => $request->description
+        ]);
+
+        $edition->save();
+
+        // si no es edición única, se crean los volúmenes asociados a la edición
+        if ($request->isStandalone == false) {
+            $cantVol = $request->cantVol;
+            for ($i = 0; $i < $cantVol; $i++) {
+                Volume::create([
+                    'title' => $edition->title,
+                    'edition_id' => $edition->id
+                ])->save();
+            }
+        }
+
+        return Inertia::render('Editions/Index');
     }
 
     /**
