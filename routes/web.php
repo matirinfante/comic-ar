@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EditionController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,12 +32,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     Route::resource('/editions', EditionController::class);
-    Route::resource('/users',UserController::class);
+    Route::resource('/users', UserController::class);
 });
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
