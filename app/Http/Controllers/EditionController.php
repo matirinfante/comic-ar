@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Edition;
-use App\Models\Volume;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Volume;
+use App\Models\Edition;
+use Illuminate\Http\Request;
+use App\Http\Resources\EditionResource;
 
 class EditionController extends Controller
 {
@@ -16,7 +17,8 @@ class EditionController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Editions/Index');
+        $editions = EditionResource::collection(Edition::all());
+        return Inertia::render('Editions/Index', compact('editions'));
     }
 
     /**
@@ -73,7 +75,8 @@ class EditionController extends Controller
      */
     public function show(Edition $edition)
     {
-        //
+        $volumes = Volume::where('edition_id', $edition->id)->get();
+        return Inertia::render('Editions/Show', compact('edition', 'volumes'));
     }
 
     /**
