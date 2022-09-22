@@ -15,9 +15,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $latest = Volume::orderBy('created_at', 'desc')->take(10)->get();
+        $popular = Volume::all()->take(10);
 
-
-       return Inertia::render('Dashboard');
+        return Inertia::render('Dashboard', compact('latest', 'popular'));
     }
 
     /**

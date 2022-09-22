@@ -3,6 +3,12 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import SectionTitle from '@/Components/SectionTitle.vue';
 import SearchInput from "@/Pages/Home/SearchInput.vue";
 import Slider from "@/Pages/Home/Slider.vue";
+
+defineProps({
+    latest: Object,
+    popular: Object
+})
+
 </script>
 
 <template>
@@ -19,9 +25,9 @@ import Slider from "@/Pages/Home/Slider.vue";
                 <!-- contenido central acá -->
                 <SearchInput/>
                 <h2 class="font-medium leading-tight text-3xl mt-10 mb-2 text-blue-600 ">Últimas Novedades</h2>
-                <Slider/>
+                <Slider :data="latest"/>
                 <h2 class="font-medium leading-tight text-3xl mt-6 mb-2 text-blue-600">Populares en ComicAR</h2>
-                <Slider/>
+                <Slider :data="popular"/>
 
 
             </div>

@@ -1,7 +1,10 @@
 <template>
     <carousel :settings="settings" :breakpoints="breakpoints">
-        <slide v-for="slide in 10" :key="slide">
-            <div class="carousel__item">{{ slide }}</div>
+        <slide v-for="(elem,index) in data" :key="index">
+            <div class="mb-4 carousel__item">
+                <img :src="elem.coverImage"
+                     class="object-cover max-w-full rounded-lg" alt="">
+            </div>
         </slide>
 
         <template #addons>
@@ -18,12 +21,16 @@ import {Carousel, Slide, Pagination, Navigation} from 'vue3-carousel';
 
 export default {
     name: 'Slider',
+    props: {
+        data: {type: Array, required: false, default: () => [{id: 0, title: "Hola"}]}
+    },
     components: {
         Carousel,
         Slide,
         Pagination,
         Navigation,
-    }, data: () => ({
+    },
+    data: () => ({
         // carousel settings
         settings: {
             itemsToShow: 2,
@@ -43,7 +50,8 @@ export default {
                 snapAlign: 'start',
             },
         },
-    })
+    }),
+
 };
 </script>
 <style>
