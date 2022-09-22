@@ -21,6 +21,18 @@ defineProps({
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
+                <div class="flex justify-end">
+                    <JetNavLink :href="route('editions.edit', edition.id)"
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <path
+                                d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
+                            <path
+                                d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
+                        </svg>
+                        Editar Información
+                    </JetNavLink>
+                </div>
                 <div class="mx-6 z-40 border-2 rounded-lg">
                     <div class="w-full pb-8 px-4 sm:px-0 bg-slate-700 rounded-t-lg">
                         <p class="text-md text-yellow-300 font-semibold sm:ml-4 md:ml-10 pt-6">
@@ -42,6 +54,16 @@ defineProps({
                         <p class="text-md text-slate-400 font-light sm:ml-4 md:ml-10 pt-1">
                             {{edition.format}}
                         </p>
+                        <div class="flex justify-end">
+                            <p class="text-white mr-10 mt-2 mb-2 md:mb-0">Estado:
+                                <span class="text-green-400 font-semibold" v-if="edition.isClosed == 0">
+                                    En curso
+                                </span>
+                                <span class="text-red-400 font-semibold" v-else>
+                                    Terminada
+                                </span>
+                            </p>
+                        </div>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
@@ -126,10 +148,10 @@ defineProps({
                         <h2 class="text-2xl font-bold text-gray-600 ml-10 mt-20">
                             Descripción
                         </h2>
-                        <p v-if="edition.description != null" class="text-mm text-gray-700 ml-10 pt-6">
+                        <p v-if="edition.description != null" class="text-mm text-gray-700 px-10 pt-6 w-full md:w-1/2">
                             {{edition.description}}
                         </p>
-                        <p v-else class="text-mm text-gray-700 ml-10 pt-6">
+                        <p v-else class="text-mm text-gray-700 px-10 pt-6 w-full md:w-1/2">
                             La edición no cuenta con una descripción
                         </p>
                     </div>
