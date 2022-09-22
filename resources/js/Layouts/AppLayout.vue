@@ -309,7 +309,7 @@ const logout = () => {
             </header>
 
             <!-- Page Content -->
-            <main class="min-h-screen">
+            <main class="min-h-screen pb-20">
                 <slot />
             </main>
         </div>
