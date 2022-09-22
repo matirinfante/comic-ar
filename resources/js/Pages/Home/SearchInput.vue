@@ -1,42 +1,35 @@
-<script>
-import {ref} from 'vue'
-import SearchInput from 'vue-search-input'
-// Optionally import default styling
-import 'vue-search-input/dist/styles.css'
+<template>
+    <div>
+        <VueMultiselect
+            v-model="value"
+            :options="options"
+            :close-on-select="true"
+            :clear-on-select="false"
+            placeholder="Busca un cómic..."
+            label="name"
+            track-by="name"
+            :show-no-options="false"
+        >
+            <template v-slot:noResult>
+                <span>No se han encontrado resultados</span>
+            </template>
+        </VueMultiselect>
+    </div>
+</template>
 
-const searchVal = ref('')
+<script>
+import VueMultiselect from 'vue-multiselect'
 
 export default {
-    data: function (){
+    components: {VueMultiselect},
+    data() {
         return {
-            "type": "search",
-            "modelValue": "",
-            "wrapperClass": "search-input-wrapper",
-            "searchIcon": false,
-            "shortcutIcon": false,
-            "clearIcon": true,
-            "hideShortcutIconOnBlur": true,
-            "clearOnEsc": false,
-            "blurOnEsc": true,
-            "selectOnFocus": false,
-            "shortcutListenerEnabled": true,
-            "shortcutKey": "/"
-        }
-    },
-    components: {
-        SearchInput
-    },
-    setup() {
-        return {
-            searchVal
+            value: [],
+            selected: null,
+            options: []
         }
     }
 }
 </script>
 
-<template>
-    <SearchInput v-model="searchVal"/>
-</template>
-
-
-
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
