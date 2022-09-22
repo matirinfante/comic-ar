@@ -34,14 +34,14 @@ defineProps({
                     </JetNavLink>
                 </div>
                 <div class="mx-6 z-40 border-2 rounded-lg">
-                    <div class="w-full pb-8 px-4 sm:px-0 bg-slate-700 rounded-t-lg">
-                        <p class="text-md text-yellow-300 font-semibold sm:ml-4 md:ml-10 pt-6">
+                    <div class="w-full pb-8 sm:px-0 bg-slate-700 rounded-t-lg">
+                        <p class="px-4 text-md text-yellow-300 font-semibold sm:ml-4 md:ml-10 pt-6">
                             {{edition.publisher}}
                         </p>
-                        <h2 class="text-3xl font-bold text-white sm:ml-4 md:ml-10 mt-2">
+                        <h2 class="px-4 text-3xl font-bold text-white sm:ml-4 md:ml-10 mt-2">
                             {{edition.title}}
                         </h2>
-                        <p v-if="volumes.length > 0" class="text-md text-green-400 font-semibold sm:ml-4 md:ml-10 pt-6">
+                        <p v-if="volumes.length > 0" class="px-4 text-md text-green-400 font-semibold sm:ml-4 md:ml-10 pt-6">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-files mr-2" viewBox="0 0 16 16">
@@ -51,18 +51,21 @@ defineProps({
                             {{volumes.length}} tomos
                         </div>
                         </p>
-                        <p class="text-md text-slate-400 font-light sm:ml-4 md:ml-10 pt-1">
+                        <p class="px-4 text-md text-slate-400 font-light sm:ml-4 md:ml-10 pt-1">
                             {{edition.format}}
                         </p>
-                        <div class="flex justify-end">
-                            <p class="text-white mr-10 mt-2 mb-2 md:mb-0">Estado:
-                                <span class="text-green-400 font-semibold" v-if="edition.isClosed == 0">
-                                    En curso
-                                </span>
-                                <span class="text-red-400 font-semibold" v-else>
-                                    Terminada
-                                </span>
-                            </p>
+                        <div class="flex justify-start">
+                            <div class="bg-zinc-500 mt-4 py-1 pr-5 rounded-r-full">
+                                <p class="text-gray-200 pl-4 md:pl-14">
+                                    <span class="font-thin" v-if="edition.isClosed == 0">
+                                        En curso
+                                    </span>
+                                    <span class="font-thin" v-else>
+                                        Terminada
+                                    </span>
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
