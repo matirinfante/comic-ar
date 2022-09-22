@@ -7,6 +7,7 @@ use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
 use App\Http\Resources\EditionResource;
+use Illuminate\Support\Facades\Redirect;
 
 class EditionController extends Controller
 {
@@ -64,7 +65,7 @@ class EditionController extends Controller
             }
         }
 
-        return Inertia::render('Editions/Index');
+        return Redirect::route('editions.index');
     }
 
     /**
@@ -87,7 +88,7 @@ class EditionController extends Controller
      */
     public function edit(Edition $edition)
     {
-        //
+        return Inertia::render('Editions/Edit', compact('edition'));
     }
 
     /**
@@ -99,7 +100,19 @@ class EditionController extends Controller
      */
     public function update(Request $request, Edition $edition)
     {
-        //
+        // validate
+
+        
+        $edition->update([
+            'title' => $request->title,
+            'publisher' => $request->publisher,
+            'language' => $request->language,
+            'format' => $request->format,
+            'isClosed' => $request->isClosed,
+            'description' => $request->description,
+        ]);
+
+        return Redirect::route('editions.show', $edition->id);
     }
 
     /**
