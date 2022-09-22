@@ -13,7 +13,7 @@ const form = useForm({
     language: '',
     format: 'Rustica/TPB (tapa blanda)',
     isStandalone: false,
-    cantVol: '2',
+    cantVol: '1',
     description: '',
 });
 
@@ -81,7 +81,7 @@ const submit = () => {
                     <!-- cantVol -->
                     <div v-if="!form.isStandalone" class="mt-6">
                         <JetLabel for="cantVol" value="Number of volumes" />
-                        <JetInput id="cantVol" v-model="form.cantVol" type="number" class="mt-1 block w-1/2" min="2" max="200" required />
+                        <JetInput id="cantVol" v-model="form.cantVol" type="number" class="mt-1 block w-1/2" min="1" max="200" required />
                         <JetInputError class="mt-2" :message="form.errors.cantVol" />
                     </div>
                     
