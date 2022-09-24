@@ -9,7 +9,7 @@ class EditionResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
@@ -22,7 +22,8 @@ class EditionResource extends JsonResource
             'format' => $this->format,
             'isStandalone' => $this->isStandalone,
             'isClosed' => $this->isClosed,
-            'description' => $this->description
+            'description' => $this->description,
+            'ratingAvg' => $this->ratingAvg
         ];
     }
 }
