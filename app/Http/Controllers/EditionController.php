@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
+use App\Http\Resources\EditionResource;
+use Illuminate\Support\Facades\Redirect;
 
 class EditionController extends Controller
 {
@@ -14,7 +18,8 @@ class EditionController extends Controller
      */
     public function index()
     {
-        //
+        $editions = EditionResource::collection(Edition::all());
+        return Inertia::render('Editions/Index', compact('editions'));
     }
 
     /**
@@ -24,7 +29,7 @@ class EditionController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Editions/Create');
     }
 
     /**
@@ -35,7 +40,32 @@ class EditionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Falta validar
+
+        $edition = Edition::create([
+            'title' => $request->title,
+            'publisher' => $request->publisher,
+            'language' => $request->language,
+            'format' => $request->format,
+            'isStandalone' => $request->isStandalone,
+            'description' => $request->description
+        ]);
+
+        $edition->save();
+
+        // si no es edición única, se crean los volúmenes asociados a la edición
+        if ($request->isStandalone == false) {
+            $cantVol = $request->cantVol;
+            for ($i = 0; $i < $cantVol; $i++) {
+                Volume::create([
+                    'title' => $edition->title,
+                    'edition_id' => $edition->id
+                ])->save();
+            }
+        }
+
+        return Redirect::route('editions.index');
     }
 
     /**
@@ -46,7 +76,8 @@ class EditionController extends Controller
      */
     public function show(Edition $edition)
     {
-        //
+        $volumes = Volume::where('edition_id', $edition->id)->get();
+        return Inertia::render('Editions/Show', compact('edition', 'volumes'));
     }
 
     /**
@@ -57,7 +88,7 @@ class EditionController extends Controller
      */
     public function edit(Edition $edition)
     {
-        //
+        return Inertia::render('Editions/Edit', compact('edition'));
     }
 
     /**
@@ -69,7 +100,19 @@ class EditionController extends Controller
      */
     public function update(Request $request, Edition $edition)
     {
-        //
+        // validate
+
+        
+        $edition->update([
+            'title' => $request->title,
+            'publisher' => $request->publisher,
+            'language' => $request->language,
+            'format' => $request->format,
+            'isClosed' => $request->isClosed,
+            'description' => $request->description,
+        ]);
+
+        return Redirect::route('editions.show', $edition->id);
     }
 
     /**

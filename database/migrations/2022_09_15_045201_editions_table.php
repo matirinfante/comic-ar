@@ -21,7 +21,8 @@ return new class extends Migration
             $table->enum('format', ['Rustica/TPB (tapa blanda)', 'Grapa', 'Tapa dura', 'Bolsillo']);
             $table->boolean('isStandalone');
             $table->boolean('isClosed')->default(false);
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->timestamps();
         });
     }
 
