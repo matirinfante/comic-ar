@@ -36,6 +36,7 @@ Route::middleware([
 
     Route::resource('/editions', EditionController::class);
     Route::resource('/users', UserController::class);
+    Route::get('/search', [EditionController::class, 'searchBy']);
 });
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
