@@ -38,4 +38,7 @@ Route::middleware([
     Route::resource('/users', UserController::class);
 });
 
+
+Route::get('/volume',function(){return Inertia::render('openlibrary',[]);});
+
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
