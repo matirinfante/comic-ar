@@ -14,10 +14,10 @@
                     <img :src="'http://books.google.com/books/content?id='+volume.id+'&printsec=frontcover&img=1&zoom=1&source=gbs_api'">
                 </div>
                 <div>
-                    <h3 class="font-bold">{{volume.volumeInfo.title}}</h3>
+                    <h3 class="font-bold">{{volume.volumeInfo.title}}</h3>                    
                     <p>Autores {{volume.volumeInfo.authors}}</p>
-                    <p>ISBN: {{volume.volumeInfo.industryIdentifiers[0].identifier}}</p>
-                    <button v-on:click="choose" class="bg-green-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">Agregar a coleccion</button>
+                    <p v-if="!(volume.volumeInfo.industryIdentifiers==null)">ISBN: {{volume.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                    <button v-on:click="choosed(volume.id)" class="bg-green-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded">Agregar a coleccion</button>
                 </div> 
             </div>
         </div>
@@ -38,7 +38,11 @@ export default {
             mostrar:false,
             volumes:null,
             verVol:true,
-            cantidad:null
+            cantidad:null,
+            ftitle:"",
+            fisbn:"",
+            fauthors:"",
+            fimg:"",
         }
     },
     methods:{
@@ -50,7 +54,7 @@ export default {
                 this.cantidad=response.data.items.length;
                 //console.log(response.data.items.length);
                 this.volumes=response.data.items;
-                console.log(this.volumes);
+                //console.log(this.volumes);
             }).catch(e=>(console.log(e)))
         },
         isbn(){
@@ -66,8 +70,16 @@ export default {
             this.mostrar=false;
             this.verVol=false;
         },
-        chose(){
-            // this.$alert("Hello Vue Simple Alert.");
+        choosed(id){
+            var url='https://www.googleapis.com/books/v1/volumes/'+id;
+            axios.get(url).then(response=>{
+                this.ftitle=response.data.volumeInfo.title;
+                this.fisbn=response.data.volumeInfo.industryIdentifiers[0].identifier;
+                this.fauthors=response.data.volumeInfo.authors;
+                this.fimg="http://books.google.com/books/content?id="+id+"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
+                //console.log('Nombre: '+this.ftitle+' ISBN: '+this.fisbn+' Autores: '+this.fauthors+' Img: '+this.fimg);
+                alert('Nombre: '+this.ftitle+' ISBN: '+this.fisbn+' Autores: '+this.fauthors+' Img: '+this.fimg);
+            }).catch(e=>(console.log(e)))
         }
         
     }
