@@ -1,7 +1,7 @@
 <template>
     <carousel :settings="settings" :breakpoints="breakpoints">
         <slide v-for="(elem,index) in data" :key="index">
-            <div class="mb-4 carousel__item">
+            <div class="mb-4 carousel__item" @click="elemPressed(elem.id)">
                 <img :src="elem.coverImage"
                      class="object-cover max-w-full rounded-lg" alt="">
             </div>
@@ -51,6 +51,11 @@ export default {
             },
         },
     }),
+    methods: {
+        elemPressed(value) {
+            this.$inertia.get('/volumes/' + value);
+        }
+    }
 
 };
 </script>
