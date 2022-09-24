@@ -23,6 +23,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "vue-multiselect": "^3.0.0-alpha.2",
         "vue-search-input": "^1.1.10",
         "vue3-carousel": "^0.1.46"
     }

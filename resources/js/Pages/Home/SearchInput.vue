@@ -1,42 +1,62 @@
-<script>
-import {ref} from 'vue'
-import SearchInput from 'vue-search-input'
-// Optionally import default styling
-import 'vue-search-input/dist/styles.css'
+<template>
+    <div>
+        <VueMultiselect
+            v-model="value"
+            :options="options"
+            :close-on-select="true"
+            :clear-on-select="false"
+            placeholder="Busca un cómic..."
+            label="title"
+            track-by="id"
+            :show-no-options="false"
+            :loading="isLoading"
+            :internal-search="false"
+            @search-change="onSearchChange"
+            @select="onSelect"
+            :select-label="selectLabel"
+            @close="onClose"
+        >
+            <template v-slot:noResult>
+                <span>No se han encontrado resultados</span>
+            </template>
+        </VueMultiselect>
+    </div>
+</template>
 
-const searchVal = ref('')
+<script>
+import VueMultiselect from 'vue-multiselect'
+import axios from "axios";
 
 export default {
-    data: function (){
+    components: {VueMultiselect},
+    data() {
         return {
-            "type": "search",
-            "modelValue": "",
-            "wrapperClass": "search-input-wrapper",
-            "searchIcon": false,
-            "shortcutIcon": false,
-            "clearIcon": true,
-            "hideShortcutIconOnBlur": true,
-            "clearOnEsc": false,
-            "blurOnEsc": true,
-            "selectOnFocus": false,
-            "shortcutListenerEnabled": true,
-            "shortcutKey": "/"
+            value: null,
+            options: [],
+            isLoading: false,
+            selectLabel: "Ver más"
         }
     },
-    components: {
-        SearchInput
-    },
-    setup() {
-        return {
-            searchVal
+    methods: {
+        onSearchChange(term) {
+            this.options = []
+            this.isLoading = true
+            if (term.length > 2) {
+                axios.get('/search', {params: {query: term}}).then(response => {
+                    this.options = response.data;
+                    //console.log(response.data)
+                    this.isLoading = false
+                });
+            }
+        },
+        onSelect(selected) {
+            this.$inertia.get('/editions/' + selected.id);
+        },
+        onClose(value) {
+            this.isLoading = false
         }
     }
 }
 </script>
 
-<template>
-    <SearchInput v-model="searchVal"/>
-</template>
-
-
-
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
