@@ -42,6 +42,6 @@ Route::middleware([
 });
 
 
-Route::get('/volume',function(){return Inertia::render('openlibrary',[]);});
+Route::get('/apibooks',function(){return Inertia::render('googlebooks',[]);});
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);

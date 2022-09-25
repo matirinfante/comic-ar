@@ -1,3 +1,6 @@
+<script setup>
+import Modalapi from '@/Components/Modalapi.vue';
+</script>
 <template>
 <div class="m-5">
     
@@ -23,6 +26,9 @@
         </div>
         
     </div>
+
+    <Modalapi :modal="modal" :editionid="editionid" :ftitle="ftitle" :fisbn="fisbn" :freview="freview" :fimg="fimg" @close="closeModal"/>
+    
 </div>
 </template>
 
@@ -43,6 +49,9 @@ export default {
             fisbn:"",
             fauthors:"",
             fimg:"",
+            freview:"",
+            modal:false,
+            editionid:null
         }
     },
     methods:{
@@ -74,12 +83,29 @@ export default {
             var url='https://www.googleapis.com/books/v1/volumes/'+id;
             axios.get(url).then(response=>{
                 this.ftitle=response.data.volumeInfo.title;
-                this.fisbn=response.data.volumeInfo.industryIdentifiers[0].identifier;
+                if (!(response.data.volumeInfo.industryIdentifiers==null)){
+                    this.fisbn=response.data.volumeInfo.industryIdentifiers[0].identifier;
+                }
+                if(!(response.data.volumeInfo.description==null)){
+                    this.freview=response.data.volumeInfo.description;
+                    //console.log(this.freview);
+                }
+                
                 this.fauthors=response.data.volumeInfo.authors;
                 this.fimg="http://books.google.com/books/content?id="+id+"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
                 //console.log('Nombre: '+this.ftitle+' ISBN: '+this.fisbn+' Autores: '+this.fauthors+' Img: '+this.fimg);
-                alert('Nombre: '+this.ftitle+' ISBN: '+this.fisbn+' Autores: '+this.fauthors+' Img: '+this.fimg);
+                this.modal=true;
+                const url = window.location.href;
+                const lastParam = url.split("id=").slice(-1)[0];
+                this.editionid=lastParam;
             }).catch(e=>(console.log(e)))
+        },
+        closeModal(val){
+            this.modal=val;
+            this.freview="";
+            this.title="";
+            this.fisbn="";
+            this.fimg="";
         }
         
     }
