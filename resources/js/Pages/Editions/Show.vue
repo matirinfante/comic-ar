@@ -70,7 +70,7 @@ defineProps({
                             <div class="bg-green-500 mt-4 py-1 pr-5 rounded-l-full">
                                 <p class="text-white-200 pl-4 md:pl-14">
                                     <!-- <button v-on:click="addV" v-if="edition.isClosed == 0">&#10133; Agregar Tomo</button> -->
-                                    <Link href="/apibooks" :data="{id:edition.id}">API</Link>
+                                    <Link href="/apibooks" :data="{id:edition.id}">&#10133;Agregar Tomo</Link>
                                 </p>
                             </div>
                         </div>
