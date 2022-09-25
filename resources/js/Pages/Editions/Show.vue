@@ -65,7 +65,14 @@ defineProps({
                                     </span>
                                 </p>
                             </div>
-
+                        </div>
+                        <div class="flex justify-end">
+                            <div class="bg-green-500 mt-4 py-1 pr-5 rounded-l-full">
+                                <p class="text-white-200 pl-4 md:pl-14">
+                                    <!-- <button v-on:click="addV" v-if="edition.isClosed == 0">&#10133; Agregar Tomo</button> -->
+                                    <Link href="/apibooks" :data="{id:edition.id}">API</Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
@@ -164,3 +171,19 @@ defineProps({
     </AppLayout>
 </template>
                 
+<script>
+export default{
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+        addV(){
+            //console.log(this.edition.id);
+            this.$inertia.get('/apibooks/' + this.edition.id);
+            
+        }
+    }
+}
+</script>

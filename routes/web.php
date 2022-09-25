@@ -3,6 +3,7 @@
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VolumeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,9 +37,10 @@ Route::middleware([
 
     Route::resource('/editions', EditionController::class);
     Route::resource('/users', UserController::class);
+    Route::resource('/volumes', VolumeController::class);
 });
 
 
-Route::get('/volume',function(){return Inertia::render('openlibrary',[]);});
+Route::get('/apibooks',function(){return Inertia::render('googlebooks',[]);});
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
