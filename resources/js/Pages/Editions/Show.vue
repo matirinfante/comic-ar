@@ -41,7 +41,8 @@ defineProps({
                         <h2 class="px-4 text-3xl font-bold text-white sm:ml-4 md:ml-10 mt-2">
                             {{edition.title}}
                         </h2>
-                        <p v-if="volumes.length > 0" class="px-4 text-md text-green-400 font-semibold sm:ml-4 md:ml-10 pt-6">
+                        <p v-if="volumes.length > 0"
+                            class="px-4 text-md text-green-400 font-semibold sm:ml-4 md:ml-10 pt-6">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-files mr-2" viewBox="0 0 16 16">
@@ -82,14 +83,13 @@ defineProps({
 
                         <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-5">
                             <div v-for="volume in volumes" :key="volume.id" class="w-24 mx-auto mb-4 rounded-lg">
-                                <!-- <Link :href="route('editions.show', volume)"> -->
-                                <!-- <img class="w-full h-50" :src="edition.title+'.jpg'" @error="$event.target.src='/edition_cover.jpg'" :alt="edition.title" /> -->
-                                <img class="" :src="'/img/edition_cover.jpg'" :alt="volume.title" />
+                                <Link :href="route('volumes.show', volume.id)">
+                                <img class="w-full h-50" :src="volume.coverImage" :alt="volume.title" />
                                 <div class="text-center py-4 bg-gray-300 text-gray-500">
                                     <h4 class="mb-3 text-md font-semibold tracking-tight">{{volume.title}}-{{volume.id}}
                                     </h4>
                                 </div>
-                                <!-- </Link> -->
+                                </Link>
                             </div>
                         </div>
 
