@@ -37,8 +37,7 @@ defineProps({
                     <div v-for="edition in editions.data" :key="edition.id"
                         class="w-48 mx-auto mb-4 rounded-lg shadow-md hover:shadow-indigo-400 border-solid border-2 border-gray-300">
                         <Link :href="route('editions.show', edition)">
-                        <!-- <img class="w-full h-50" :src="/img/edition.title+'.jpg'" @error="$event.target.src='/edition_cover.jpg'" :alt="edition.title" /> -->
-                        <img class="w-full h-50" :src="'/img/edition_cover.jpg'" :alt="edition.title" />
+                        <img class="w-full h-50" :src="'/assets/cover/default.png'" :alt="edition.title" />
                         <div class="text-center py-4 bg-gray-300 text-gray-500">
                             <h4 class="mb-3 text-xl font-semibold tracking-tight">{{edition.title}}</h4>
                         </div>
