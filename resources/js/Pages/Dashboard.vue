@@ -21,7 +21,7 @@ defineProps({
         </template>
 
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto py-10 px-10 sm:px-6 lg:px-8">
                 <!-- contenido central acá -->
                 <SearchInput/>
                 <h2 class="font-medium leading-tight text-3xl mt-10 mb-2 text-blue-600 ">Últimas Novedades</h2>

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('editions', function(Blueprint $table){
+        Schema::create('editions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('publisher'); //might refer to a list of publishers?
@@ -22,6 +21,7 @@ return new class extends Migration
             $table->boolean('isStandalone');
             $table->boolean('isClosed')->default(false);
             $table->string('description')->nullable();
+            $table->float('ratingAvg')->default(0);
             $table->timestamps();
         });
     }

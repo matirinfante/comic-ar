@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -18,7 +19,18 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = EditionResource::collection(Edition::all());
+        // $editions = EditionResource::collection(Edition::all());
+        $editions = Edition::all();
+        $cont = 0;
+        foreach ($editions as $edition) {
+            $vol = Volume::select('coverImage')->where('edition_id', $edition->id)->first();
+            if ($vol != null) {
+                $editions[$cont]['cover'] = $vol->coverImage;
+            } else {
+                $editions[$cont]['cover'] = "/assets/cover/default.png";
+            }
+            $cont++;
+        }
         return Inertia::render('Editions/Index', compact('editions'));
     }
 
@@ -35,7 +47,7 @@ class EditionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -71,7 +83,7 @@ class EditionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Edition  $edition
+     * @param \App\Models\Edition $edition
      * @return \Illuminate\Http\Response
      */
     public function show(Edition $edition)
@@ -83,7 +95,7 @@ class EditionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Edition  $edition
+     * @param \App\Models\Edition $edition
      * @return \Illuminate\Http\Response
      */
     public function edit(Edition $edition)
@@ -94,15 +106,15 @@ class EditionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Edition  $edition
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Edition $edition
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Edition $edition)
     {
         // validate
 
-        
+
         $edition->update([
             'title' => $request->title,
             'publisher' => $request->publisher,
@@ -118,11 +130,17 @@ class EditionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Edition  $edition
+     * @param \App\Models\Edition $edition
      * @return \Illuminate\Http\Response
      */
     public function destroy(Edition $edition)
     {
         //
+    }
+
+    public function searchBy(Request $request)
+    {
+        $results = DB::table('editions')->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title']);
+        return $results;
     }
 }
