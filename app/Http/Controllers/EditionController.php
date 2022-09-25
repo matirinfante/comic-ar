@@ -19,7 +19,18 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = EditionResource::collection(Edition::all());
+        // $editions = EditionResource::collection(Edition::all());
+        $editions = Edition::all();
+        $cont = 0;
+        foreach ($editions as $edition) {
+            $vol = Volume::select('coverImage')->where('edition_id', $edition->id)->first();
+            if ($vol != null) {
+                $editions[$cont]['cover'] = $vol->coverImage;
+            } else {
+                $editions[$cont]['cover'] = "/assets/cover/default.png";
+            }
+            $cont++;
+        }
         return Inertia::render('Editions/Index', compact('editions'));
     }
 
@@ -103,7 +114,7 @@ class EditionController extends Controller
     {
         // validate
 
-        
+
         $edition->update([
             'title' => $request->title,
             'publisher' => $request->publisher,
