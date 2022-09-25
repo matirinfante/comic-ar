@@ -34,10 +34,12 @@ defineProps({
                 </div>
                 <SectionBorder />
                 <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-10">
-                    <div v-for="edition in editions.data" :key="edition.id"
+                    <div v-for="edition in editions" :key="edition.id"
                         class="w-48 mx-auto mb-4 rounded-lg shadow-md hover:shadow-indigo-400 border-solid border-2 border-gray-300">
                         <Link :href="route('editions.show', edition)">
-                        <img class="w-full h-50" :src="'/assets/cover/default.png'" :alt="edition.title" />
+
+                        <img class="w-full h-50" :src="edition.cover" :alt="edition.title" />
+
                         <div class="text-center py-4 bg-gray-300 text-gray-500">
                             <h4 class="mb-3 text-xl font-semibold tracking-tight">{{edition.title}}</h4>
                         </div>
