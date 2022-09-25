@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Volume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class VolumeController extends Controller
 {
@@ -35,7 +36,17 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $volume = Volume::create([
+            'title' => $request->title,
+            'isbn' => $request->isbn,
+            'argument' => $request->argument,
+            'coverImage' => $request->coverImage,
+            'edition_id' => $request->edition_id
+        ]);
+
+        $volume->save();
+
+        return Redirect::route('editions.index');
     }
 
     /**
