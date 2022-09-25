@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Volume;
+use App\Models\Edition;
 use Illuminate\Http\Request;
 
 class VolumeController extends Controller
@@ -46,7 +48,9 @@ class VolumeController extends Controller
      */
     public function show(Volume $volume)
     {
-        //
+        $edition = Edition::where('id', $volume->edition_id)->get();
+        $volume = Volume::where('id', $volume->id)->get();
+        return Inertia::render('Volumes/Show', compact('volume', 'edition'));
     }
 
     /**
