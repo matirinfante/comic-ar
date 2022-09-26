@@ -107,13 +107,6 @@ defineProps({
                             </div>
 
                         </div>
-                        <div class="flex justify-end">
-                            <div class="bg-green-500 mt-4 py-1 pr-5 rounded-l-full">
-                                <p class="text-white-200 pl-4 md:pl-14">
-                                    <Link href="/apibooks" :data="{id:edition.id}">&#10133;Agregar Tomo</Link>
-                                </p>
-                            </div>
-                        </div>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
@@ -122,6 +115,7 @@ defineProps({
                                 Información
                             </JetNavLink>
                         </div>
+                    </div>
                     <div v-if="volumes.length > 0" class="bg-white">
                         <!-- Tomos/Volumenes -->
 
