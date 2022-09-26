@@ -23,8 +23,13 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "vue-final-modal": "^3.4.4",
         "vue-multiselect": "^3.0.0-alpha.2",
+        "vue-rate": "^3.1.1",
         "vue-search-input": "^1.1.10",
-        "vue3-carousel": "^0.1.46"
+        "vue-star-rating": "^2.1.0",
+        "vue-sweetalert2": "^5.0.5",
+        "vue3-carousel": "^0.1.46",
+        "vue3-star-ratings": "^1.1.0"
     }
 }
