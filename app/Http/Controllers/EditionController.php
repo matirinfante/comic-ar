@@ -7,7 +7,6 @@ use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
-use App\Http\Resources\EditionResource;
 use Illuminate\Support\Facades\Redirect;
 
 class EditionController extends Controller
@@ -19,15 +18,25 @@ class EditionController extends Controller
      */
     public function index()
     {
-        // $editions = EditionResource::collection(Edition::all());
         $editions = Edition::all();
         $cont = 0;
+        // Si la edición cuenta con al menos un volúmen, ésta tendrá la portada del primer volumen encontrado
         foreach ($editions as $edition) {
             $vol = Volume::select('coverImage')->where('edition_id', $edition->id)->first();
             if ($vol != null) {
-                $editions[$cont]['cover'] = $vol->coverImage;
+                // detectar si posee imagen en storage o usa la predeterminada de public
+                if ($vol->coverImage != "/assets/cover/default.png") {
+                    if (str_contains($vol->coverImage, 'comicar-cover')) {
+                        $edition['cover'] = asset('/storage/' . $vol->coverImage);
+                    } else {
+
+                        $edition['cover'] = $vol->coverImage;
+                    }
+                } else {
+                    $edition['cover'] = "/assets/cover/default.png";
+                }
             } else {
-                $editions[$cont]['cover'] = "/assets/cover/default.png";
+                $edition['cover'] = "/assets/cover/default.png";
             }
             $cont++;
         }
@@ -89,6 +98,18 @@ class EditionController extends Controller
     public function show(Edition $edition)
     {
         $volumes = Volume::where('edition_id', $edition->id)->get();
+        foreach ($volumes as $volume) {
+            if ($volume['coverImage'] != "/assets/cover/default.png") {
+                if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                    $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                } else {
+
+                    $volume['coverImage'] = $volume['coverImage'];
+                }
+            } else {
+                $volume['coverImage'] = "/assets/cover/default.png";
+            }
+        }
         return Inertia::render('Editions/Show', compact('edition', 'volumes'));
     }
 
