@@ -93,7 +93,6 @@ export default {
                 
                 this.fauthors=response.data.volumeInfo.authors;
                 this.fimg="http://books.google.com/books/content?id="+id+"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
-                //console.log('Nombre: '+this.ftitle+' ISBN: '+this.fisbn+' Autores: '+this.fauthors+' Img: '+this.fimg);
                 this.modal=true;
                 const url = window.location.href;
                 const lastParam = url.split("id=").slice(-1)[0];
