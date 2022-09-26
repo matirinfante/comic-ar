@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 
@@ -99,15 +100,35 @@ class VolumeController extends Controller
      */
     public function update(Request $request, Volume $volume)
     {
-        $image = $volume->coverImage;
+        
         if ($request->hasFile('coverImage')) {
             Storage::delete($volume->coverImage);
-            $image = $request->file('coverImage')->store('/comicar-cover');
+
+            // get filename with extension
+            $filenamewithextension = $request->file('coverImage')->getClientOriginalName();
+
+            // get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            // get file extension
+            $extension = $request->file('coverImage')->getClientOriginalExtension();
+
+            // filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+            // upload file
+            $request->file('coverImage')->storeAs('comicar-cover', $filenametostore);
+
+            // Resize img
+            $path = public_path('storage/comicar-cover/' . $filenametostore);
+            $img = Image::make($request->file('coverImage')->getRealPath())->resize(263, 400);
+            $img->save($path);
+
             $volume->update([
                 'title' => $request->title,
                 'ISBN' => $request->ISBN,
                 'argument' => $request->argument,
-                'coverImage' => $image,
+                'coverImage' => 'comicar-cover/'. $filenametostore,
             ]);
         } else {
             // si el volumen tenía ya una imagen, no se actualiza
