@@ -41,7 +41,7 @@ class VolumeController extends Controller
     {
         $volume = Volume::create([
             'title' => $request->title,
-            'isbn' => $request->isbn,
+            'ISBN' => $request->ISBN,
             'argument' => $request->argument,
             'coverImage' => $request->coverImage,
             'edition_id' => $request->edition_id
@@ -49,7 +49,8 @@ class VolumeController extends Controller
 
         $volume->save();
 
-        return Redirect::route('editions.index');
+        //return Redirect::route('editions.index');
+        return ['redirect' => route('editions.index')];
     }
 
     /**
