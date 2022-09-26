@@ -103,4 +103,9 @@ class ReviewController extends Controller
         $response = Review::where('edition_id', $request->edition_id)->where('user_id', $request->user_id)->get();
         return response()->json($response);
     }
+
+    public function scoreReviews(Request $request){
+        $reviews = Review::where('edition_id', $request->edition_id)->get('rating');
+        return response()->json($reviews);
+    }
 }
