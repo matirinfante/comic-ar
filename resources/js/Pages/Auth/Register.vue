@@ -25,14 +25,14 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Register" />
+    <Head title="Registro" />
 
     <JetAuthenticationCard>
         <template #logo>
             <JetAuthenticationCardLogo />
         </template>
 
-        
+
 
         <form @submit.prevent="submit">
             <div>
@@ -102,12 +102,12 @@ const submit = () => {
 
             <div class="flex items-center justify-end mt-4">
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
+                    ¿Ya estas registrado? Ingresa
                 </Link>
-                
+
 
                 <JetButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Registrarse
                 </JetButton>
             </div>
         </form>

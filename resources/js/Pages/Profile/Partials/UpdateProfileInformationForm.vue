@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-import { Link, useForm } from '@inertiajs/inertia-vue3';
+import {ref} from 'vue';
+import {Inertia} from '@inertiajs/inertia';
+import {Link, useForm} from '@inertiajs/inertia-vue3';
 import JetButton from '@/Components/Button.vue';
 import JetFormSection from '@/Components/FormSection.vue';
 import JetInput from '@/Components/Input.vue';
@@ -48,7 +48,7 @@ const selectNewPhoto = () => {
 const updatePhotoPreview = () => {
     const photo = photoInput.value.files[0];
 
-    if (! photo) return;
+    if (!photo) return;
 
     const reader = new FileReader();
 
@@ -79,11 +79,11 @@ const clearPhotoFileInput = () => {
 <template>
     <JetFormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Información de perfil
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Actualice la información de su cuenta y la dirección de correo electrónico
         </template>
 
         <template #form>
@@ -97,7 +97,7 @@ const clearPhotoFileInput = () => {
                     @change="updatePhotoPreview"
                 >
 
-                <JetLabel for="photo" value="Photo" />
+                <JetLabel for="photo" value="Photo"/>
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
@@ -125,12 +125,12 @@ const clearPhotoFileInput = () => {
                     Remove Photo
                 </JetSecondaryButton>
 
-                <JetInputError :message="form.errors.photo" class="mt-2" />
+                <JetInputError :message="form.errors.photo" class="mt-2"/>
             </div>
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="name" value="Name" />
+                <JetLabel for="name" value="Nombre"/>
                 <JetInput
                     id="name"
                     v-model="form.name"
@@ -138,24 +138,23 @@ const clearPhotoFileInput = () => {
                     class="mt-1 block w-full"
                     autocomplete="name"
                 />
-                <JetInputError :message="form.errors.name" class="mt-2" />
+                <JetInputError :message="form.errors.name" class="mt-2"/>
             </div>
 
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="email" value="Email" />
+                <JetLabel for="email" value="Email"/>
                 <JetInput
                     id="email"
                     v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
                 />
-                <JetInputError :message="form.errors.email" class="mt-2" />
+                <JetInputError :message="form.errors.email" class="mt-2"/>
 
                 <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
                     <p class="text-sm mt-2">
-                        Your email address is unverified.
-
+                        Su dirección de correo electrónico no está verificada.
                         <Link
                             :href="route('verification.send')"
                             method="post"
@@ -163,24 +162,22 @@ const clearPhotoFileInput = () => {
                             class="underline text-gray-600 hover:text-gray-900"
                             @click.prevent="sendEmailVerification"
                         >
-                            Click here to re-send the verification email.
-                        </Link>
+                            Haga clic aquí para reenviar el correo de verificación.                        </Link>
                     </p>
 
                     <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        A new verification link has been sent to your email address.
-                    </div>
+                        Se ha enviado un nuevo enlace de verificación a su dirección de correo electrónico.                    </div>
                 </div>
             </div>
         </template>
 
         <template #actions>
             <JetActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Guardado.
             </JetActionMessage>
 
             <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Guardar
             </JetButton>
         </template>
     </JetFormSection>

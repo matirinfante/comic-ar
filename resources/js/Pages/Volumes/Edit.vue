@@ -30,7 +30,7 @@ const submit = () => {
     });
 };
 </script>
-                
+
 <template>
     <AppLayout title="Información del Tomo">
         <template #header>
@@ -46,7 +46,7 @@ const submit = () => {
                 <form @submit.prevent="submit" class="p-4" enctype="multipart/form-data">
                     <!-- title -->
                     <div>
-                        <JetLabel for="title" value="Title" />
+                        <JetLabel for="title" value="Título" />
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
                             required autofocus />
                         <JetInputError class="mt-2" :message="form.errors.title" />
@@ -62,7 +62,7 @@ const submit = () => {
 
                     <!-- argument -->
                     <div class="mt-5">
-                        <JetLabel for="argument" value="Argument (Optional)" />
+                        <JetLabel for="argument" value="Argumento (Opcional)" />
                         <textarea v-model="form.argument" placeholder="Argument..."
                             class="w-full bg-slate-200"></textarea>
                         <JetInputError class="mt-2" :message="form.errors.argument" />
@@ -70,7 +70,7 @@ const submit = () => {
 
                     <!-- coverImage -->
                     <div class="mt-4">
-                        <JetLabel for="coverImage" value="Cover Image" />
+                        <JetLabel for="coverImage" value="Imagen de Portada" />
                         <JetInput id="coverImage" @input="form.coverImage = $event.target.files[0]" type="file"
                             class="mt-1 block w-full bg-slate-200 text-gray-500" />
                         <JetInputError class="mt-2" :message="form.errors.coverImage" />
@@ -87,4 +87,3 @@ const submit = () => {
         </div>
     </AppLayout>
 </template>
-                
