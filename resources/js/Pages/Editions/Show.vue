@@ -3,6 +3,7 @@ import {Head, Link} from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import Review from "@/Pages/Editions/Review.vue";
+import Score from "@/Pages/Editions/Score.vue";
 
 defineProps({
     edition: JSON,
@@ -73,6 +74,7 @@ defineProps({
                                 </p>
                             </div>
                         </div>
+                        
                         <!-- agregar tomos si no esta terminada-->
                         <div v-if="edition.isClosed == 0">
                             <!-- si no es standalone -->
@@ -107,6 +109,7 @@ defineProps({
                             </div>
 
                         </div>
+                        <Score/>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
