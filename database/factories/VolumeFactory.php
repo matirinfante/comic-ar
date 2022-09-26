@@ -17,7 +17,11 @@ class VolumeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => fake()->name(),
+            'ISBN' => fake()->isbn13(),
+            'argument' => fake()->text($maxNbChars = 250),
+            'coverImage' => fake()->imageUrl($width = 1400, $height = 2000),
+            'edition_id' => fake()->numberBetween(2, 9),
         ];
     }
 }

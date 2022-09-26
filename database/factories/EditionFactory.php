@@ -17,7 +17,12 @@ class EditionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => fake()->name(),
+            'publisher' => fake()->company(),
+            'language' => fake()->randomElement(['Inglés', 'Español', 'Japonés', 'Portugués', 'Italiano', 'Alemán']),
+            'format' => fake()->randomElement(['Rustica/TPB (tapa blanda)', 'Grapa', 'Tapa dura', 'Bolsillo']),
+            'description' => fake()->text($maxNbChars = 200),
+            'isStandalone' => fake()->randomElement([0, 1]),
         ];
     }
 }
