@@ -16,7 +16,7 @@ defineProps({
 
 <template>
 
-    <Head title="Welcome" />
+    <Head title="Bienvenido" />
 
     <WelcomeNavBar />
 
@@ -48,18 +48,17 @@ defineProps({
                 <div class="p-6 text-white text-center">
                     &#128055;&#128055;&#128055;
                     <br>
-                    Design in process...
+                    Diseño en proceso...
 
                     <div v-if="canLogin" class="hidden mt-4 px-6 py-4 sm:block dark:bg-blue-200">
                         <Link v-if="$page.props.user" :href="route('dashboard')"
                             class="text-sm text-gray-700 dark:text-gray-900 underline">Ir a inicio</Link>
 
                         <template v-else>
-                            <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Log
-                            In</Link>
+                            <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Iniciar Sesión</Link>
 
                             <Link v-if="canRegister" :href="route('register')"
-                                class="ml-6 text-sm text-gray-700 dark:text-gray-500 underline">Register</Link>
+                                class="ml-6 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</Link>
                         </template>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue';
-import { useForm } from '@inertiajs/inertia-vue3';
+import {ref} from 'vue';
+import {useForm} from '@inertiajs/inertia-vue3';
 import JetActionMessage from '@/Components/ActionMessage.vue';
 import JetActionSection from '@/Components/ActionSection.vue';
 import JetButton from '@/Components/Button.vue';
@@ -45,16 +45,19 @@ const closeModal = () => {
 <template>
     <JetActionSection>
         <template #title>
-            Browser Sessions
+            Sesiones del navegador
         </template>
 
         <template #description>
-            Manage and log out your active sessions on other browsers and devices.
+            Administre y cierre sus sesiones activas en otros navegadores y dispositivos.
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.
+                Si es necesario, puede salir de todas las demás sesiones de otros navegadores en todos sus dispositivos.
+                Algunas de sus sesiones recientes se enumeran a continuación; sin embargo, es posible que esta lista no
+                sea exhaustiva. Si cree que su cuenta se ha visto comprometida, también debería actualizar su
+                contraseña.
             </div>
 
             <!-- Other Browser Sessions -->
@@ -71,7 +74,8 @@ const closeModal = () => {
                             stroke="currentColor"
                             class="w-8 h-8 text-gray-500"
                         >
-                            <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            <path
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
 
                         <svg
@@ -85,27 +89,30 @@ const closeModal = () => {
                             stroke-linejoin="round"
                             class="w-8 h-8 text-gray-500"
                         >
-                            <path d="M0 0h24v24H0z" stroke="none" /><rect
+                            <path d="M0 0h24v24H0z" stroke="none"/>
+                            <rect
                                 x="7"
                                 y="4"
                                 width="10"
                                 height="16"
                                 rx="1"
-                            /><path d="M11 5h2M12 17v.01" />
+                            />
+                            <path d="M11 5h2M12 17v.01"/>
                         </svg>
                     </div>
 
                     <div class="ml-3">
                         <div class="text-sm text-gray-600">
-                            {{ session.agent.platform ? session.agent.platform : 'Unknown' }} - {{ session.agent.browser ? session.agent.browser : 'Unknown' }}
+                            {{ session.agent.platform ? session.agent.platform : 'Unknown' }} -
+                            {{ session.agent.browser ? session.agent.browser : 'Unknown' }}
                         </div>
 
                         <div>
                             <div class="text-xs text-gray-500">
                                 {{ session.ip_address }},
 
-                                <span v-if="session.is_current_device" class="text-green-500 font-semibold">This device</span>
-                                <span v-else>Last active {{ session.last_active }}</span>
+                                <span v-if="session.is_current_device" class="text-green-500 font-semibold">Este dispositivo</span>
+                                <span v-else>Activo por última vez {{ session.last_active }}</span>
                             </div>
                         </div>
                     </div>
@@ -114,7 +121,7 @@ const closeModal = () => {
 
             <div class="flex items-center mt-5">
                 <JetButton @click="confirmLogout">
-                    Log Out Other Browser Sessions
+                    Cerrar las demás sesiones
                 </JetButton>
 
                 <JetActionMessage :on="form.recentlySuccessful" class="ml-3">
@@ -125,12 +132,12 @@ const closeModal = () => {
             <!-- Log Out Other Devices Confirmation Modal -->
             <JetDialogModal :show="confirmingLogout" @close="closeModal">
                 <template #title>
-                    Log Out Other Browser Sessions
+                    Cerrar las demás sesiones
                 </template>
 
                 <template #content>
-                    Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.
-
+                    Por favor ingrese su contraseña para confirmar que desea cerrar las demás sesiones de otros
+                    navegadores en todos sus dispositivos.
                     <div class="mt-4">
                         <JetInput
                             ref="passwordInput"
@@ -141,13 +148,13 @@ const closeModal = () => {
                             @keyup.enter="logoutOtherBrowserSessions"
                         />
 
-                        <JetInputError :message="form.errors.password" class="mt-2" />
+                        <JetInputError :message="form.errors.password" class="mt-2"/>
                     </div>
                 </template>
 
                 <template #footer>
                     <JetSecondaryButton @click="closeModal">
-                        Cancel
+                        Cancelar
                     </JetSecondaryButton>
 
                     <JetButton
@@ -156,7 +163,7 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="logoutOtherBrowserSessions"
                     >
-                        Log Out Other Browser Sessions
+                        Cerrar las demás sesiones
                     </JetButton>
                 </template>
             </JetDialogModal>
