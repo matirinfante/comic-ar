@@ -43,6 +43,7 @@ Route::middleware([
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
+    Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
 });
 
 
