@@ -33,10 +33,12 @@
                 </button>
             </div>
         </vue-final-modal>
-        <button @click="showModal = true" :class="{'hidden':alreadyReviewed}"
-                class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
-            Añadir reseña
-        </button>
+        <div class="flex justify-center my-5">
+            <button @click="showModal = true" :class="{'hidden':alreadyReviewed}"
+                    class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                Añadir reseña
+            </button>
+        </div>
     </div>
     <div v-if="alreadyReviewed">
         <article class="mt-9 pr-9 ml-10 ">
