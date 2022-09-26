@@ -1,7 +1,8 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import {Head, Link} from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
+import Review from "@/Pages/Editions/Review.vue";
 
 defineProps({
     edition: JSON,
@@ -9,12 +10,12 @@ defineProps({
 })
 
 </script>
-                    
+
 <template>
     <AppLayout :title="edition.title">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Edición de {{edition.title}}</span>
+                <span class="text-gray-500">Edición de {{ edition.title }}</span>
             </h2>
         </template>
 
@@ -71,7 +72,6 @@ defineProps({
                                     </span>
                                 </p>
                             </div>
-
                         </div>
                         <!-- agregar tomos si no esta terminada-->
                         <div v-if="edition.isClosed == 0">
@@ -105,17 +105,23 @@ defineProps({
                                     </p>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="flex justify-end">
+                            <div class="bg-green-500 mt-4 py-1 pr-5 rounded-l-full">
+                                <p class="text-white-200 pl-4 md:pl-14">
+                                    <Link href="/apibooks" :data="{id:edition.id}">&#10133;Agregar Tomo</Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
                             <JetNavLink :href="route('editions.show', edition.id)"
-                                :active="route().current('editions.show', edition.id)">
+                                        :active="route().current('editions.show', edition.id)">
                                 Información
                             </JetNavLink>
                         </div>
-
-                    </div>
                     <div v-if="volumes.length > 0" class="bg-white">
                         <!-- Tomos/Volumenes -->
 
@@ -139,11 +145,66 @@ defineProps({
                             Valoración
                         </div>
                         <div class="">
-                            {{edition.language}}
+                            {{ edition.language }}
                         </div>
                         <div class="mr-8 md:mr-20 lg:mr-28">
                             Propietarios?
                         </div>
+                    </div>
+                    <div class="bg-white py-10">
+                        <!-- Información/Descripción -->
+                        <h2 class="text-2xl font-bold text-gray-600 ml-10 mt-2">
+                            Sobre esta edición
+                        </h2>
+                        <p class="text-mm text-gray-700 ml-10 pt-6">
+                            {{ edition.format }}
+                        <div v-if="edition.format == 'Rustica/TPB (tapa blanda)'"
+                             class="mt-2 pr-9 text-gray-500 w-full md:w-1/2">
+                            A pesar de que la encuadernación rústica se conoce comúnmente como «tapa blanda», lo cierto
+                            es que la cubierta no tiene que ser necesariamente flexible, aunque suele ser así
+                        </div>
+                        <div v-if="edition.format == 'Grapa'" class="mt-2 pr-9 text-gray-500 w-full md:w-1/2">
+                            La encuadernación grapada es una de las formas de empastar un documento que más se usa en el
+                            sector. Se trata de un tipo de encuadernación sencillo y que resulta especialmente útil
+                            cuando se tienen volúmenes modestos, de pocas páginas
+                        </div>
+                        <div v-if="edition.format == 'Tapa dura'" class="mt-2 pr-9 text-gray-500 w-full md:w-1/2">
+                            La encuadernación cartoné, conocida popularmente como «encuadernación de tapa dura», es un
+                            tipo de encuadernación en la que el libro, cosido o encolado, está forrado simplemente con
+                            una cubierta rígida de cartón, pegada al lomo. Esta cubierta recubre el libro en todas sus
+                            superficies exteriores
+                        </div>
+                        <div v-if="edition.format == 'Bolsillo'" class="mt-2 pr-9 text-gray-500 w-full md:w-1/2">
+                            Se denomina libro de bolsillo al tipo de edición de libros que se comercializa con un
+                            formato especialmente manejable y con un precio más asequible que el de otras modalidades.​
+                            La edición de bolsillo admite cualquier tipo de género o materia en el contenido de los
+                            libros
+                        </div>
+                        </p>
+
+                        <!-- Standalone? -->
+                        <p v-if="edition.isStandalone == 1" class="text-mm text-gray-700 ml-10 pt-10">
+                            Tomo único
+                        </p>
+                        <p v-else class="text-mm text-gray-700 ml-10 pt-10">
+                            Serie de tomos
+                        </p>
+
+                        <h2 class="text-2xl font-bold text-gray-600 ml-10 mt-20">
+                            Descripción
+                        </h2>
+                        <p v-if="edition.description != null" class="text-mm text-gray-700 px-10 pt-6 w-full md:w-1/2">
+                            {{ edition.description }}
+                        </p>
+                        <p v-else class="text-mm text-gray-700 px-10 pt-6 w-full md:w-1/2">
+                            La edición no cuenta con una descripción
+                        </p>
+                    </div>
+                    <div class="text-gray-800 border-y-2 bg-white py-10">
+                        <!-- Reviews -->
+                        <h2 class="text-2xl font-bold text-gray-600 ml-10 mt-2">Opina sobre
+                            {{ edition.title }}</h2>
+                        <Review :show-state="showModal"></Review>
                     </div>
                     <div class="bg-white py-10">
                         <!-- Información/Descripción -->
@@ -199,13 +260,11 @@ defineProps({
         </div>
     </AppLayout>
 </template>
-                
+
 <script>
 export default {
     data() {
-        return {
-
-        }
+        return {}
     },
     methods: {
         addV() {

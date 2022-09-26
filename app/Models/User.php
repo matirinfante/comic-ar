@@ -60,7 +60,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function booklists(){
+    public function booklists()
+    {
         return $this->hasMany(Booklist::class);
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }
