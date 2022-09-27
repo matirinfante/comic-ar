@@ -40,11 +40,16 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->coverFile==null){
+            $urlImg=$request->coverImage;
+        }else{
+            $urlImg = $request->file('coverFile')->store('/comicar-cover');
+        }
         $volume = Volume::create([
             'title' => $request->title,
             'ISBN' => $request->ISBN,
             'argument' => $request->argument,
-            'coverImage' => $request->coverImage,
+            'coverImage' => $urlImg,
             'edition_id' => $request->edition_id
         ]);
 
