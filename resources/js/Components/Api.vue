@@ -4,9 +4,16 @@ import Modalapi from '@/Components/Modalapi.vue';
 <template>
 <div class="m-5">
     
-    <input  v-model="query" v-on:keyup="borrar" placeholder="Titulo o ISBN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-    <button v-on:click="fetch" class="bg-orange-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded m-2">Buscar por Nombre</button>
-    <button v-on:click="isbn" class="bg-green-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded m-2">Buscar por ISBN</button>
+    <input  v-model="query" v-on:keyup="borrar" placeholder="Titulo o ISBN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3">
+    <div class="flex justify-between">
+        <div>
+            <button v-on:click="fetch" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded m-2">Buscar por Nombre</button>
+            <button v-on:click="isbn" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded m-2">Buscar por ISBN</button>
+        </div>
+        <div>
+            <button v-on:click="manual" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Carga Manual</button>
+        </div>
+    </div>
     <div>
         <h2 class="text-lg" v-show="mostrar">Resultados para {{query}}:</h2>
         <h4 class="text-sm" v-show="mostrar">Coincidencias: {{cantidad}}</h4>
@@ -48,11 +55,16 @@ export default {
             ftitle:"",
             fisbn:"",
             fauthors:"",
-            fimg:"",
+            fimg:null,
             freview:"",
             modal:false,
             editionid:null
         }
+    },
+    mounted(){
+        const url = window.location.href;
+        const lastParam = url.split("id=").slice(-1)[0];
+        this.editionid=lastParam;
     },
     methods:{
         fetch(){
@@ -61,9 +73,7 @@ export default {
                 this.mostrar=true;
                 this.verVol=true;
                 this.cantidad=response.data.items.length;
-                //console.log(response.data.items.length);
                 this.volumes=response.data.items;
-                //console.log(this.volumes);
             }).catch(e=>(console.log(e)))
         },
         isbn(){
@@ -88,15 +98,11 @@ export default {
                 }
                 if(!(response.data.volumeInfo.description==null)){
                     this.freview=response.data.volumeInfo.description;
-                    //console.log(this.freview);
                 }
                 
                 this.fauthors=response.data.volumeInfo.authors;
                 this.fimg="http://books.google.com/books/content?id="+id+"&printsec=frontcover&img=1&zoom=1&source=gbs_api";
                 this.modal=true;
-                const url = window.location.href;
-                const lastParam = url.split("id=").slice(-1)[0];
-                this.editionid=lastParam;
             }).catch(e=>(console.log(e)))
         },
         closeModal(val){
@@ -105,6 +111,9 @@ export default {
             this.title="";
             this.fisbn="";
             this.fimg="";
+        },
+        manual(){
+            this.modal=true;
         }
         
     }
