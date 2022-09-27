@@ -12,4 +12,14 @@ class Edition extends Model
     protected $fillable = [
         'title', 'publisher', 'language', 'format', 'isStandalone', 'isClosed', 'description', 'ratingAvg'
     ];
+
+    public function volumes()
+    {
+        return $this->hasMany(Volume::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

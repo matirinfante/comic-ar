@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -38,10 +39,16 @@ Route::middleware([
     Route::resource('/editions', EditionController::class);
     Route::resource('/users', UserController::class);
     Route::resource('/volumes', VolumeController::class);
+    Route::resource('/reviews', ReviewController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
+    Route::get('/check-review', [ReviewController::class, 'checkReview']);
+    Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
+    Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
 });
 
 
-Route::get('/apibooks',function(){return Inertia::render('googlebooks',[]);});
+Route::get('/apibooks', function () {
+    return Inertia::render('googlebooks', []);
+});
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
