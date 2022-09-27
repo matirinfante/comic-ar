@@ -18,7 +18,7 @@ class EditionFactory extends Factory
     {
         return [
             'title' => fake()->name(),
-            'publisher' => fake()->company(),
+            'publisher' => fake()->randomElement(['Panini Manga', 'Ivrea Argentina', 'ECC Comics', 'OVNI Press']),
             'language' => fake()->randomElement(['Inglés', 'Español', 'Japonés', 'Portugués', 'Italiano', 'Alemán']),
             'format' => fake()->randomElement(['Rustica/TPB (tapa blanda)', 'Grapa', 'Tapa dura', 'Bolsillo']),
             'description' => fake()->text($maxNbChars = 200),
