@@ -1,7 +1,9 @@
 <script setup>
 import Api from '@/Components/Api.vue';
+import AppLayout from '@/Layouts/AppLayout.vue';
 </script>
 <template>
+    <AppLayout>
     <div class="container">
         
         <div class="flex justify-between">
@@ -14,7 +16,7 @@ import Api from '@/Components/Api.vue';
         
         <Api />
     </div>
-    
+    </AppLayout>
 </template>
 <script>
 export default {

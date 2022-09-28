@@ -40,16 +40,53 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
+        //coverFile has uploaded image
+        //coverImage has image by url
         if ($request->coverFile==null){
-            $urlImg=$request->coverImage;
+            $contents = file_get_contents($request->coverImage);
+            $filename = substr($request->coverImage, strrpos($request->coverImage, 'id=') + 3,12);
+            $extension='.jpg';
+
+            // filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+            // upload file
+            $imgpath='comicar-cover/'.$filenametostore;
+            Storage::put($imgpath, $contents);
+
+            // Resize img
+            $path = public_path('storage/comicar-cover/' . $filenametostore);
+            $img = Image::make($path)->resize(263, 400);
+            $img->save($path);
+
         }else{
-            $urlImg = $request->file('coverFile')->store('/comicar-cover');
+            // get filename with extension
+            $filenamewithextension = $request->file('coverFile')->getClientOriginalName();
+
+            // get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            // get file extension
+            $extension = $request->file('coverFile')->getClientOriginalExtension();
+
+            // filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+            // upload file
+            $request->file('coverFile')->storeAs('comicar-cover', $filenametostore);
+
+            // Resize img
+            $path = public_path('storage/comicar-cover/' . $filenametostore);
+            $img = Image::make($request->file('coverFile')->getRealPath())->resize(263, 400);
+            $img->save($path);
+
+            $imgpath='comicar-cover/'. $filenametostore;
         }
         $volume = Volume::create([
             'title' => $request->title,
             'ISBN' => $request->ISBN,
             'argument' => $request->argument,
-            'coverImage' => $urlImg,
+            'coverImage' => $imgpath,
             'edition_id' => $request->edition_id
         ]);
 
