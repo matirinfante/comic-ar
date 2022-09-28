@@ -7,7 +7,7 @@ defineProps({
     editions: Object,
 })
 </script>
-    
+
 <template>
     <AppLayout title="Ediciones">
         <template #header>
@@ -35,10 +35,10 @@ defineProps({
                 <SectionBorder />
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-10">
                     <div v-for="edition in editions" :key="edition.id"
-                        class="w-36 h-52 mx-auto mb-36 md:mb-32 shadow-md hover:shadow-indigo-400 border-2 border-gray-300">
+                        class="w-50 h-60 mx-auto mb-36 md:mb-32 shadow-md hover:shadow-indigo-400 border-2 border-gray-300">
                         <Link :href="route('editions.show', edition)">
 
-                        <img class="w-full h-52" :src="edition.cover" :alt="edition.title" />
+                        <img class="w-full h-60" :src="edition.cover" :alt="edition.title" />
 
                         <div class="text-center py-4 bg-gray-300 text-gray-500">
                             <h4 class="text-xl font-semibold tracking-tight">{{edition.title}}</h4>
@@ -50,4 +50,3 @@ defineProps({
         </div>
     </AppLayout>
 </template>
-    

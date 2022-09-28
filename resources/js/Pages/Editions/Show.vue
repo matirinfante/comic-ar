@@ -124,12 +124,12 @@ defineProps({
                         <!-- Tomos/Volumenes -->
 
                         <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-5">
-                            <div v-for="volume in volumes" :key="volume.id" class="w-24 mx-auto mb-4 rounded-lg">
+                            <div v-for="volume in volumes" :key="volume.id" class="w-26 p-3 mx-auto mb-4 rounded-lg">
                                 <Link :href="route('volumes.show', volume.id)">
-                                    <img class="w-full h-50" :src="volume.coverImage" :alt="volume.title"/>
-                                    <div class="text-center py-4 bg-gray-300 text-gray-500">
+                                    <img class="w-full h-50 rounded-sm" :src="volume.coverImage" :alt="volume.title"/>
+                                    <div class="text-center py-4 bg-gray-300 text-gray-500 rounded-sm">
                                         <h4 class="mb-3 text-md font-semibold tracking-tight">
-                                            {{ volume.title }}-{{ volume.id }}
+                                            {{ volume.title }}
                                         </h4>
                                     </div>
                                 </Link>
