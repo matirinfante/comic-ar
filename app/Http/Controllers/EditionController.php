@@ -110,7 +110,7 @@ class EditionController extends Controller
      */
     public function show(Edition $edition)
     {
-        $volumes = Volume::where('edition_id', $edition->id)->get();
+        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
                 if (str_contains($volume['coverImage'], 'comicar-cover')) {
