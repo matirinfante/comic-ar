@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('ISBN')->nullable();
-            $table->string('argument')->nullable();
+            $table->string('argument',1000)->nullable();
             $table->string('coverImage')->default('/assets/cover/default.png');
             //TODO authors
             $table->foreignId('edition_id')->constrained();

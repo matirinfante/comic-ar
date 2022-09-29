@@ -84,6 +84,11 @@ class EditionController extends Controller
                     'edition_id' => $edition->id
                 ])->save();
             }
+        }else{  //si es edición única se crea un solo volumen
+            Volume::create([
+                'title' => $edition->title,
+                'edition_id' => $edition->id
+            ])->save();
         }
 
         return Redirect::route('editions.index');

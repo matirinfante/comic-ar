@@ -18,22 +18,26 @@
                                 <div class="mt-2">
                                 <form v-on:submit.prevent="submitForm">
                                 <div>
-                                    <label for="ftitle">Titulo:</label>
-                                    <input v-model="ftitle" id="title" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
+                                    <label for="title">Titulo:</label>
+                                    <input v-model="ftitle" id="title" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500" required>
+                                </div>
+                                <div>
+                                    <label for="volumeNum">Tomo Nº</label>
+                                    <input v-model="volumeNum" id="volumeNum" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500" required>
                                 </div>
                                 <div class="mt-2">
-                                    <label for="fisbn">ISBN:</label>
+                                    <label for="isbn">ISBN:</label>
                                     <input v-model="fisbn" id="isbn" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                 </div>
                                 <div>
-                                    <input type="hidden" id="edition_id" v-model="editionid">
+                                    <input type="hidden" id="edition_id" v-model="editionid" required>
                                 </div>
                                 <div class="mt-2">
-                                    <label for="freview">Reseña:</label>
+                                    <label for="argument">Reseña:</label>
                                     <textarea v-model="freview" id="argument" class="resize-none pb-20 w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500"></textarea>
                                 </div>
                                 <div v-if='ruta'>
-                                    <label for="fimg">Ruta imagen:</label>
+                                    <label for="coverImage">Ruta imagen:</label>
                                     <input v-model="fimg" id="coverImage" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                 </div>
                                 <div v-else>
@@ -75,7 +79,8 @@ export default {
         return{
             ruta:true,
             imgButton:"Subir imagen del ordenador",
-            file:null
+            file:null,
+            volumeNum:""
         }
     },
     methods:{
@@ -85,7 +90,7 @@ export default {
             this.imgButton="Subir imagen del ordenador"
         },
         submitForm(){
-            if (this.freview.length>254){
+            if (this.freview.length>999){
                 alert('La reseña es muy larga');
             }else{
                 axios.post('/volumes', {
@@ -101,7 +106,7 @@ export default {
                 },
                 }).then(function (response) { 
                     window.location = response.data.redirect+'/'+edition_id.value;
-                    }).catch(function (error) {console.log(error);});
+                    }).catch(function (error) {console.log(error); alert('Error en la carga. Revise los datos del formulario.')});
             }
             
         },
