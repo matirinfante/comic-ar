@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Database\Query\Expression;
+use Ramsey\Uuid\Type\Integer;
 
 class EditionController extends Controller
 {
@@ -78,14 +80,19 @@ class EditionController extends Controller
         // si no es edición única, se crean los volúmenes asociados a la edición
         if ($request->isStandalone == false) {
             $cantVol = $request->cantVol;
+
+            $contNumber = 1;
+
             for ($i = 0; $i < $cantVol; $i++) {
                 Volume::create([
                     'title' => $edition->title,
+                    'number' => $contNumber,
                     'edition_id' => $edition->id
                 ])->save();
+
+                $contNumber++;
             }
         }
-
         return Redirect::route('editions.index');
     }
 
