@@ -42,13 +42,17 @@ class VolumeController extends Controller
     {
         //coverFile has uploaded image
         //coverImage has image by url
-        if ($request->coverFile==null){
+        if (!($request->coverImage==null)){
             $contents = file_get_contents($request->coverImage);
-            $filename = substr($request->coverImage, strrpos($request->coverImage, 'id=') + 3,12);
-            $extension='.jpg';
-
-            // filename to store
-            $filenametostore = $filename . '_' . time() . '.' . $extension;
+            $hasExt= substr($request->coverImage,-4,4);
+            if ($hasExt=='.jpg' || $hasExt=='.png'){
+                $filenametostore=substr($request->coverImage, strrpos($request->coverImage, '/') + 1);
+            }else{
+                $filename=$request->ISBN;
+                $extension='.jpg';
+                $filenametostore = $filename . '_' . time() . '.' . $extension;
+            }
+            
 
             // upload file
             $imgpath='comicar-cover/'.$filenametostore;
@@ -59,7 +63,7 @@ class VolumeController extends Controller
             $img = Image::make($path)->resize(263, 400);
             $img->save($path);
 
-        }else{
+        }elseif(!($request->coverFile==null)){
             // get filename with extension
             $filenamewithextension = $request->file('coverFile')->getClientOriginalName();
 
@@ -81,6 +85,9 @@ class VolumeController extends Controller
             $img->save($path);
 
             $imgpath='comicar-cover/'. $filenametostore;
+        }else{
+            //If no image was sent by form
+            $imgpath="/assets/cover/default.png";
         }
         $volume = Volume::create([
             'title' => $request->title,
