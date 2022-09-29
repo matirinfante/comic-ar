@@ -10,7 +10,7 @@ class Volume extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'ISBN', 'argument', 'coverImage', 'edition_id'
+        'title', 'number', 'ISBN', 'argument', 'coverImage', 'edition_id'
     ];
 
     public function edition(){

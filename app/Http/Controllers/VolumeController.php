@@ -89,8 +89,18 @@ class VolumeController extends Controller
             //If no image was sent by form
             $imgpath="/assets/cover/default.png";
         }
+
+        $lastVolFound = Volume::latest('id')->where('edition_id', $request->edition_id)->first();
+
+        $contNumber = 1;
+
+        if($lastVolFound != null){
+            $contNumber = $lastVolFound->number + 1;
+        }
+
         $volume = Volume::create([
             'title' => $request->title,
+            'number' => $contNumber,
             'ISBN' => $request->ISBN,
             'argument' => $request->argument,
             'coverImage' => $imgpath,
