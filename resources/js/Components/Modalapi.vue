@@ -99,7 +99,8 @@ export default {
                     argument:this.freview,
                     coverImage:this.fimg,
                     edition_id:this.editionid,
-                    coverFile:this.file
+                    coverFile:this.file,
+                    number:this.volumeNum
                 },{
                 headers: {
                     "Content-Type": "multipart/form-data",

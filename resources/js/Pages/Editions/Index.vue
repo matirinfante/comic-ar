@@ -35,13 +35,13 @@ defineProps({
                 <SectionBorder />
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-10">
                     <div v-for="edition in editions" :key="edition.id"
-                        class="w-50 h-60 mx-auto mb-36 md:mb-32 shadow-md hover:shadow-indigo-400 border-2 border-gray-300">
+                        class="w-50 h-60 mx-auto mb-20 md:mb-14 shadow-md hover:shadow-indigo-400 relative">
                         <Link :href="route('editions.show', edition)">
 
                         <img class="w-full h-60" :src="edition.cover" :alt="edition.title" />
-
-                        <div class="text-center py-4 bg-gray-300 text-gray-500">
-                            <h4 class="text-xl font-semibold tracking-tight">{{edition.title}}</h4>
+                        <div
+                            class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300">
+                            {{edition.title}}
                         </div>
                         </Link>
                     </div>

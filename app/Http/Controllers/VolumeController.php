@@ -89,8 +89,10 @@ class VolumeController extends Controller
             //If no image was sent by form
             $imgpath="/assets/cover/default.png";
         }
+
         $volume = Volume::create([
             'title' => $request->title,
+            'number' => $request->number,
             'ISBN' => $request->ISBN,
             'argument' => $request->argument,
             'coverImage' => $imgpath,
@@ -175,6 +177,7 @@ class VolumeController extends Controller
 
             $volume->update([
                 'title' => $request->title,
+                'number' => $request->number,
                 'ISBN' => $request->ISBN,
                 'argument' => $request->argument,
                 'coverImage' => 'comicar-cover/'. $filenametostore,
@@ -184,12 +187,14 @@ class VolumeController extends Controller
             if ($volume->coverImage != null) {
                 $volume->update([
                     'title' => $request->title,
+                    'number' => $request->number,
                     'ISBN' => $request->ISBN,
                     'argument' => $request->argument,
                 ]);
             } else {
                 $volume->update([
                     'title' => $request->title,
+                    'number' => $request->number,
                     'ISBN' => $request->ISBN,
                     'argument' => $request->argument,
                     'coverImage' => "/assets/cover/default.png",
