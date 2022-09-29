@@ -90,17 +90,9 @@ class VolumeController extends Controller
             $imgpath="/assets/cover/default.png";
         }
 
-        $lastVolFound = Volume::latest('id')->where('edition_id', $request->edition_id)->first();
-
-        $contNumber = 1;
-
-        if($lastVolFound != null){
-            $contNumber = $lastVolFound->number + 1;
-        }
-
         $volume = Volume::create([
             'title' => $request->title,
-            'number' => $contNumber,
+            'number' => $request->number,
             'ISBN' => $request->ISBN,
             'argument' => $request->argument,
             'coverImage' => $imgpath,
@@ -185,6 +177,7 @@ class VolumeController extends Controller
 
             $volume->update([
                 'title' => $request->title,
+                'number' => $request->number,
                 'ISBN' => $request->ISBN,
                 'argument' => $request->argument,
                 'coverImage' => 'comicar-cover/'. $filenametostore,
@@ -194,12 +187,14 @@ class VolumeController extends Controller
             if ($volume->coverImage != null) {
                 $volume->update([
                     'title' => $request->title,
+                    'number' => $request->number,
                     'ISBN' => $request->ISBN,
                     'argument' => $request->argument,
                 ]);
             } else {
                 $volume->update([
                     'title' => $request->title,
+                    'number' => $request->number,
                     'ISBN' => $request->ISBN,
                     'argument' => $request->argument,
                     'coverImage' => "/assets/cover/default.png",

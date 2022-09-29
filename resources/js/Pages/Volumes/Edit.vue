@@ -13,6 +13,7 @@ const props = defineProps({
 
 const form = useForm({
     title: props.volume?.title,
+    number: props.volume?.number,
     ISBN: props.volume?.ISBN,
     argument: props.volume?.argument,
     coverImage: null,
@@ -27,6 +28,7 @@ const submit = () => {
         ISBN: form.ISBN,
         argument: form.argument,
         coverImage: form.coverImage,
+        number: form.number
     });
 };
 </script>
@@ -50,6 +52,14 @@ const submit = () => {
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
                             required autofocus />
                         <JetInputError class="mt-2" :message="form.errors.title" />
+                    </div>
+
+                    <!-- number -->
+                    <div>
+                        <JetLabel for="number" value="Título" />
+                        <JetInput id="number" v-model="form.number" type="text" class="mt-1 block w-full bg-slate-200"
+                            required autofocus />
+                        <JetInputError class="mt-2" :message="form.errors.number" />
                     </div>
 
                     <!-- ISBN -->
