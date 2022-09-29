@@ -57,7 +57,7 @@
                             </div>
                             <div
                                 class="w-1/2 h-36 flex justify-start absolute left-28 md:left-44 lg:left-60 top-2 md:top-10">
-                                <p class="text-white md:text-2xl font-bold ml-6">{{volume[0].title}}</p>
+                                <p class="text-white md:text-2xl font-bold ml-6">#{{volume[0].number}}</p>
                             </div>
                         </div>
                         <div class="flex">
