@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('volumes', function(Blueprint $table){
+        Schema::create('volumes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->integer('number');
             $table->string('ISBN')->nullable();
             $table->string('argument',1000)->nullable();
             $table->string('coverImage')->default('/assets/cover/default.png');
