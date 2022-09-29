@@ -76,12 +76,12 @@ class EditionController extends Controller
         ]);
 
         $edition->save();
+        
+        $contNumber = 1;
 
         // si no es edición única, se crean los volúmenes asociados a la edición
         if ($request->isStandalone == false) {
             $cantVol = $request->cantVol;
-
-            $contNumber = 1;
 
             for ($i = 0; $i < $cantVol; $i++) {
                 Volume::create([
@@ -95,6 +95,7 @@ class EditionController extends Controller
         }else{  //si es edición única se crea un solo volumen
             Volume::create([
                 'title' => $edition->title,
+                'number' => $contNumber,
                 'edition_id' => $edition->id
             ])->save();
         }
