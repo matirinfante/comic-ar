@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComictecaController;
 use App\Http\Controllers\ReviewController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::middleware([
     Route::resource('/users', UserController::class);
     Route::resource('/volumes', VolumeController::class);
     Route::resource('/reviews', ReviewController::class);
+    Route::resource('/comictecas', ComictecaController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
