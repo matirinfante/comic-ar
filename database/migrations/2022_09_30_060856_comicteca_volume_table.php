@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comictecas',function(Blueprint $table){
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->timestamps();
+        Schema::create('comicteca_volume',function(Blueprint $table){
+            $table->foreignId('comicteca_id')->constrained();
+            $table->foreignId('volume_id')->constrained();            
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comictecas');
+        Schema::dropIfExists('comicteca_volume');
     }
 };
