@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comicteca;
+use App\Models\Volume;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class ComictecaController extends Controller
 {
@@ -14,7 +17,11 @@ class ComictecaController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+        $comicteca=Comicteca::where('user_id',$userId)->get();
+        $volumes=$comicteca->volumes()->get();
+        //$volumes=Volume::all();
+        return Inertia::render('Comictecas/Index',compact('comicteca','volumes'));
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Booklist;
+use App\Models\Comicteca;
+use App\Models\Review;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -68,6 +70,11 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function comictecas()
+    {
+        return $this->hasOne(Comicteca::class);
     }
 
 }
