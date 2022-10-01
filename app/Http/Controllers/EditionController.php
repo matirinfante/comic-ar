@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comicteca;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
+use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Type\Integer;
 
 class EditionController extends Controller
@@ -110,6 +112,8 @@ class EditionController extends Controller
      */
     public function show(Edition $edition)
     {
+        $userId = Auth::id();
+        $comictecaId=Comicteca::where('user_id',$userId)->get('id');
         $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
@@ -121,6 +125,12 @@ class EditionController extends Controller
                 }
             } else {
                 $volume['coverImage'] = "/assets/cover/default.png";
+            }
+            $volComic=$volume->comictecas()->where('id',$comictecaId[0]->id)->get();
+            if (count($volComic)>0){
+                $volume['inComicteca']=1;
+            }else{
+                $volume['inComicteca']=0;
             }
         }
         return Inertia::render('Editions/Show', compact('edition', 'volumes'));
