@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\EditionController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::middleware([
     Route::resource('/users', UserController::class);
     Route::resource('/volumes', VolumeController::class);
     Route::resource('/reviews', ReviewController::class);
+    Route::resource('/wishlists', WishlistController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
