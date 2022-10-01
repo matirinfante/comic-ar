@@ -68,6 +68,16 @@ defineProps({
                         <p class="px-4 text-md text-slate-400 font-light sm:ml-4 md:ml-10 pt-1">
                             {{ edition.format }}
                         </p>
+                        <div class="flex justify-end">
+                            <div class="bg-yellow-700 hover:bg-yellow-600 mt-4 py-1 pr-5 rounded-l-full">
+                                <button v-on:click="complete()" class="text-gray-200 pl-4 md:pl-14">
+                                    <span class="font-thin">
+                                        TENGO EDICION COMPLETA
+                                    </span>
+                                </button>
+                        </div>
+                        </div>
+                        
                         <div class="flex justify-between">
                             <div class="bg-zinc-500 mt-4 py-1 pr-5 rounded-r-full">
                                 <p class="text-gray-200 pl-4 md:pl-14">
@@ -79,6 +89,7 @@ defineProps({
                                     </span>
                                 </p>
                             </div>
+                            
                             <!-- agregar tomos si no esta terminada-->
                         <div v-if="edition.isClosed == 0">
                             <!-- si no es standalone -->
@@ -255,6 +266,9 @@ export default {
         },
         comicteca(id,state){
             axios.post('/comictecas',{volume_id:id,status:state}).then(response=>{})
+        },
+        complete(){
+            alert('te la creiste we')
         }
     }
 }

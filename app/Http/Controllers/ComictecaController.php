@@ -47,7 +47,7 @@ class ComictecaController extends Controller
         }else{
             $comicteca[0]->volumes()->detach((array)$request->input('volume_id'));
         }
-        
+        return ($comicteca[0]->volumes()->get());
     }
 
     /**
