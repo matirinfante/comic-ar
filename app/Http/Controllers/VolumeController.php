@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -42,28 +43,27 @@ class VolumeController extends Controller
     {
         //coverFile has uploaded image
         //coverImage has image by url
-        if (!($request->coverImage==null)){
+        if (!($request->coverImage == null)) {
             $contents = file_get_contents($request->coverImage);
-            $hasExt= substr($request->coverImage,-4,4);
-            if ($hasExt=='.jpg' || $hasExt=='.png'){
-                $filenametostore=substr($request->coverImage, strrpos($request->coverImage, '/') + 1);
-            }else{
-                $filename=$request->ISBN;
-                $extension='.jpg';
+            $hasExt = substr($request->coverImage, -4, 4);
+            if ($hasExt == '.jpg' || $hasExt == '.png') {
+                $filenametostore = substr($request->coverImage, strrpos($request->coverImage, '/') + 1);
+            } else {
+                $filename = $request->ISBN;
+                $extension = '.jpg';
                 $filenametostore = $filename . '_' . time() . '.' . $extension;
             }
-            
+
 
             // upload file
-            $imgpath='comicar-cover/'.$filenametostore;
+            $imgpath = 'comicar-cover/' . $filenametostore;
             Storage::put($imgpath, $contents);
 
             // Resize img
             $path = public_path('storage/comicar-cover/' . $filenametostore);
             $img = Image::make($path)->resize(263, 400);
             $img->save($path);
-
-        }elseif(!($request->coverFile==null)){
+        } elseif (!($request->coverFile == null)) {
             // get filename with extension
             $filenamewithextension = $request->file('coverFile')->getClientOriginalName();
 
@@ -84,17 +84,17 @@ class VolumeController extends Controller
             $img = Image::make($request->file('coverFile')->getRealPath())->resize(263, 400);
             $img->save($path);
 
-            $imgpath='comicar-cover/'. $filenametostore;
-        }else{
+            $imgpath = 'comicar-cover/' . $filenametostore;
+        } else {
             //If no image was sent by form
-            $imgpath="/assets/cover/default.png";
+            $imgpath = "/assets/cover/default.png";
         }
 
         $lastVolFound = Volume::latest('id')->where('edition_id', $request->edition_id)->first();
 
         $contNumber = 1;
 
-        if($lastVolFound != null){
+        if ($lastVolFound != null) {
             $contNumber = $lastVolFound->number + 1;
         }
 
@@ -119,10 +119,27 @@ class VolumeController extends Controller
      * @param  \App\Models\Volume  $volume
      * @return \Illuminate\Http\Response
      */
-    public function show(Volume $volume)
+    public function show(Volume $volume, Request $request)
     {
         $edition = Edition::where('id', $volume->edition_id)->get();
         $volume = Volume::where('id', $volume->id)->get();
+
+
+        $id = $request->user()->id;
+        $user = User::find($id);
+        $volume[0]['inWishlist'] = 0;
+        $volume[0]['usr'] = null;
+        if ($user != null) {
+            $userWishlist = $user->wishlists()->get();
+            $volWish = null;
+            if (count($userWishlist) > 0) {
+                $volWish = $userWishlist[0]->volumes()->where('id', $volume[0]['id'])->get();
+                if (count($volWish) > 0) {
+                    $volume[0]['inWishlist'] = 1;
+                }
+            }
+            $volume[0]['usr'] = $id;
+        }
 
         // detectar si posee imagen en storage o usa la predeterminada de public
         $image = $volume[0]['coverImage'];
@@ -159,7 +176,7 @@ class VolumeController extends Controller
      */
     public function update(Request $request, Volume $volume)
     {
-        
+
         if ($request->hasFile('coverImage')) {
             Storage::delete($volume->coverImage);
 
@@ -187,7 +204,7 @@ class VolumeController extends Controller
                 'title' => $request->title,
                 'ISBN' => $request->ISBN,
                 'argument' => $request->argument,
-                'coverImage' => 'comicar-cover/'. $filenametostore,
+                'coverImage' => 'comicar-cover/' . $filenametostore,
             ]);
         } else {
             // si el volumen tenía ya una imagen, no se actualiza
