@@ -37,20 +37,23 @@ import axios from 'axios';
                                                     :src="volume.coverImage" :alt="volume.title">
                                                 </Link>
                                             </div>
-                                            <div class="flex-1 min-w-0">
+                                            <div class="flex-1 min-w-0 border-2 border-white border-opacity-40 border-r-purple-400 px-2 hover:bg-purple-100">
+                                                <Link :href="route('volumes.show', volume.id)">
                                                 <p class="text-sm font-medium text-gray-900 truncate ">
                                                     {{volume.title}}
                                                 </p>
                                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                                     N° {{volume.number}}
                                                 </p>
+                                                </Link>
                                             </div>
                                             <div
                                                 class="inline-flex items-center text-base font-semibold text-gray-900 ">
 
                                                 <form
                                                     v-on:submit.prevent="deleteItem(volume['pivot']['wishlist_id']+'*'+volume['pivot']['volume_id'])">
-                                                    <button type="submit" class="hover:text-red-700 transition delay-100">
+                                                    <button type="submit"
+                                                        class="hover:text-red-700 transition delay-100">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="w-6 h-6">
@@ -102,7 +105,7 @@ export default {
     },
     data() {
         return {
-            vol: this.volumes,
+            vol: [],
         }
     },
 
@@ -111,10 +114,12 @@ export default {
             // alert($v['pivot']['volume_id']);
             axios.delete('/wishlists/' + $id)
                 .then(response => {
+                    console.log('Cantidad original: ' + this.volumes.length);
+                    console.log('----------------------------------------');
                     console.log(response.data);
-                    alert('Item eliminado. Recargá la página');
+                    // alert('Item eliminado. Recargá la página');
                     // location.reload();
-                    this.vol = response.data;
+                    this.$inertia.get('/wishlists');
                 })
                 .catch(error => { console.log(error.response) });
         }
