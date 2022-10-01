@@ -3,11 +3,6 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
 
-
-// defineProps({
-//     volumes: Object
-// })
-
 </script>
 <template>
     <AppLayout title="Lista de deseados">
@@ -20,15 +15,16 @@ import axios from 'axios';
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
-                <div v-if="volumes != null">
+                <div v-if="vol != null && vol.length > 0">
                     <div class="p-4 w-full max-w-md bg-white rounded-lg border shadow-md sm:p-8 mx-auto">
                         <div class="flex justify-between items-center mb-4">
                             <h5 class="text-xl font-bold leading-none text-gray-700 ">Qué será lo siguiente a leer?
                             </h5>
+                            <p v-if="vol.length > 0" class="text-gray-400">(Total: {{vol.length}})</p>
                         </div>
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <div v-for="volume in volumes" :key="volume.id">
+                                <div v-for="volume in vol" :key="volume.id">
                                     <li class="py-3 sm:py-4">
                                         <div class="flex items-center space-x-4">
                                             <div class="flex-shrink-0">
@@ -37,7 +33,8 @@ import axios from 'axios';
                                                     :src="volume.coverImage" :alt="volume.title">
                                                 </Link>
                                             </div>
-                                            <div class="flex-1 min-w-0 border-2 border-white border-opacity-40 border-r-purple-400 px-2 hover:bg-purple-100">
+                                            <div
+                                                class="flex-1 min-w-0 border-2 border-white border-opacity-40 border-r-purple-400 px-2 hover:bg-purple-100">
                                                 <Link :href="route('volumes.show', volume.id)">
                                                 <p class="text-sm font-medium text-gray-900 truncate ">
                                                     {{volume.title}}
@@ -82,12 +79,24 @@ import axios from 'axios';
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <li class="py-3 sm:py-4">
-                                    <div class="flex items-center space-x-4">
+                                    <div class="flex justify-center space-x-4 border-2 py-4">
                                         <div class="flex-shrink-0">
                                             <p class="text-sm font-medium text-gray-500 truncate ">
                                                 Sin elementos
                                             </p>
                                         </div>
+                                    </div>
+                                    <div class="flex justify-center space-x-4 mt-4">
+                                        <p class="text-sm font-medium text-gray-500">
+                                            Si te interesa algún tomo, puedes darle al botón 'Lo quiero' para que se
+                                            añadan a esta lista.
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-center space-x-4 mt-8">
+                                        <Link :href="route('editions.index')"
+                                            class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                                        Explorar Ediciones
+                                        </Link>
                                     </div>
                                 </li>
                             </ul>
@@ -105,21 +114,18 @@ export default {
     },
     data() {
         return {
-            vol: [],
+            vol: this.volumes,
         }
     },
 
     methods: {
         deleteItem($id) {
-            // alert($v['pivot']['volume_id']);
             axios.delete('/wishlists/' + $id)
                 .then(response => {
-                    console.log('Cantidad original: ' + this.volumes.length);
-                    console.log('----------------------------------------');
-                    console.log(response.data);
-                    // alert('Item eliminado. Recargá la página');
-                    // location.reload();
-                    this.$inertia.get('/wishlists');
+                    // console.log('Cantidad original: ' + this.volumes.length);
+                    // console.log('----------------------------------------');
+                    // console.log(response.data);
+                    this.vol = response.data;
                 })
                 .catch(error => { console.log(error.response) });
         }
