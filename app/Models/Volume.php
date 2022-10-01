@@ -16,4 +16,8 @@ class Volume extends Model
     public function edition(){
         return $this->belongsTo(Edition::class, 'edition_id');
     }
+
+    public function wishlists(){
+        return $this->belongsToMany(Wishlist::class)->withTimestamps();
+    }
 }
