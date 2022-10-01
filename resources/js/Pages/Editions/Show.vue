@@ -19,7 +19,6 @@ defineProps({
                 <span class="text-gray-500">Edición de {{ edition.title }}</span>
             </h2>
         </template>
-
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
@@ -141,9 +140,9 @@ defineProps({
                                         {{volume.title}} #{{volume.number}}
                                     </div>
                                 </div>
-
-                                <div class="text-center">
-                                    <button
+                                </Link>
+                                <div v-if="volume.inComicteca == 0" class="text-center">
+                                    <button v-on:click="comicteca(volume.id,true);volume.inComicteca=1"
                                         class="inline-block w-full py-2 border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition duration-150 ease-in-out">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto">
@@ -151,7 +150,14 @@ defineProps({
                                         </svg>
                                     </button>
                                 </div>
-                                </Link>
+                                <div v-if="volume.inComicteca == 1" class="text-center">
+                                    <button v-on:click="comicteca(volume.id,false);volume.inComicteca=0"
+                                        class="inline-block w-full py-2 border-2 border-green-600 text-purple-600 hover:bg-green-600 hover:text-white transition duration-150 ease-in-out">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-6 h-6 mx-auto" stroke="green"><path fill="green" d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                                    </button>
+                                </div>
+                                
+                                
                             </div>
                         </div>
 
@@ -246,6 +252,9 @@ export default {
             //console.log(this.edition.id);
             this.$inertia.get('/apibooks/' + this.edition.id);
 
+        },
+        comicteca(id,state){
+            axios.post('/comictecas',{volume_id:id,status:state}).then(response=>{})
         }
     }
 }
