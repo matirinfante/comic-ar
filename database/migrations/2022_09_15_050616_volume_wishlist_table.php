@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wishlist_volume',function(Blueprint $table){
+        Schema::create('volume_wishlist',function(Blueprint $table){
             $table->foreignId('wishlist_id')->constrained();
             $table->foreignId('volume_id')->constrained();
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlist_volume');
+        Schema::dropIfExists('volume_wishlist');
     }
 };
