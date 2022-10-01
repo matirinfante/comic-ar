@@ -170,6 +170,12 @@ const logout = () => {
                                         <JetDropdownLink :href="route('profile.show')">
                                             Configuración de Perfil
                                         </JetDropdownLink>
+                                        
+                                        <div class="border-t border-gray-100" />
+
+                                        <JetDropdownLink :href="route('wishlists.index')">
+                                            Lista de deseados
+                                        </JetDropdownLink>
 
                                         <JetDropdownLink v-if="$page.props.jetstream.hasApiFeatures"
                                             :href="route('api-tokens.index')">
