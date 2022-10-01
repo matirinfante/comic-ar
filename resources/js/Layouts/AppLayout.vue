@@ -64,6 +64,13 @@ const logout = () => {
                                 </JetNavLink>
                             </div>
 
+                            <!-- Comicteca -->
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <JetNavLink :href="route('comictecas.index')" :active="route().current('comictecas.index')">
+                                    Mi Comicteca
+                                </JetNavLink>
+                            </div>
+
 
                         </div>
 
@@ -169,6 +176,12 @@ const logout = () => {
 
                                         <JetDropdownLink :href="route('profile.show')">
                                             Configuración de Perfil
+                                        </JetDropdownLink>
+                                        
+                                        <div class="border-t border-gray-100" />
+
+                                        <JetDropdownLink :href="route('wishlists.index')">
+                                            Lista de deseados
                                         </JetDropdownLink>
 
                                         <JetDropdownLink v-if="$page.props.jetstream.hasApiFeatures"
