@@ -17,7 +17,13 @@ class Volume extends Model
     public function edition(){
         return $this->belongsTo(Edition::class, 'edition_id');
     }
+    
+    public function wishlists(){
+        return $this->belongsToMany(Wishlist::class)->withTimestamps();
+    }
+    
     public function comictecas(){
         return $this->belongsToMany(Comicteca::class,'comicteca_volume','volume_id','comicteca_id');
     }
+
 }
