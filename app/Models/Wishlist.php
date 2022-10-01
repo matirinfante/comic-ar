@@ -18,7 +18,7 @@ class Wishlist extends Model
     }
 
     public function volumes(){
-        return $this->belongsToMany(Volume::class)->withTimestamps();
+        return $this->belongsToMany(Volume::class)->withTimestamps()->orderBy('title')->orderBy('number');
     }
 
     
