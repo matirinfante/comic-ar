@@ -68,9 +68,9 @@ defineProps({
                         <p class="px-4 text-md text-slate-400 font-light sm:ml-4 md:ml-10 pt-1">
                             {{ edition.format }}
                         </p>
-                        <div class="flex justify-end">
+                        <div v-show="hasAll" class="flex justify-end">
                             <div class="bg-yellow-700 hover:bg-yellow-600 mt-4 py-1 pr-5 rounded-l-full">
-                                <button v-on:click="complete()" class="text-gray-200 pl-4 md:pl-14">
+                                <button v-on:click="complete(edition.id)" class="text-gray-200 pl-4 md:pl-14">
                                     <span class="font-thin">
                                         TENGO EDICION COMPLETA
                                     </span>
@@ -142,7 +142,7 @@ defineProps({
                         <!-- Tomos/Volumenes -->
 
                         <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-5">
-                            <div v-for="volume in volumes" :key="volume.id" class="w-26 p-3 mx-auto mb-4 rounded-lg">
+                            <div v-for="volume in dataVolumes" :key="volume.id" class="w-26 p-3 mx-auto mb-4 rounded-lg">
                                 <Link :href="route('volumes.show', volume.id)">
                                 <div class="relative">
                                     <img class="w-full h-50" :src="volume.coverImage" :alt="volume.title" />
@@ -256,7 +256,13 @@ defineProps({
 <script>
 export default {
     data() {
-        return {}
+        return {
+            dataVolumes:this.volumes,
+            hasAll:false
+        }
+    },
+    mounted(){
+        this.checkAll()
     },
     methods: {
         addV() {
@@ -265,10 +271,18 @@ export default {
 
         },
         comicteca(id,state){
-            axios.post('/comictecas',{volume_id:id,status:state}).then(response=>{})
+            axios.post('/comictecas',{volume_id:id,status:state}).then(response=>{this.checkAll()})
         },
-        complete(){
-            alert('te la creiste we')
+        complete(id){
+            axios.post('/comictecas-complete',{edition_id:id}).then(response=>{this.dataVolumes=response.data; this.checkAll()})
+        },
+        checkAll(){
+            this.hasAll=false;
+            this.dataVolumes.forEach(volume => {
+                if (volume['inComicteca']==0){
+                    this.hasAll=true;
+                }
+            });
         }
     }
 }
