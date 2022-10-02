@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comicteca;
+use App\Models\Volume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -48,6 +49,25 @@ class ComictecaController extends Controller
             $comicteca[0]->volumes()->detach((array)$request->input('volume_id'));
         }
         return ($comicteca[0]->volumes()->get());
+    }
+
+    public function completeEdition(Request $request){
+        $userId = Auth::id();
+        $comicteca=Comicteca::where('user_id',$userId)->get();
+        $volumes=Volume::where('edition_id',$request->input('edition_id'))->get();
+        foreach($volumes as $volume){
+            $alreadyIn=false;   //Para que no hayan copias del volumen en la comicteca
+            foreach ($comicteca[0]->volumes()->get() as $inComicteca){
+                if ($volume->id == $inComicteca->id){
+                    $alreadyIn=true;
+                }
+            }
+            if(!$alreadyIn){
+                $comicteca[0]->volumes()->attach((array)$volume->id);
+            }
+            $volume['inComicteca']=1;
+        }
+        return $volumes;
     }
 
     /**

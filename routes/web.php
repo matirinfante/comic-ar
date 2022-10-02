@@ -48,6 +48,7 @@ Route::middleware([
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
     Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
+    Route::post('/comictecas-complete', [ComictecaController::class,'completeEdition']);
 });
 
 
