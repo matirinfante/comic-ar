@@ -19,7 +19,22 @@ class ComictecaController extends Controller
     {
         $userId = Auth::id();
         $comicteca=Comicteca::where('user_id',$userId)->get();
-        $volumes=$comicteca[0]->volumes()->get();
+        $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
+        //Divido por edicion
+        $volumes=[];
+        $edition=[];
+        $editionNum=$volumesCol[0]['edition_id'];
+        foreach($volumesCol as $volume){
+            if($editionNum==$volume['edition_id']){
+                array_push($edition,$volume);
+            }else{
+                array_push($volumes,$edition);
+                $edition=[];
+                $editionNum=$volume['edition_id'];
+                array_push($edition,$volume);
+            }
+        }
+        array_push($volumes,$edition);
         return Inertia::render('Comictecas/Index',compact('comicteca','volumes'));
     }
 
@@ -101,6 +116,31 @@ class ComictecaController extends Controller
      */
     public function update(Request $request, comicteca $comicteca)
     {
+        $userId = Auth::id();
+        $comicteca=Comicteca::where('user_id',$userId)->get();
+        if($request->input('status')){
+            $comicteca[0]->volumes()->attach((array)$request->input('volume_id'));
+        }else{
+            $comicteca[0]->volumes()->detach((array)$request->input('volume_id'));
+        }
+
+        $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
+        //Divido por edicion
+        $volumes=[];
+        $edition=[];
+        $editionNum=$volumesCol[0]['edition_id'];
+        foreach($volumesCol as $volume){
+            if($editionNum==$volume['edition_id']){
+                array_push($edition,$volume);
+            }else{
+                array_push($volumes,$edition);
+                $edition=[];
+                $editionNum=$volume['edition_id'];
+                array_push($edition,$volume);
+            }
+        }
+        array_push($volumes,$edition);
+        return ($volumes);
     }
 
     /**
