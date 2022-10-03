@@ -10,9 +10,11 @@
             </h2>
     </template>
     <div class="container mt-3">
-        <p class="font-bold text-xl mb-3 ml-3">Cantidad de Volumenes: {{allVol.length}}</p>
-        <div class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center">
-            <div v-for="volume in allVol" :key="volume.id" class="mb-3">
+        <p class="font-bold text-xl mb-3 ml-3">Cantidad de Volumenes: {{cantVol}}</p>
+        <div class="">
+            <div v-for="edition in allVol" class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center"> 
+            <!-- {{edition[0].title}} -->
+            <div v-for="volume in edition" :key="volume.id" class="mb-3">
                 <div class="relative">
                     <Link :href="route('volumes.show', volume.id)">
                     <img class="h-60" :src="volume.coverImage">
@@ -26,6 +28,7 @@
                 </div>
                 
                 
+            </div>
             </div>
         </div>
         
@@ -42,12 +45,22 @@ export default{
     },
     data(){
         return{
-            allVol:this.volumes
+            allVol:this.volumes,
+            cantVol:0
         }
+    },
+    mounted(){
+        this.countVol()
     },
     methods:{
         remove(id){
-            axios.post('/comictecas',{volume_id:id,status:false}).then(response=>{this.allVol=response.data})
+            axios.post('/comictecas.update',{volume_id:id,status:false}).then(response=>{this.allVol=response.data; this.countVol()})
+        },
+        countVol(){
+            this.cantVol=0;
+            this.allVol.forEach(element => {
+                this.cantVol+=element.length;
+            });
         }
     }
 }
