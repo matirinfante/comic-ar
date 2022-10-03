@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comicteca;
+use App\Models\Edition;
 use App\Models\Volume;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,11 +27,15 @@ class ComictecaController extends Controller
         $editionNum=$volumesCol[0]['edition_id'];
         foreach($volumesCol as $volume){
             if($editionNum==$volume['edition_id']){
+                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                $volume['edition_title']=$edTitle[0];
                 array_push($edition,$volume);
             }else{
                 array_push($volumes,$edition);
                 $edition=[];
                 $editionNum=$volume['edition_id'];
+                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                $volume['edition_title']=$edTitle[0];
                 array_push($edition,$volume);
             }
         }
@@ -131,11 +136,15 @@ class ComictecaController extends Controller
         $editionNum=$volumesCol[0]['edition_id'];
         foreach($volumesCol as $volume){
             if($editionNum==$volume['edition_id']){
+                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                $volume['edition_title']=$edTitle[0];
                 array_push($edition,$volume);
             }else{
                 array_push($volumes,$edition);
                 $edition=[];
                 $editionNum=$volume['edition_id'];
+                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                $volume['edition_title']=$edTitle[0];
                 array_push($edition,$volume);
             }
         }
