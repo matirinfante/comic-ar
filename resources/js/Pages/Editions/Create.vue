@@ -38,7 +38,7 @@ const submit = () => {
                     <!-- title -->
                     <div>
                         <JetLabel for="title" value="Título"/>
-                        <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full" required
+                        <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full" 
                                   autofocus/>
                         <JetInputError class="mt-2" :message="form.errors.title"/>
                     </div>
@@ -46,7 +46,7 @@ const submit = () => {
                     <!-- publisher -->
                     <div class="mt-4">
                         <JetLabel for="publisher" value="Editorial"/>
-                        <JetInput id="publisher" v-model="form.publisher" type="text" class="mt-1 block w-full" required
+                        <JetInput id="publisher" v-model="form.publisher" type="text" class="mt-1 block w-full" 
                                   autocomplete="current-publisher"/>
                         <JetInputError class="mt-2" :message="form.errors.publisher"/>
                     </div>
@@ -54,7 +54,7 @@ const submit = () => {
                     <!-- language -->
                     <div class="mt-4">
                         <JetLabel for="language" value="Idioma"/>
-                        <JetInput id="language" v-model="form.language" type="text" class="mt-1 block w-full" required
+                        <JetInput id="language" v-model="form.language" type="text" class="mt-1 block w-full" 
                                   autocomplete="current-language"/>
                         <JetInputError class="mt-2" :message="form.errors.language"/>
                     </div>
