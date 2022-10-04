@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditionRequest;
 use App\Models\Comicteca;
 use Inertia\Inertia;
 use App\Models\Volume;
@@ -63,19 +64,9 @@ class EditionController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EditionRequest $request)
     {
-
-        // Falta validar
-
-        $edition = Edition::create([
-            'title' => $request->title,
-            'publisher' => $request->publisher,
-            'language' => $request->language,
-            'format' => $request->format,
-            'isStandalone' => $request->isStandalone,
-            'description' => $request->description
-        ]);
+        $edition = Edition::create($request->validated());
 
         $edition->save();
         
