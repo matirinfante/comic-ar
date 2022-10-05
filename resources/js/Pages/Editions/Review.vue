@@ -49,7 +49,8 @@
                 </div>
             </div>
             <div class="flex items-center mb-1">
-                <star-rating inactive-color="#e1bad9" active-color="#cc1166" :inline="true" :star-size="15" :show-rating="false" :rating="this.review.rating"
+                <star-rating inactive-color="#e1bad9" active-color="#cc1166" :inline="true" :star-size="15"
+                             :show-rating="false" :rating="this.review.rating"
                              :read-only="true" :increment="0.01" :rounded-corners="true" :border-width="2"
                              :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"></star-rating>
                 <h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white"></h3>
@@ -70,7 +71,7 @@
             <article class="mt-9 pr-9 ml-10 ">
                 <div class="flex items-center mb-4 space-x-4">
                     <div class="space-y-1 font-bold dark:text-white">
-                        <p>{{ review.id }}
+                        <p>{{ review.user.name }}
                         </p>
                     </div>
                 </div>
@@ -157,6 +158,7 @@ export default {
                 }
             }).then((response) => {
                 if (response.data.length > 0) {
+                    console.log(response.data)
                     this.editionReviews = response.data
                 }
             })

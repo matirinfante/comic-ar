@@ -94,7 +94,7 @@ class ReviewController extends Controller
 
     public function showReviews(Request $request)
     {
-        $reviews = Review::where('edition_id', $request->edition_id)->get();
+        $reviews = Review::with('user')->where('edition_id', $request->edition_id)->get();
         return response()->json($reviews);
     }
 
