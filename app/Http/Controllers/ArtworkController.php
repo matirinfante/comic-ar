@@ -9,6 +9,7 @@ use App\Models\Edition;
 use App\Models\Comicteca;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ArtworkRequest;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Redirect;
 
@@ -21,7 +22,7 @@ class ArtworkController extends Controller
      */
     public function index()
     {
-        return "INDEX";
+        return abort(404);
     }
 
     /**
@@ -41,14 +42,11 @@ class ArtworkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArtworkRequest $request)
     {
         $userId = Auth::id();
         $editionId = $request->editionId;
-        $request->validate([
-            'title' => ['required', 'min:4'],
-            'imgUrl' => ['required', 'image'],
-        ]);
+        $request->validated();
 
         if ($request->hasFile('imgUrl')) {
 
