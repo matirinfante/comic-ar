@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Artwork;
+use App\Models\Comicteca;
 use App\Models\User;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -24,6 +27,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'a@a.com',
             'password' => Hash::make('admin123')
+        ]);
+
+        // Comicteca de administrador
+        Comicteca::create([
+            'user_id' => 1,
         ]);
 
         // crear 10 usuarios aleatorios
@@ -72,6 +80,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9789871858323',
             'argument' => 'Pocos superhéroes tienen un origen secreto tan tormentoso como Kick-Ass. De hecho, él y sus amigos se las ven bastante negras...¿Quien sobrevive? O mejor dicho... ¿Hay alguien que quede vivio después de todo esto? Una cosa te podemos asegurar: a varios les está esperando una buena paliza.',
             'coverImage' => 'https://i1.whakoom.com/small/16/12/06867944aa734106a056287ae6802178.jpg',
+            'edition_id' => 1,
+        ]);
+
+        // Creación de artworks (kick-ass)
+        Artwork::create([
+            'title' => 'Kick-Ass',
+            'description' => 'Comic style',
+            'imgUrl' => 'https://i.pinimg.com/originals/56/5e/c9/565ec9d779ff0967dd9da5cd428a533c.jpg',
+            'user_id' => 2,
+            'edition_id' => 1,
+        ]);
+        Artwork::create([
+            'title' => 'Crew',
+            'description' => 'Los héroes sin poderes',
+            'imgUrl' => 'https://i.pinimg.com/originals/8f/e3/c0/8fe3c0e62741459234dccf2d0b3a4d7e.jpg',
+            'user_id' => 3,
+            'edition_id' => 1,
+        ]);
+        Artwork::create([
+            'title' => 'Hit Girl',
+            'description' => 'By Darkone',
+            'imgUrl' => 'https://cafans.b-cdn.net/images/Category_68944/subcat_119123/Hit-Girl%20by%20Greg%20Darkone%20Williams.jpg',
+            'user_id' => 4,
             'edition_id' => 1,
         ]);
 
@@ -131,6 +162,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9788417787684',
             'argument' => 'Incluso para una ciudad como Gotham, la violencia que ha desplegado la KGBestia ha superado el límite tolerable. El caos se adueña del hogar de Batman en una guerra fría que esconde un secreto todavía más brutal que la verdad sobre el juicio de Mr. Frío.',
             'coverImage' => 'https://i1.whakoom.com/small/36/30/e02d41d70287416aac9f60f39c0c30c8.jpg',
+            'edition_id' => 2,
+        ]);
+
+        // artworks de batman
+        Artwork::create([
+            'title' => 'El caballero oscuro',
+            'description' => 'artwork',
+            'imgUrl' => 'https://images.hdqwalls.com/wallpapers/the-batman-artwork-2020-4k-pu.jpg',
+            'user_id' => 5,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'Batman',
+            'description' => 'Art deko style',
+            'imgUrl' => 'https://cdn.domestika.org/c_fit,dpr_auto,f_auto,t_base_params,w_820/v1630444921/content-items/008/973/973/ART-DECO-BatMan-original.jpg?1630444921',
+            'user_id' => 6,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'Guasón',
+            'description' => 'El bromas, pero enfermo',
+            'imgUrl' => 'https://i.pinimg.com/originals/98/8a/52/988a52f16673cda12829d05210f42cbc.jpg',
+            'user_id' => 7,
             'edition_id' => 2,
         ]);
 
@@ -210,6 +264,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 3,
         ]);
 
+        // Artworks de dorohedoro
+        Artwork::create([
+            'title' => 'Demons',
+            'description' => 'dorohedoro art',
+            'imgUrl' => 'https://img1.ak.crunchyroll.com/i/spire4/7b024210201748b731779ec3afd6d9fe1660914358_main.jpg',
+            'user_id' => 8,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Shin',
+            'description' => 'Dorohedoro',
+            'imgUrl' => 'https://wallpaperaccess.com/full/2007898.jpg',
+            'user_id' => 9,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Kaiman y Nikaido',
+            'description' => 'Saludando',
+            'imgUrl' => 'https://hiepsibaotap.com/wp-content/uploads/2020/02/aa87fe156bf01c0a2a3a971ef715f427ae33610dr1-1200-900v2_uhq.jpg',
+            'user_id' => 10,
+            'edition_id' => 3,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Sensor (E4) (Tomo Único)
@@ -229,6 +306,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => 'Kyoko Byakuya pasea sola al pie del monte Sengoku cuando se cruza con un hombre que la invita al pueblo perdido de Kiyokami. Al llegar, ¡encuentra que todo allí brilla como el oro! Cuando comienzan a relatarle la historia de ese extraño poblado, ella siente cada vez mayor conexión con el lugar. ¡¿Qué tiene esta misteriosa mujer que sin buscarlo puede hacer que el mundo entero quede a su merced?!',
             'coverImage' => 'https://i1.whakoom.com/small/37/19/0493912318794ed4b56b28976781dd3b.jpg',
+            'edition_id' => 4,
+        ]);
+
+        // creacion de artwork
+        Artwork::create([
+            'title' => 'Junji Ito',
+            'description' => 'Creepy',
+            'imgUrl' => 'https://i.pinimg.com/736x/26/14/46/26144680f730a4050b1472f120a83522--junji-ito-japanese-art.jpg',
+            'user_id' => 11,
+            'edition_id' => 4,
+        ]);
+        Artwork::create([
+            'title' => 'Sensor',
+            'description' => 'Junji Ito Manga',
+            'imgUrl' => 'https://preview.redd.it/d0l30h6jpeg71.jpg?auto=webp&s=0df1a215464b4d901a40c7f04ec3f786d03b61b2',
+            'user_id' => 3,
+            'edition_id' => 4,
+        ]);
+        Artwork::create([
+            'title' => 'Sensor',
+            'description' => 'Terror rural',
+            'imgUrl' => 'http://www.eslahoradelastortas.com/blog/media/2021/01/tumblr_pivl3nMmTG1wva86to1_500.jpg',
+            'user_id' => 6,
             'edition_id' => 4,
         ]);
 
@@ -254,6 +354,7 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 5,
         ]);
 
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Sensacional Wonder Woman (E6) (Tomo Único)
@@ -273,6 +374,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/3e/21/3f726c10ece047578509bd6a6097494d.jpg',
+            'edition_id' => 6,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'WW',
+            'description' => 'Wonder Woman',
+            'imgUrl' => 'https://preview.redd.it/pd16g7j2z2r71.jpg?width=640&crop=smart&auto=webp&s=4877d31d8f8eec30b2ace0686c803721eca5cd73',
+            'user_id' => 4,
+            'edition_id' => 6,
+        ]);
+        Artwork::create([
+            'title' => 'Diana',
+            'description' => 'Close-up',
+            'imgUrl' => 'https://w0.peakpx.com/wallpaper/411/215/HD-wallpaper-wonder-woman-looking-wonder-woman-superheroes-artist-artwork-digital-art.jpg',
+            'user_id' => 8,
+            'edition_id' => 6,
+        ]);
+        Artwork::create([
+            'title' => 'Black & Gold',
+            'description' => 'WW variant',
+            'imgUrl' => 'https://preview.redd.it/y3plgvruh9i71.jpg?auto=webp&s=7fa1c7f499994ddae0949039a5662b852d2ae66b',
+            'user_id' => 6,
             'edition_id' => 6,
         ]);
 
@@ -334,6 +458,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 7,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Raiden',
+            'description' => 'Dios del trueno',
+            'imgUrl' => 'https://i.pinimg.com/originals/51/40/de/5140de14742b4856925ae518aa65a631.jpg',
+            'user_id' => 6,
+            'edition_id' => 7,
+        ]);
+        Artwork::create([
+            'title' => 'Kitana',
+            'description' => 'Mortal Kombat 11 art',
+            'imgUrl' => 'https://es.gamewallpapers.com/download.php?img=wallpaper_mortal_kombat_11_fan_art_01_1920x1080.jpg',
+            'user_id' => 5,
+            'edition_id' => 7,
+        ]);
+        Artwork::create([
+            'title' => 'Scorpion Rage',
+            'description' => 'Fighting game',
+            'imgUrl' => 'https://ae01.alicdn.com/kf/HTB1tNhTbBWD3KVjSZFsq6AqkpXaX/Q0002-Mortal-Kombat-Scorpion-Art.jpg',
+            'user_id' => 11,
+            'edition_id' => 7,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Así habló Kishibe Rohan (E8)
@@ -362,6 +509,28 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9788419451200',
             'argument' => 'El excéntrico Rohan Kishibe, el mangaka presentado en Jojo' . "'" . 's Bizarre Adventure Diamond is Unbreakable, protagoniza este manga de capítulos unitarios que narran historias en solitario, o mejor dicho, en compañía de su stand Heaven' . "'" . 's Door. Su personalidad caprichosa, arrogante y extravagante pero a la vez magnética, hacen de Rohan uno de los personajes más memorables de todas las sagas, y a los que el maestro Araki vuelve una y otra vez. No en vano este personaje es considerado por algunos como un alter ego de Araki',
             'coverImage' => 'https://i1.whakoom.com/small/2c/19/76047209c012423a8db8f95318962f0f.jpg',
+            'edition_id' => 8,
+        ]);
+
+        Artwork::create([
+            'title' => 'Jolyne Gucci',
+            'description' => 'Fashion',
+            'imgUrl' => 'https://i.pinimg.com/736x/6c/f3/70/6cf37009d310d0757ebb655739fdbc01.jpg',
+            'user_id' => 8,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Kishibe Rohan',
+            'description' => 'Mangaka',
+            'imgUrl' => 'https://image.tmdb.org/t/p/w780/tNubPqMgMC61a8PS9nUqp8ot1Df.jpg',
+            'user_id' => 7,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'JJBA',
+            'description' => 'Jojos',
+            'imgUrl' => 'https://2.bp.blogspot.com/-dvNEAPN_IDM/XDDzOeFzI8I/AAAAAAAAAJ0/btT51TZoEKkJpwHVm9uGUHmIxj8jR70oACLcBGAs/s1600/Steamworkshop_webupload_previewfile_332969030_preview.png',
+            'user_id' => 4,
             'edition_id' => 8,
         ]);
 
@@ -404,6 +573,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 9,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Wanted',
+            'description' => 'Comic art',
+            'imgUrl' => 'https://qph.cf2.quoracdn.net/main-qimg-d34c274d884d2f1dc571e0ead472ec20.webp',
+            'user_id' => 1,
+            'edition_id' => 9,
+        ]);
+        Artwork::create([
+            'title' => 'Killer Suit',
+            'description' => 'Wanted',
+            'imgUrl' => 'https://img.gta5-mods.com/q90/avatars/407061/159548-2904793-emask.jpg',
+            'user_id' => 5,
+            'edition_id' => 9,
+        ]);
+        Artwork::create([
+            'title' => 'Videojuego',
+            'description' => 'Wanted game',
+            'imgUrl' => 'https://assets-prd.ignimgs.com/2022/05/07/wanted-1651884107432.jpg',
+            'user_id' => 9,
+            'edition_id' => 9,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Hellboy: El Ataud Encadenado y otros relatos (E10) (Tomo Único)
@@ -423,6 +615,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9789876130608',
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/14/3b/1f70afa43ecf4d0eb4daa6d39ea2a84e.jpg',
+            'edition_id' => 10,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'Hellboy',
+            'description' => 'Rojo',
+            'imgUrl' => 'https://i.pinimg.com/originals/3a/8d/d1/3a8dd1e595d4b451d9019330d1891959.jpg',
+            'user_id' => 4,
+            'edition_id' => 10,
+        ]);
+        Artwork::create([
+            'title' => 'Pelicula',
+            'description' => 'Pelicula de Guillermo del Toro',
+            'imgUrl' => 'https://i.etsystatic.com/15590810/r/il/239699/2147012741/il_fullxfull.2147012741_gvit.jpg',
+            'user_id' => 4,
+            'edition_id' => 10,
+        ]);
+        Artwork::create([
+            'title' => 'Rojo',
+            'description' => 'HB',
+            'imgUrl' => 'http://images.fandango.com/images/fandangoblog/JuanCarlosRuiz%20copy.jpg',
+            'user_id' => 4,
             'edition_id' => 10,
         ]);
 
@@ -480,6 +695,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/0d/0f/b518e88af12a4746a7eb056330693a7f.jpg',
+            'edition_id' => 11,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'Kenshiro',
+            'description' => 'Hokuto No Ken',
+            'imgUrl' => 'https://www.manga-news.com/public/2016/news_fr_01/hokuto-no-ken-ex-libris-kaze-manga.jpg',
+            'user_id' => 7,
+            'edition_id' => 11,
+        ]);
+        Artwork::create([
+            'title' => 'Hokuto No Ken',
+            'description' => 'Mad Max style',
+            'imgUrl' => 'https://www.playerone.vg/wp-content/uploads/2021/03/hokuto-no-ken-manga-spinoff-e1614977195267.png',
+            'user_id' => 8,
+            'edition_id' => 11,
+        ]);
+        Artwork::create([
+            'title' => 'HNK',
+            'description' => 'Estrella del norte',
+            'imgUrl' => 'https://www.wallpapertip.com/wmimgs/18-186292_fist-of-the-north-star-hokuto-no-ken.jpg',
+            'user_id' => 10,
             'edition_id' => 11,
         ]);
 
@@ -586,6 +824,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 12,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Poster',
+            'description' => 'Spy X Family',
+            'imgUrl' => 'https://i.pinimg.com/550x/9e/a0/cd/9ea0cd1593ee1e64ede8ddc2ced75588.jpg',
+            'user_id' => 8,
+            'edition_id' => 12,
+        ]);
+        Artwork::create([
+            'title' => 'Spy X Family',
+            'description' => 'Artwork',
+            'imgUrl' => 'https://dthezntil550i.cloudfront.net/wa/latest/wa2003132002055770008497197/1280_960/a6ec0083-b4b8-4948-9878-142434152cc5.png',
+            'user_id' => 6,
+            'edition_id' => 12,
+        ]);
+        Artwork::create([
+            'title' => 'SXF Poster',
+            'description' => 'Poster',
+            'imgUrl' => 'https://resizing.flixster.com/oKZx6R0LR26Hy_-BwPxj05F3dsg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vYWZmMjgxMzYtMjg5Yi00ZmVhLWEwYjctYmEyMmI4MTFjNzBjLnBuZw==',
+            'user_id' => 5,
+            'edition_id' => 12,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Kamen Rider Kuuga (E13)
@@ -671,6 +932,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 13,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Kamen Rider',
+            'description' => 'KM',
+            'imgUrl' => 'https://cdna.artstation.com/p/assets/images/images/000/523/786/large/chen-guan-yu-kamen-rider-by-kyzylhum-d8khuk4.jpg?1425568807&dl=1',
+            'user_id' => 1,
+            'edition_id' => 13,
+        ]);
+        Artwork::create([
+            'title' => 'Zero-One',
+            'description' => 'Kamen Rider Zero-One',
+            'imgUrl' => 'https://pbs.twimg.com/media/D_Mr4jeXUAAPs4i.jpg',
+            'user_id' => 2,
+            'edition_id' => 13,
+        ]);
+        Artwork::create([
+            'title' => 'Kuuga & Agito',
+            'description' => 'KM',
+            'imgUrl' => 'https://cdn.donmai.us/original/45/b8/45b881913b4391c2e681a1c35e226a33.jpg',
+            'user_id' => 3,
+            'edition_id' => 13,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Spider-Man (E14)
@@ -709,6 +993,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9789871966059',
             'argument' => 'Spider-Man se alía con los Cuatro Fantásticos y con Anti-Venom (el ex villano Venom), sin saber que en el futuro serán clave para luchar contra la infestación de la "isla Araña"...',
             'coverImage' => 'https://i1.whakoom.com/small/05/28/fbb00fc5133748fe8859c5b66fbe4608.jpg',
+            'edition_id' => 14,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'Spiderman',
+            'description' => 'marvel',
+            'imgUrl' => 'https://preview.redd.it/j5lrkjiizun41.jpg?width=640&crop=smart&auto=webp&s=2d9d918506e83f3d2bec8f7892706285b6c42f4d',
+            'user_id' => 4,
+            'edition_id' => 14,
+        ]);
+        Artwork::create([
+            'title' => 'Peter Parker',
+            'description' => 'Spiderman',
+            'imgUrl' => 'https://i.pinimg.com/originals/ca/5d/18/ca5d18e760c9d328e9d0f64c67d5c134.jpg',
+            'user_id' => 5,
+            'edition_id' => 14,
+        ]);
+        Artwork::create([
+            'title' => 'Goblin',
+            'description' => 'Hombre Araña',
+            'imgUrl' => 'https://c4.wallpaperflare.com/wallpaper/901/280/30/spiderman-goblin-hd-artwork-wallpaper-preview.jpg',
+            'user_id' => 6,
             'edition_id' => 14,
         ]);
 
