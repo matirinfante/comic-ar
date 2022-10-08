@@ -27,6 +27,18 @@ class WishlistController extends Controller
             if (count($userWishlist) > 0) {
                 // si existe la wishlist, obtengo los volúmenes
                 $volumes = $userWishlist[0]->volumes()->get();
+                foreach ($volumes as $volume) {
+                    if ($volume['coverImage'] != "/assets/cover/default.png") {
+                        if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                            $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                        } else {
+        
+                            $volume['coverImage'] = $volume['coverImage'];
+                        }
+                    } else {
+                        $volume['coverImage'] = "/assets/cover/default.png";
+                    }
+                }
             }
         }
         return Inertia::render('Wishlists/Index', compact('volumes'));
