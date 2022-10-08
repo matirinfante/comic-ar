@@ -21,25 +21,38 @@ class ComictecaController extends Controller
         $userId = Auth::id();
         $comicteca=Comicteca::where('user_id',$userId)->get();
         $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
-        //Divido por edicion
         $volumes=[];
-        $edition=[];
-        $editionNum=$volumesCol[0]['edition_id'];
-        foreach($volumesCol as $volume){
-            if($editionNum==$volume['edition_id']){
-                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                $volume['edition_title']=$edTitle[0];
-                array_push($edition,$volume);
-            }else{
-                array_push($volumes,$edition);
-                $edition=[];
-                $editionNum=$volume['edition_id'];
-                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                $volume['edition_title']=$edTitle[0];
-                array_push($edition,$volume);
+        if (count($volumesCol)>0){
+            $edition=[];
+            $editionNum=$volumesCol[0]['edition_id'];
+            foreach($volumesCol as $volume){
+                //Renombrando ruta de la imagen
+                if ($volume['coverImage'] != "/assets/cover/default.png") {
+                    if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                        $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                    } else {
+    
+                        $volume['coverImage'] = $volume['coverImage'];
+                    }
+                } else {
+                    $volume['coverImage'] = "/assets/cover/default.png";
+                }
+                //Divido por edicion
+                if($editionNum==$volume['edition_id']){
+                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                    $volume['edition_title']=$edTitle[0];
+                    array_push($edition,$volume);
+                }else{
+                    array_push($volumes,$edition);
+                    $edition=[];
+                    $editionNum=$volume['edition_id'];
+                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                    $volume['edition_title']=$edTitle[0];
+                    array_push($edition,$volume);
+                }
             }
+            array_push($volumes,$edition);
         }
-        array_push($volumes,$edition);
         return Inertia::render('Comictecas/Index',compact('comicteca','volumes'));
     }
 
@@ -130,25 +143,38 @@ class ComictecaController extends Controller
         }
 
         $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
-        //Divido por edicion
         $volumes=[];
-        $edition=[];
-        $editionNum=$volumesCol[0]['edition_id'];
-        foreach($volumesCol as $volume){
-            if($editionNum==$volume['edition_id']){
-                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                $volume['edition_title']=$edTitle[0];
-                array_push($edition,$volume);
-            }else{
-                array_push($volumes,$edition);
-                $edition=[];
-                $editionNum=$volume['edition_id'];
-                $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                $volume['edition_title']=$edTitle[0];
-                array_push($edition,$volume);
+        if (count($volumesCol)>0){
+            $edition=[];
+            $editionNum=$volumesCol[0]['edition_id'];
+            foreach($volumesCol as $volume){
+                //Renombrando ruta de la imagen
+                if ($volume['coverImage'] != "/assets/cover/default.png") {
+                    if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                        $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                    } else {
+    
+                        $volume['coverImage'] = $volume['coverImage'];
+                    }
+                } else {
+                    $volume['coverImage'] = "/assets/cover/default.png";
+                }
+                //Divido por edicion
+                if($editionNum==$volume['edition_id']){
+                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                    $volume['edition_title']=$edTitle[0];
+                    array_push($edition,$volume);
+                }else{
+                    array_push($volumes,$edition);
+                    $edition=[];
+                    $editionNum=$volume['edition_id'];
+                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
+                    $volume['edition_title']=$edTitle[0];
+                    array_push($edition,$volume);
+                }
             }
+            array_push($volumes,$edition);
         }
-        array_push($volumes,$edition);
         return ($volumes);
     }
 

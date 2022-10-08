@@ -50,7 +50,7 @@ class VolumeController extends Controller
                 $filenametostore = substr($request->coverImage, strrpos($request->coverImage, '/') + 1);
             } else {
                 $filename = $request->ISBN;
-                $extension = '.jpg';
+                $extension = 'jpg';
                 $filenametostore = $filename . '_' . time() . '.' . $extension;
             }
 
