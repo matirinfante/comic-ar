@@ -82,4 +82,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Comicteca::class);
     }
 
+    public function artworks()
+    {
+        return $this->hasMany(Artwork::class);
+    }
+
 }
