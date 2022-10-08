@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
+import NoArtwork from '../../Components/NoArtwork.vue';
 
 defineProps({
     edition: Object,
@@ -136,8 +137,8 @@ defineProps({
                         </section>
                     </div>
                     <div v-else>
-                        <div class="text-gray-800 bg-white py-20 flex flex-row justify-center">
-                            <p>Edición sin Artworks</p>
+                        <div class="text-gray-800 bg-white py-4 flex flex-row justify-center px-10">
+                            <NoArtwork />
                         </div>
                     </div>
 
@@ -159,7 +160,8 @@ defineProps({
                             <img :src="modalContent"
                                 class="max-w-full md:max-w-[768px] lg:max-w-[1024px] max-h-[550px] object-cover" />
                             <div class="absolute inset-0 z-10 text-white flex flex-col">
-                                <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de {{author}}</p>
+                                <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de
+                                    {{author}}</p>
                             </div>
                         </div>
                     </div>
@@ -178,7 +180,7 @@ export default {
             // ...
             modalShow: false,
             modalContent: null,
-            author: null
+            author: null,
         };
     },
     methods: {
