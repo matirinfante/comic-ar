@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Edition;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -78,7 +79,8 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        $review->update($request->input());
+        return response()->json($review);
     }
 
     /**
@@ -94,7 +96,7 @@ class ReviewController extends Controller
 
     public function showReviews(Request $request)
     {
-        $reviews = Review::with('user')->where('edition_id', $request->edition_id)->get();
+        $reviews = Review::with('user')->where('edition_id', $request->edition_id)->where('user_id', '!=', auth()->user()->id)->get();
         return response()->json($reviews);
     }
 
@@ -104,7 +106,8 @@ class ReviewController extends Controller
         return response()->json($response);
     }
 
-    public function scoreReviews(Request $request){
+    public function scoreReviews(Request $request)
+    {
         $reviews = Review::where('edition_id', $request->edition_id)->get('rating');
         return response()->json($reviews);
     }
