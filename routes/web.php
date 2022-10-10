@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\EditionController;
+use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\WishlistController;
 
 /*
@@ -44,12 +45,16 @@ Route::middleware([
     Route::resource('/reviews', ReviewController::class);
     Route::resource('/wishlists', WishlistController::class);
     Route::resource('/comictecas', ComictecaController::class);
+    Route::resource('/objectives',ObjectiveController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
     Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
     Route::post('/comictecas-complete', [ComictecaController::class,'completeEdition']);
     Route::post('/comictecas.update', [ComictecaController::class,'update']);
+    Route::get('/searchObj',[ObjectiveController::class,'searchBy']);
+    Route::get('/objectives-show',[ObjectiveController::class,'show']);
+    Route::post('/objectives-update',[ObjectiveController::class,'update']);
 });
 
 
