@@ -184,6 +184,10 @@ const logout = () => {
                                             Lista de deseados
                                         </JetDropdownLink>
 
+                                        <JetDropdownLink :href="route('objectives.index')">
+                                            Lectura
+                                        </JetDropdownLink>
+
                                         <JetDropdownLink v-if="$page.props.jetstream.hasApiFeatures"
                                             :href="route('api-tokens.index')">
                                             API Tokens
