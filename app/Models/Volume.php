@@ -25,5 +25,9 @@ class Volume extends Model
     public function comictecas(){
         return $this->belongsToMany(Comicteca::class,'comicteca_volume','volume_id','comicteca_id');
     }
+    
+    public function objectives(){
+        return $this->belongsToMany(Objective::class)->withPivot('status');
+    }
 
 }
