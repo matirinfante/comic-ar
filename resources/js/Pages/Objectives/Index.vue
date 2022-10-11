@@ -3,6 +3,7 @@
     import AppLayout from '@/Layouts/AppLayout.vue';
     import Create from '@/Pages/Objectives/Create.vue';
     import Show from '@/Pages/Objectives/Show.vue';
+    
 </script>
 <template>
     <AppLayout title="Objetivos">
@@ -10,32 +11,53 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 <span class="text-gray-500">Objetivos de lectura</span>
             </h2>
-        </template>        
-        <select v-model="selected" v-on:change="changed">
-            <option disabled value="">Seleccione un objetivo</option>
-            <option v-for="objective in objectives" :key="objective.id" :value="objective.id">{{objective.name}}</option>
-        </select>
-        <button v-on:click="createNew" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded m-2">Nuevo Objetivo</button>
+        </template>      
+        <div class="flex justify-between mt-3">
+            <div class="pl-3">
+                <select v-model="selected" v-on:change="changed">
+                    <option disabled value="noselect">Seleccione un objetivo</option>
+                    <option v-for="objective in objetivos" :key="objective.id" :value="objective.id">{{objective.name}}</option>
+                </select>
+                <button v-show="cargar" v-on:click="erase" class="bg-orange-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-2">Eliminar Actual</button>
+            </div>
+            <div>
+                <button v-on:click="createNew" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded m-2">Nuevo Objetivo</button>
+            </div>
+        </div>  
+        
         <!-- {{objectives}} -->
-        <Show :name="oname" :volLeer="volLeer" :volLeyendo="volLeyendo" :volLeido="volLeido" :selected="selected"/>
-        <Create :modal="modal" @close="close"/>
+        <div v-show="cargar" class="text-center">
+            <ve-progress 
+                :progress="progress"
+                color="purple"
+                fontSize="2rem"
+                legendClass="pb-10"
+            >
+            </ve-progress>
+        </div>
+        
+
+        <Show v-show="cargar" :name="oname" :volLeer="volLeer" :volLeyendo="volLeyendo" :volLeido="volLeido" :selected="selected" @updateProg="updateProg"/>
+        <Create :modal="modal" @close="close" @updt="updt"/>
     </AppLayout>
 </template>
 <script>
+import { VeProgress } from "vue-ellipse-progress";
 import axios from 'axios'
 export default {
     props:['objectives'],
     data(){
         return{
+            objetivos:this.objectives,
             modal:false,
-            selected:"",
+            selected:"noselect",
             oname:"",
-            oprogress:"",
-            ostatus:"",
+            progress:0,
             osteps:"",
             volLeer:[],
             volLeyendo:[],
-            volLeido:[]
+            volLeido:[],
+            cargar:false
         }
     },
     methods:{
@@ -45,18 +67,28 @@ export default {
         close(val){
             this.modal=val;
         },
+        updt(data){
+            this.objetivos=data;
+            this.selected=data[data.length-1]['id'];
+            this.changed();
+        },
         changed(){
+            this.cargar=true;
             axios.get('/objectives-show',{params:{id:this.selected}}).then(response=>{
-                //console.log(response.data.porleer);
                 this.oname=response.data.name;
-                this.oprogress=response.data.progress;
-                this.ostatus=response.data.status;
+                this.progress=response.data.progress;
                 this.osteps=response.data.steps;
                 this.volLeer=response.data.porleer;
                 this.volLeyendo=response.data.leyendo;
                 this.volLeido=response.data.leido;
                 })
-            // console.log(this.selected)
+        },
+        updateProg(val){
+            this.progress=Math.round(val);
+        },
+        erase(){
+            axios.delete('/objectives/'+this.selected)
+            .then(response=>{this.objetivos=response.data; this.cargar=false; this.selected='noselect'})
         }
     }
 }

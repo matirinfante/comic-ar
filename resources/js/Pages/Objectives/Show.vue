@@ -1,10 +1,8 @@
-<script setup>
-import rawDisplayer from '@/Pages/Objectives/rawDisplayer.vue';
-</script>
 <template>
-  <div class="grid grid-cols-3 ml-32">
+  <div class="grid grid-cols-3 bg-purple-100 divide-x-2 divide-purple-400 py-3">
     <div>
-      <h3 class="pl-8">Por Leer</h3>
+      <h3 class="text-center pb-1">Por Leer</h3>
+      <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
         :list="volLeer"
@@ -16,10 +14,12 @@ import rawDisplayer from '@/Pages/Objectives/rawDisplayer.vue';
           <div class="py-1 px-2 w-fit border-b border-gray-200 dark:border-gray-600"><img :src="element.coverImage" class="h-46"></div>
         </template>
       </draggable>
+      </div>
     </div>
 
-    <div class="">
-      <h3 class="pl-9">Leyendo</h3>
+    <div>
+      <h3 class="text-center pb-1">Leyendo</h3>
+      <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
         :list="volLeyendo"
@@ -31,10 +31,12 @@ import rawDisplayer from '@/Pages/Objectives/rawDisplayer.vue';
           <div class="py-1 px-2 w-fit border-b border-gray-200 dark:border-gray-600"><img :src="element.coverImage" class="h-46"></div>
         </template>
       </draggable>
+      </div>
     </div>
 
     <div class="">
-      <h3 class="pl-10">Leido</h3>
+      <h3 class="text-center pb-1">Leido</h3>
+      <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
         :list="volLeido"
@@ -46,11 +48,8 @@ import rawDisplayer from '@/Pages/Objectives/rawDisplayer.vue';
           <div class="py-1 px-2 w-fit border-b border-gray-200 dark:border-gray-600"><img :src="element.coverImage" class="h-46"></div>
         </template>
       </draggable>
+      </div>
     </div>
-
-    <!-- <rawDisplayer class="col-3" :value="list1" title="List 1" />
-
-    <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
   </div>
 </template>
 <script>
@@ -71,36 +70,9 @@ export default {
       leyendo:this.volLeyendo,
       leido:this.volLeido,
       once:true,  //to avoid log function from being called twice
-      list1: [
-        { name: "John", id: 1 },
-        { name: "Joao", id: 2 },
-        { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 }
-      ],
-      list2: [
-        { name: "Juan", id: 5},
-        { name: "Edgard", id: 6 },
-        { name: "Johnson", id: 7 }
-      ],
-      list3: [
-        { name: "Paco", id: 5 },
-        { name: "Bob", id: 6 },
-        { name: "Boby", id: 7 }
-      ]
     };
   },
   methods: {
-    add: function() {
-      this.list.push({ name: "Juan" });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard" }];
-    },
-    clone: function(el) {
-      return {
-        name: el.name + " cloned"
-      };
-    },
     log: function(evt) {
       if (this.once){
         axios.post('/objectives-update',{
@@ -108,14 +80,22 @@ export default {
           leyendo:this.volLeyendo,
           leido:this.volLeido,
           id:this.selected
-        }).then(response=>{console.log(response)})
-        // console.log(this.volLeer);
-        // console.log(this.volLeyendo);
-        // console.log(this.volLeido);
+        }).then(response=>{
+          var cantLeer= this.volLeer.length;
+          var cantLeyendo= this.volLeyendo.length;
+          var cantLeido= this.volLeido.length;
+          axios.post('/objectives-calculate',{
+            leer:cantLeer,
+            leyendo:cantLeyendo,
+            leido:cantLeido,
+            id:this.selected
+          }).then(response=>{this.updateProg(response.data)});
+        })
       }
       this.once=(!this.once);
-      //console.log(evt);
-      
+    },
+    updateProg(val){
+      this.$emit('updateProg',val);
     }
   },
 };
