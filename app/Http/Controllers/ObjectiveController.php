@@ -43,7 +43,7 @@ class ObjectiveController extends Controller
         $userId=Auth::id();
         $objective= Objective::create([
             'name'=>$request->name,
-            'steps'=>$request->steps,
+            'days'=>$request->days,
             'progress'=>0,
             'user_id'=>$userId
         ]);

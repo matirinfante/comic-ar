@@ -22,8 +22,8 @@
                                     <input v-model="name" id="name" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500" required>
                                 </div>
                                 <div>
-                                    <label for="steps">Dias</label>
-                                    <input v-model="steps" id="steps" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500" required>
+                                    <label for="days">Dias</label>
+                                    <input v-model="days" id="days" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                 </div>
                                 <div class="mt-2">
                                     <label class="typo__label">Tomos a leer</label>
@@ -88,7 +88,7 @@ export default {
       value: null,
       options: [],
       isLoading: false,
-      steps:"",
+      days:"",
       name:""
     }
   },
@@ -118,7 +118,7 @@ export default {
     send(){
         axios.post('/objectives',{
             name:this.name,
-            steps:this.steps,
+            days:this.days,
             volumes:this.value
         }).then(response=>{ this.close(); this.updt(response.data)});
     }
