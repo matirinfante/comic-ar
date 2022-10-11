@@ -59,7 +59,7 @@
                                     </Multiselect>
                                 </div>
                                 
-                                <button v-on:click="send" type="submit" class="mt-5 rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  sm:w-auto sm:text-sm">Agregar</button>
+                                <button v-on:click="send" type="submit" class="mt-5 rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2  sm:w-auto sm:text-sm">Empezar</button>
 
                                 </form>
                                 </div>
@@ -99,7 +99,6 @@ export default {
             if (term.length > 2) {
                 axios.get('/searchObj', {params: {query: term}}).then(response => {
                     this.options = response.data;
-                    //console.log(response.data)
                     this.isLoading = false
                 });
             }
@@ -113,12 +112,15 @@ export default {
     close(){
         this.$emit('close',false);
     },
+    updt(data){
+        this.$emit('updt',data)
+    },
     send(){
         axios.post('/objectives',{
             name:this.name,
             steps:this.steps,
             volumes:this.value
-        }).then(response=>{ this.close()});
+        }).then(response=>{ this.close(); this.updt(response.data)});
     }
   }
 }

@@ -19,10 +19,6 @@ class ObjectiveController extends Controller
     {
         $userId=Auth::id();
         $objectives=Objective::where('user_id',$userId)->get();
-        // foreach($objectives as $objective){
-        //     $objective['volumes']=$objective->volumes()->get(['id','title','coverImage']);
-        // }
-        //$volumes=$objectives[0]->volumes()->get();
         return Inertia::render('Objectives/Index',compact('objectives'));
     }
 
@@ -55,7 +51,8 @@ class ObjectiveController extends Controller
         foreach($request->volumes as $volume){
             $objective->volumes()->attach($volume['id']); //por defecto pone "por leer". Chequear en caso de problemas
         }
-        return $objective;
+        $objectives=Objective::where('user_id',$userId)->get();
+        return $objectives;
     }
 
     /**
@@ -118,17 +115,63 @@ class ObjectiveController extends Controller
      * @param  \App\Models\Objective  $objective
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Objective $objective)
+    public function destroy($id)
     {
-        //
+        $objective=Objective::find($id);
+        $volumes=$objective->volumes()->get();
+        foreach($volumes as $volume){
+            $objective->volumes()->detach($volume->id);
+        }
+        $objective->delete();
+        $userId=Auth::id();
+        $objectives=Objective::where('user_id',$userId)->get();
+        return ($objectives);
     }
 
     public function searchBy(Request $request)
     {
         $userId=Auth::id();
         $comicteca=Comicteca::where('user_id',$userId)->get();
-        $results=$comicteca[0]->volumes()->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title']);
-        // $results = DB::table('editions')->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title']);
+        $results=[];
+        if (count($comicteca)==1){
+            //Genero un array con todos los volumenes que ya se encuentran en algun objetivo
+            $objectives=Objective::where('user_id',$userId)->get();
+            $readed=[];
+            foreach($objectives as $objective){
+                $volumes=$objective->volumes()->get();
+                foreach($volumes as $volume){
+                    array_push($readed,$volume);
+                }
+            }
+
+            $search=$comicteca[0]->volumes()->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title','number']);
+            // Comparo los volumenes de la busqueda con los que estan en los objetivos
+            // No quiero volumenes que ya se encuentran en algun objetivo
+            foreach($search as $element){
+                $found=false;
+                foreach($readed as $vol){
+                    if ($element['id']==$vol['id']){
+                        $found=true;
+                    }
+                }
+                if (!$found){
+                    $element['title']=$element['title']." ".$element['number'];
+                    array_push($results,$element);
+                }
+            }
+        }
         return $results;
+    }
+
+    public function calculateProgress(Request $request){
+        $objective=Objective::where('id',$request->id)->get();
+        if (count($objective)==1){
+            $cantComics=$request->leer+$request->leyendo+$request->leido;
+            $partialProg=100/($cantComics*2);   //2 es leyendo y leido, Por Leer no suma progreso.
+            $totalProg=($partialProg*$request->leyendo)+($partialProg*$request->leido*2);
+            $objective[0]->progress=$totalProg;
+            $objective[0]->save();
+        }
+        return $totalProg;
     }
 }

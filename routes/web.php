@@ -55,6 +55,7 @@ Route::middleware([
     Route::get('/searchObj',[ObjectiveController::class,'searchBy']);
     Route::get('/objectives-show',[ObjectiveController::class,'show']);
     Route::post('/objectives-update',[ObjectiveController::class,'update']);
+    Route::post('/objectives-calculate',[ObjectiveController::class,'calculateProgress']);
 });
 
 
