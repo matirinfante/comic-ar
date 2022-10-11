@@ -53,7 +53,7 @@ export default {
             selected:"noselect",
             oname:"",
             progress:0,
-            osteps:"",
+            days:"",
             volLeer:[],
             volLeyendo:[],
             volLeido:[],
@@ -77,7 +77,7 @@ export default {
             axios.get('/objectives-show',{params:{id:this.selected}}).then(response=>{
                 this.oname=response.data.name;
                 this.progress=response.data.progress;
-                this.osteps=response.data.steps;
+                this.days=response.data.days;
                 this.volLeer=response.data.porleer;
                 this.volLeyendo=response.data.leyendo;
                 this.volLeido=response.data.leido;

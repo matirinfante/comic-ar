@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('progress');            
-            $table->integer('steps');
+            $table->integer('days')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

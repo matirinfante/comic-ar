@@ -12,7 +12,7 @@ class Objective extends Model
     protected $fillable=[
         'name',
         'progress',
-        'steps',
+        'days',
         'user_id'
     ];
 
