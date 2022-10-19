@@ -3,6 +3,7 @@
     import AppLayout from '@/Layouts/AppLayout.vue';
     import Create from '@/Pages/Objectives/Create.vue';
     import Show from '@/Pages/Objectives/Show.vue';
+    import Notification from '@/Pages/Objectives/Notification.vue';
     
 </script>
 <template>
@@ -24,19 +25,16 @@
                 <button v-on:click="createNew" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded m-2">Nuevo Objetivo</button>
             </div>
         </div>  
-        
-        <!-- {{objectives}} -->
         <div v-show="cargar" class="text-center">
             <ve-progress 
                 :progress="progress"
                 color="purple"
                 fontSize="2rem"
                 legendClass="pb-10"
-            >
-            </ve-progress>
+            ></ve-progress>
         </div>
         
-
+        <Notification :messageon="messageon" :message="message" @closenotif="closenotif"/>
         <Show v-show="cargar" :name="oname" :volLeer="volLeer" :volLeyendo="volLeyendo" :volLeido="volLeido" :selected="selected" @updateProg="updateProg"/>
         <Create :modal="modal" @close="close" @updt="updt"/>
     </AppLayout>
@@ -57,8 +55,19 @@ export default {
             volLeer:[],
             volLeyendo:[],
             volLeido:[],
-            cargar:false
+            cargar:false,
+            message:[],
+            messageon:false
         }
+    },
+    mounted(){
+        var option=2;
+        axios.get('/objnotifications-ask',{params:{option:option}}).then(response=>{
+            if (response.data!=""){
+                this.message=response.data.split('</br>');
+                this.messageon=true;
+                }
+            });
     },
     methods:{
         createNew(){
@@ -89,7 +98,11 @@ export default {
         erase(){
             axios.delete('/objectives/'+this.selected)
             .then(response=>{this.objetivos=response.data; this.cargar=false; this.selected='noselect'})
-        }
+        },
+        closenotif(val){
+            this.messageon=val;
+            axios.get('/objnotifications-update').then(response=>{});
+        },
     }
 }
 </script>
