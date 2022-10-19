@@ -87,4 +87,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Objective::class);
     }
 
+    public function objnotifications()
+    {
+        return $this->hasMany(Objnotification::class);
+    }
+
 }

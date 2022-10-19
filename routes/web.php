@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\ObjnotificationController;
 use App\Http\Controllers\WishlistController;
 
 /*
@@ -46,6 +47,7 @@ Route::middleware([
     Route::resource('/wishlists', WishlistController::class);
     Route::resource('/comictecas', ComictecaController::class);
     Route::resource('/objectives',ObjectiveController::class);
+    Route::resource('/objnotifications',ObjnotificationController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
@@ -56,6 +58,8 @@ Route::middleware([
     Route::get('/objectives-show',[ObjectiveController::class,'show']);
     Route::post('/objectives-update',[ObjectiveController::class,'update']);
     Route::post('/objectives-calculate',[ObjectiveController::class,'calculateProgress']);
+    Route::get('/objnotifications-ask',[ObjnotificationController::class,'ask']);
+    Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
 });
 
 
