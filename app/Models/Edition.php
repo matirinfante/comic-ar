@@ -22,4 +22,9 @@ class Edition extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function artworks()
+    {
+        return $this->hasMany(Artwork::class);
+    }
 }

@@ -137,6 +137,11 @@ defineProps({
                                 Información
                             </JetNavLink>
                         </div>
+                        <div class="align-middle ml-10 my-auto">
+                            <JetNavLink :href="route('artworks.show', edition.id)">
+                                Artworks
+                            </JetNavLink>
+                        </div>
                     </div>
                     <div v-if="volumes.length > 0" class="bg-white">
                         <!-- Tomos/Volumenes -->
