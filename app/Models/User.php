@@ -82,6 +82,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Comicteca::class);
     }
 
+    public function objectives()
+    {
+        return $this->hasMany(Objective::class);
+    }
+
+    public function objnotifications()
+    {
+        return $this->hasMany(Objnotification::class);
+    }
+    
     public function artworks()
     {
         return $this->hasMany(Artwork::class);
