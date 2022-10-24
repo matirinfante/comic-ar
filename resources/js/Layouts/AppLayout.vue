@@ -70,6 +70,13 @@ const logout = () => {
                                     Mi Comicteca
                                 </JetNavLink>
                             </div>
+                            
+                            <!-- Booklist -->
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <JetNavLink :href="route('booklists.index')" :active="route().current('booklists.index')">
+                                    Listas
+                                </JetNavLink>
+                            </div>
 
 
                         </div>

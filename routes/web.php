@@ -7,12 +7,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VolumeController;
+use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\ObjnotificationController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ComictecaController;
-use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\BooklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::middleware([
     Route::resource('/objectives',ObjectiveController::class);
     Route::resource('/objnotifications',ObjnotificationController::class);
     Route::resource('/artworks', ArtworkController::class);
+    Route::resource('/booklists', BooklistController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);

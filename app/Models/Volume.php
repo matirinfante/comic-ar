@@ -29,5 +29,9 @@ class Volume extends Model
     public function objectives(){
         return $this->belongsToMany(Objective::class)->withPivot('status');
     }
+    
+    public function booklists(){
+        return $this->belongsToMany(Booklist::class)->withTimestamps();
+    }
 
 }

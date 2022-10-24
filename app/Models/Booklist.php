@@ -10,10 +10,14 @@ class Booklist extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'user_id'
+        'name', 'description', 'classification', 'user_id'
     ];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function volumes(){
+        return $this->belongsToMany(Volume::class)->withTimestamps();
     }
 }
