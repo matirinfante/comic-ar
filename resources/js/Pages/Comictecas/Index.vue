@@ -9,8 +9,10 @@
                 <span class="text-gray-500">Mi Comicteca</span>
             </h2>
     </template>
-    <div class="pt-3 bg-violet-50">
-        <p class="font-bold text-xl mb-3 ml-3 text-violet-700">Cantidad de Volumenes: {{cantVol}}</p>
+    <div class="pt-3 bg-violet-100">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <p class="font-bold text-xl mb-3 ml-3 mt-2 text-white w-fit bg-violet-700 px-2 rounded-xl">Cantidad de Volumenes: {{cantVol}}</p>
+      
         <div v-for="edition in allVol" class="divide-y divide-y-1 divide-blue-200">
             <p class="font-semibold text-lg mt-2 text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-6 w-6 pb-1 inline">
@@ -39,8 +41,8 @@
                 
             </div>
             </div>
-            <!-- <hr class="divide-blue-600 "/> -->
         </div>
+      </div>
         
     </div>
     
