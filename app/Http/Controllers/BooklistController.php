@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booklist;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BooklistController extends Controller
 {
@@ -13,7 +15,24 @@ class BooklistController extends Controller
      */
     public function index()
     {
-        //
+        $booklists = Booklist::all();
+        foreach ($booklists as $book) {
+            $book['usr'] = $book->user()->get()->first()->name;
+            $volumes = $book->volumes()->get();
+            foreach ($volumes as $volume) {
+                if ($volume['coverImage'] != "/assets/cover/default.png") {
+                    if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                        $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                    } else {
+                        $volume['coverImage'] = $volume['coverImage'];
+                    }
+                } else {
+                    $volume['coverImage'] = "/assets/cover/default.png";
+                }
+            }
+            $book['vol'] = $volumes;
+        }
+        return Inertia::render('Booklists/Index', compact('booklists'));
     }
 
     /**
@@ -43,9 +62,22 @@ class BooklistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Booklist $booklist)
     {
-        //
+        $booklist['usr'] = $booklist->user()->get()->first()->name;
+        $volumes = $booklist->volumes()->get();
+        foreach ($volumes as $volume) {
+            if ($volume['coverImage'] != "/assets/cover/default.png") {
+                if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                    $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                } else {
+                    $volume['coverImage'] = $volume['coverImage'];
+                }
+            } else {
+                $volume['coverImage'] = "/assets/cover/default.png";
+            }
+        }
+        return Inertia::render('Booklists/Show', compact('booklist','volumes'));
     }
 
     /**

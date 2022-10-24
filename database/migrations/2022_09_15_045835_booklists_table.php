@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->enum('classification', ['Guía de lectura', 'Crossover', 'Personal']);
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

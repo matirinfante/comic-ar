@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artwork;
+use App\Models\Booklist;
 use App\Models\Comicteca;
 use App\Models\User;
 use App\Models\Volume;
@@ -1029,5 +1030,42 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 20) as $index) {
             Review::factory()->create();
         }
+
+        Booklist::create([
+            'name' => 'Lista #1',
+            'description' => 'Desc #1',
+            'user_id' => 1,
+        ]);
+        Booklist::create([
+            'name' => 'Hokuto No Ken',
+            'description' => 'Algunos tomos que quisiera leer cuando tenga un poco de tiempo libre :)',
+            'user_id' => 6,
+        ]);
+        Booklist::create([
+            'name' => 'Mix de tomos',
+            'description' => 'Comics que captaron mi atención',
+            'classification' => 'Crossover',
+            'user_id' => 4,
+        ]);
+        Booklist::create([
+            'name' => 'Mi Booklist',
+            'description' => '',
+            'classification' => 'Personal',
+            'user_id' => 9,
+        ]);
+
+        $booklist2 = Booklist::find(2);
+        $booklist2->volumes()->attach(30);
+        $booklist2->volumes()->attach(31);
+        $booklist2->volumes()->attach(32);
+        $booklist2->volumes()->attach(33);
+
+        $booklist3 = Booklist::find(3);
+        $booklist3->volumes()->attach(11);
+        $booklist3->volumes()->attach(37);
+        $booklist3->volumes()->attach(50);
+        
+        $booklist4 = Booklist::find(4);
+        $booklist4->volumes()->attach(5);
     }
 }
