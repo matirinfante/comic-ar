@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
+import axios from 'axios';
 
 
 defineProps({
@@ -37,6 +38,20 @@ function formatDate(date) {
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
+
+                <div v-if="booklist.editPermission == 'y'" class="flex justify-end">
+                    <JetNavLink :href="route('booklists.edit', booklist.id)"
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <path
+                                d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
+                            <path
+                                d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
+                        </svg>
+                        Editar
+                    </JetNavLink>
+                </div>
+
                 <div class="mx-6 z-40 border-2 rounded-lg">
                     <div class="w-full pb-8 bg-slate-500 rounded-t-lg text-center">
                         <p class="text-md text-yellow-300 font-semibold pt-6">
@@ -85,7 +100,7 @@ function formatDate(date) {
                             {{ booklist.description }}
                         </p>
                         <p v-else class="text-mm text-gray-700 px-10 pt-6">
-                            La edición no cuenta con una descripción
+                            La lista no cuenta con una descripción
                         </p>
                     </div>
 
@@ -100,7 +115,7 @@ function formatDate(date) {
                                     <img class="w-full h-50" :src="volume.coverImage" :alt="volume.title" />
                                     <div
                                         class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300">
-                                        {{volume.title}} #{{volume.number}}
+                                        {{ volume.title }} #{{ volume.number }}
                                     </div>
                                 </div>
                                 </Link>
@@ -121,6 +136,11 @@ function formatDate(date) {
                                 No disponible
                             </p>
                         </div>
+                        <form v-if="booklist.editPermission == 'y'" v-on:submit.prevent="deleteItem(booklist.id)">
+                            <button type="submit" class="text-xs text-gray-500 mr-10">
+                                Eliminar
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -128,3 +148,47 @@ function formatDate(date) {
 
     </AppLayout>
 </template>
+<script>
+export default {
+    methods: {
+        deleteItem($id) {
+
+            this.$swal({
+                title: "Seguro que quiere eliminar la lista?",
+                text: "Esta acción es irreversible",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Eliminar",
+                cancelButtonText: 'Cancelar',
+            }).then((result) => { // <--
+                if (result.value) { // <-- if confirmed
+                    axios.delete('/booklists/' + $id)
+                        .then(response => {
+                            this.$swal(
+                                'Eliminada!',
+                                response.data,
+                                'success'
+                            ).then((result) => { // <--
+                                if (result.value) { // <-- if confirmed
+                                    // location.href = '/booklists';
+                                    alert('Refrescar...');
+                                }
+                            });
+                        })
+                        .catch(error => { console.log(error.response) });
+                }
+            });
+
+            // axios.delete('/booklists/' + $id)
+            //     .then(response => {
+            //         this.$swal(
+            //             'Eliminado!',
+            //             response.data,
+            //             'success'
+            //         )
+            //     })
+            //     .catch(error => { console.log(error.response) });
+        }
+    }
+}
+</script>

@@ -89,7 +89,7 @@ const filterBookLists = (id) => {
                     </ul>
 
                     <!-- Botón de creación -->
-                    <Link :href="route('booklists.index')"
+                    <Link :href="route('booklists.create')"
                         class="mt-6 text-center md:mt-0 inline-block px-6 my-auto py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
                     Crear Lista
                     </Link>

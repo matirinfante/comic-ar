@@ -7,6 +7,8 @@ use App\Models\Booklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BooklistRequest;
+use Illuminate\Support\Facades\Redirect;
 
 class BooklistController extends Controller
 {
@@ -18,7 +20,7 @@ class BooklistController extends Controller
     public function index()
     {
         $userId = Auth::id();
-        $booklists = Booklist::all();
+        $booklists = Booklist::orderBy('updated_at', 'desc')->get();
         foreach ($booklists as $book) {
             $book['usr'] = $book->user()->get()->first()->name;
 
@@ -52,7 +54,7 @@ class BooklistController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Booklists/Create');
     }
 
     /**
@@ -63,7 +65,27 @@ class BooklistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $volumes = $request['value'];
+
+        $usrId = Auth::id();
+
+        $booklist = Booklist::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'classification' => $request->classification,
+            'user_id' => $usrId,
+        ]);
+
+        $booklist->save();
+
+        if(count($volumes) > 0){
+            foreach ($volumes as $vol) {
+                $booklist->volumes()->attach($vol['id']);
+            }
+        }
+
+        return Redirect::route('booklists.index');
+
     }
 
     /**
@@ -106,7 +128,7 @@ class BooklistController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "Vista para editar";
     }
 
     /**
@@ -129,7 +151,10 @@ class BooklistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $booklist = Booklist::find($id);
+        $booklist->volumes()->detach();
+        $booklist->delete();
+        return "La lista y sus tomos han sido eliminados";
     }
 
     public function searchBy(Request $request)
