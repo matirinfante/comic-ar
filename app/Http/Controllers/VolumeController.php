@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -232,5 +233,11 @@ class VolumeController extends Controller
     public function destroy(Volume $volume)
     {
         //
+    }
+
+    public function searchBy(Request $request)
+    {
+        $results = DB::table('volumes')->selectRaw('CONCAT(title, "(#", number, ")") as title, id')->where('title', 'like', "%{$request->input('query')}%")->get();
+        return $results;
     }
 }
