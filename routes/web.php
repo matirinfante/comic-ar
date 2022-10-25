@@ -65,6 +65,7 @@ Route::middleware([
     Route::get('/objnotifications-ask',[ObjnotificationController::class,'ask']);
     Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
+    Route::get('/searchVol', [VolumeController::class, 'searchBy']);
 
 });
 
