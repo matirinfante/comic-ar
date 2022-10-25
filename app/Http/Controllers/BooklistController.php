@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Booklist;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BooklistController extends Controller
 {
@@ -15,9 +17,17 @@ class BooklistController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
         $booklists = Booklist::all();
         foreach ($booklists as $book) {
             $book['usr'] = $book->user()->get()->first()->name;
+
+            if ($book->user_id == $userId) {
+                $book['actualUsr'] = 'y';
+            } else {
+                $book['actualUsr'] = 'n';
+            }
+
             $volumes = $book->volumes()->get();
             foreach ($volumes as $volume) {
                 if ($volume['coverImage'] != "/assets/cover/default.png") {
@@ -66,6 +76,14 @@ class BooklistController extends Controller
     {
         $booklist['usr'] = $booklist->user()->get()->first()->name;
         $volumes = $booklist->volumes()->get();
+
+        $userId = Auth::id();
+        if ($booklist['user_id'] == $userId) {
+            $booklist['editPermission'] = 'y';
+        } else {
+            $booklist['editPermission'] = 'n';
+        }
+
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
                 if (str_contains($volume['coverImage'], 'comicar-cover')) {
@@ -77,7 +95,7 @@ class BooklistController extends Controller
                 $volume['coverImage'] = "/assets/cover/default.png";
             }
         }
-        return Inertia::render('Booklists/Show', compact('booklist','volumes'));
+        return Inertia::render('Booklists/Show', compact('booklist', 'volumes'));
     }
 
     /**
@@ -112,5 +130,11 @@ class BooklistController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function searchBy(Request $request)
+    {
+        $results = DB::table('booklists')->where('name', 'like', "%{$request->input('query')}%")->get(['id', 'name']);
+        return $results;
     }
 }
