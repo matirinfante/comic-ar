@@ -64,6 +64,8 @@ Route::middleware([
     Route::post('/objectives-calculate',[ObjectiveController::class,'calculateProgress']);
     Route::get('/objnotifications-ask',[ObjnotificationController::class,'ask']);
     Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
+    Route::get('/searchList', [BooklistController::class, 'searchBy']);
+
 });
 
 
