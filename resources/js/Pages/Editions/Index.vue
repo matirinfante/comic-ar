@@ -22,12 +22,20 @@ defineProps({
 
                 <div class="flex flex-col md:flex-row justify-between mx-6 mb-5">
                     <!-- Buscador -->
-                    <div class="md:w-6/12 px-4 py-2 bg-indigo-300 text-gray-600 rounded-full">
-                        Buscar...
+                    <div class="md:w-6/12 px-4 py-2">
+                        <!-- Buscar... -->
+                        <VueMultiselect v-model="value" :options="options" :close-on-select="true" :clear-on-select="false"
+                        placeholder="Busca una edición..." label="title" track-by="id" :show-no-options="false"
+                        :loading="isLoading" :internal-search="false" @search-change="onSearchChange" @select="onSelect"
+                        :select-label="selectLabel" @close="onClose">
+                        <template v-slot:noResult>
+                            <span>No se han encontrado resultados</span>
+                        </template>
+                    </VueMultiselect>
                     </div>
                     <!-- Botón de creación -->
-                    <div class="md:mt-0 mt-4 w-fit px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">
-                        <Link :href="route('editions.create')" class="">Añadir Nueva
+                    <div class="">
+                        <Link :href="route('editions.create')" class="mt-6 text-center w-full md:mt-0 inline-block px-6 my-auto py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Añadir Nueva
                         Edición
                         </Link>
                     </div>
@@ -50,3 +58,39 @@ defineProps({
         </div>
     </AppLayout>
 </template>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<script>
+import VueMultiselect from 'vue-multiselect'
+import axios from "axios";
+
+export default {
+    components: {VueMultiselect},
+    data() {
+        return {
+            value: null,
+            options: [],
+            isLoading: false,
+            selectLabel: "Ver más"
+        }
+    },
+    methods: {
+        onSearchChange(term) {
+            this.options = []
+            this.isLoading = true
+            if (term.length > 2) {
+                axios.get('/search', {params: {query: term}}).then(response => {
+                    this.options = response.data;
+                    // console.log(response.data)
+                    this.isLoading = false
+                });
+            }
+        },
+        onSelect(selected) {
+            this.$inertia.get('/editions/' + selected.id);
+        },
+        onClose(value) {
+            this.isLoading = false
+        }
+    }
+}
+</script>
