@@ -20,7 +20,7 @@ class ReviewFactory extends Factory
             'rating' => fake()->numberBetween(1, 5),
             'description' => fake()->text($maxNbChars = 200),
             'user_id' => fake()->numberBetween(2, 10),
-            'edition_id' => fake()->numberBetween(1, 10),
+            'edition_id' => fake()->numberBetween(1, 17),
         ];
     }
 }
