@@ -7,7 +7,6 @@ use App\Models\Booklist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\BooklistRequest;
 use Illuminate\Support\Facades\Redirect;
 
 class BooklistController extends Controller
@@ -126,9 +125,20 @@ class BooklistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Booklist $booklist)
     {
-        return "Vista para editar";
+        $arrayVol = $booklist->volumes()->get();
+        $v = [];
+        $volumes = [];
+        // obtener solo el id y el titulo del volumen
+        foreach ($arrayVol as $vol) {
+            $v['id'] = $vol['id'];
+            $v['title'] = $vol['title'];
+            array_push($volumes, $v);
+        }
+        return Inertia::render('Booklists/Edit', compact('booklist','volumes'));
+        // return $volumes;
+
     }
 
     /**
@@ -138,9 +148,9 @@ class BooklistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -159,7 +169,8 @@ class BooklistController extends Controller
 
     public function searchBy(Request $request)
     {
-        $results = DB::table('booklists')->where('name', 'like', "%{$request->input('query')}%")->get(['id', 'name']);
+        // $results = DB::table('booklists')->where('name', 'like', "%{$request->input('query')}%")->get(['id', 'name']);
+        $results = DB::table('booklists')->selectRaw('CONCAT(name) as title, id')->where('name', 'like', "%{$request->input('query')}%")->get();
         return $results;
     }
 }
