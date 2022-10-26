@@ -238,6 +238,13 @@ class VolumeController extends Controller
     public function searchBy(Request $request)
     {
         $results = DB::table('volumes')->selectRaw('CONCAT(title, "(#", number, ")") as title, id')->where('title', 'like', "%{$request->input('query')}%")->get();
+
+        // títulos de volúmenes con su número de orden(por edición) y publisher correspondiente
+        // *** ROMPE LA BÚSQUEDA DESPUES DEL PRIMER RESULTADO
+        // $results = DB::table('volumes')->join('editions', 'volumes.edition_id', '=', 'editions.id')
+        // ->selectRaw('CONCAT(volumes.title, "(#", volumes.number, ") ", editions.publisher) as title')
+        // ->where('volumes.title', 'like', "%{$request->input('query')}%")
+        // ->get();
         return $results;
     }
 }
