@@ -148,9 +148,17 @@ class BooklistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Booklist $booklist)
     {
-        return $request;
+        $booklist->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'classification' => $request->classification,
+        ]);
+
+        // Eliminar todas las referencias de volumes de la booklist y actualizar por las nuevas
+
+        return Redirect::route('booklists.show', $booklist->id);
     }
 
     /**
