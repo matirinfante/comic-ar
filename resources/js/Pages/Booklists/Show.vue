@@ -176,8 +176,7 @@ export default {
                                 'success'
                             ).then((result) => { // <--
                                 if (result.value) { // <-- if confirmed
-                                    // location.href = '/booklists';
-                                    alert('Refrescar...');
+                                    this.$inertia.get(`/booklists`);
                                 }
                             });
                         })

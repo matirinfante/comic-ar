@@ -147,7 +147,8 @@ const filterBookLists = (id) => {
                             </div>
                             <div
                                 class="text-gray-600 bg-slate-200 truncate w-full ml-0 pl-2 py-2 sm:ml-40 sm:w-1/4 sm:py-10 md:w-1/2 sm:bg-opacity-0">
-                                {{ book.description }}
+                                <span v-if="book.description != null">{{ book.description }}</span>
+                                <span v-if="book.description == null"></span>
                                 <br>
                                 <span v-if="book['vol'].length == 0" class="text-gray-400">Sin Tomos</span>
                                 <span v-if="book['vol'].length == 1" class="text-gray-400">1 Tomo</span>
