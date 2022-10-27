@@ -15,7 +15,7 @@ const form = useForm({
     name: props.booklist?.name,
     classification: props.booklist?.classification,
     description: props.booklist?.description,
-    value: props.volumes?.value,
+    value: props.volumes,
     user_id: ''
 });
 
@@ -41,7 +41,6 @@ const submit = () => {
         <div>
             <div class="max-w-md mx-auto py-10 mt-10 sm:px-6 lg:px-8 bg-white shadow md:shadow-lg">
                 <!-- CONTENIDO CENTRAL -->
-                {{volumes}}
                 <form @submit.prevent="submit" class="p-4">
                     <!-- name -->
                     <div>
