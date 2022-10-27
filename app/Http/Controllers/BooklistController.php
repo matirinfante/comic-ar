@@ -130,15 +130,13 @@ class BooklistController extends Controller
         $arrayVol = $booklist->volumes()->get();
         $v = [];
         $volumes = [];
-        // obtener solo el id y el titulo del volumen
+        // obtener solo el id y el titulo + número del volumen
         foreach ($arrayVol as $vol) {
             $v['id'] = $vol['id'];
-            $v['title'] = $vol['title'];
+            $v['title'] = $vol['title']."(#".$vol['number'].")";
             array_push($volumes, $v);
         }
         return Inertia::render('Booklists/Edit', compact('booklist','volumes'));
-        // return $volumes;
-
     }
 
     /**
@@ -157,6 +155,12 @@ class BooklistController extends Controller
         ]);
 
         // Eliminar todas las referencias de volumes de la booklist y actualizar por las nuevas
+        $booklist->volumes()->detach();
+
+        $newVolumes = $request['value'];
+        foreach ($newVolumes as $vol) {
+            $booklist->volumes()->attach($vol['id']);
+        }
 
         return Redirect::route('booklists.show', $booklist->id);
     }
