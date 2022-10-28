@@ -21,10 +21,14 @@ class ComictecaController extends Controller
         $userId = Auth::id();
         $comicteca=Comicteca::where('user_id',$userId)->get();
         $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
-        $volumes=[];
+        $edCol=[];
         if (count($volumesCol)>0){
             $edition=[];
+            $edition['volumes']=[];
             $editionNum=$volumesCol[0]['edition_id'];
+            $editionDB=Edition::find($editionNum);
+            $volTotal=count($editionDB->volumes);
+            $volProgress=0;
             foreach($volumesCol as $volume){
                 //Renombrando ruta de la imagen
                 if ($volume['coverImage'] != "/assets/cover/default.png") {
@@ -38,22 +42,29 @@ class ComictecaController extends Controller
                     $volume['coverImage'] = "/assets/cover/default.png";
                 }
                 //Divido por edicion
+
+                $editionDB=Edition::find($volume['edition_id']);
                 if($editionNum==$volume['edition_id']){
-                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                    $volume['edition_title']=$edTitle[0];
-                    array_push($edition,$volume);
+                    $edition['title']=$editionDB['title'];
+                    $volProgress++;
+                    array_push($edition['volumes'],$volume);
                 }else{
-                    array_push($volumes,$edition);
+                    $edition['progress']=round((100/$volTotal)*$volProgress);
+                    array_push($edCol,$edition);
                     $edition=[];
+                    $edition['volumes']=[];
+                    $volTotal=count($editionDB->volumes);
+                    $volProgress=1;
                     $editionNum=$volume['edition_id'];
-                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                    $volume['edition_title']=$edTitle[0];
-                    array_push($edition,$volume);
+                    $edition['title']=$editionDB['title'];
+                    array_push($edition['volumes'],$volume);
                 }
             }
-            array_push($volumes,$edition);
+            //La ultima edicion se guarda luego del foreach.
+            $edition['progress']=round((100/$volTotal)*$volProgress);
+            array_push($edCol,$edition);
         }
-        return Inertia::render('Comictecas/Index',compact('comicteca','volumes'));
+        return Inertia::render('Comictecas/Index',compact('comicteca','edCol'));
     }
 
     /**
@@ -143,10 +154,14 @@ class ComictecaController extends Controller
         }
 
         $volumesCol=$comicteca[0]->volumes()->orderBy('edition_id')->orderBy('number')->get();
-        $volumes=[];
+        $edCol=[];
         if (count($volumesCol)>0){
             $edition=[];
+            $edition['volumes']=[];
             $editionNum=$volumesCol[0]['edition_id'];
+            $editionDB=Edition::find($editionNum);
+            $volTotal=count($editionDB->volumes);
+            $volProgress=0;
             foreach($volumesCol as $volume){
                 //Renombrando ruta de la imagen
                 if ($volume['coverImage'] != "/assets/cover/default.png") {
@@ -160,22 +175,27 @@ class ComictecaController extends Controller
                     $volume['coverImage'] = "/assets/cover/default.png";
                 }
                 //Divido por edicion
+                $editionDB=Edition::find($volume['edition_id']);
                 if($editionNum==$volume['edition_id']){
-                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                    $volume['edition_title']=$edTitle[0];
-                    array_push($edition,$volume);
+                    $edition['title']=$editionDB['title'];
+                    $volProgress++;
+                    array_push($edition['volumes'],$volume);
                 }else{
-                    array_push($volumes,$edition);
+                    $edition['progress']=round((100/$volTotal)*$volProgress);
+                    array_push($edCol,$edition);
                     $edition=[];
+                    $edition['volumes']=[];
+                    $volTotal=count($editionDB->volumes);
+                    $volProgress=1;
                     $editionNum=$volume['edition_id'];
-                    $edTitle=Edition::where('id',$volume['edition_id'])->get('title');
-                    $volume['edition_title']=$edTitle[0];
-                    array_push($edition,$volume);
+                    $edition['title']=$editionDB['title'];
+                    array_push($edition['volumes'],$volume);
                 }
             }
-            array_push($volumes,$edition);
+            $edition['progress']=round((100/$volTotal)*$volProgress);
+            array_push($edCol,$edition);
         }
-        return ($volumes);
+        return ($edCol);
     }
 
     /**

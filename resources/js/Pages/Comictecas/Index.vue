@@ -9,7 +9,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                 <span class="text-gray-500">Mi Comicteca</span>
             </h2>
         </template>
-        <div class="pt-3 bg-violet-100">
+        <div class="pt-3 bg-violet-50">            
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <p class="font-bold text-xl mb-3 ml-3 mt-2 text-white w-fit bg-violet-700 px-2 rounded-xl">Cantidad de
                     Volumenes: {{ cantVol }}</p>
@@ -20,15 +20,26 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                             <path
                                 d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C87.5 32 35.1 48.6 9 59.9c-5.6 2.4-9 8-9 14V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V73.9c0-6.1-3.4-11.6-9-14C540.9 48.6 488.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"/>
                         </svg>
-                        {{ edition[0].edition_title.title }}
+                        {{ edition.title }}
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-6 w-6 pb-1 inline">
                             <path
                                 d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C87.5 32 35.1 48.6 9 59.9c-5.6 2.4-9 8-9 14V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V73.9c0-6.1-3.4-11.6-9-14C540.9 48.6 488.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"/>
                         </svg>
                     </p>
+                    <div>
+                <k-progress 
+             active 
+      status="success" 
+      type="line"
+      :border="true"
+      :color="['#210FFF', '#8A30B7', '#CA21A4']"
+      :bg-color="'#D9CFFC'"
+      :percent=edition.progress >
+    </k-progress>
+            
                     <div class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center pt-2">
 
-                        <div v-for="volume in edition" :key="volume.id" class="mb-3">
+                        <div v-for="volume in edition['volumes']" :key="volume.id" class="mb-3">
                             <div class="relative">
                                 <Link :href="route('volumes.show', volume.id)">
                                     <img class="h-60" :src="volume.coverImage">
@@ -40,15 +51,19 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                             </div>
                             <div class="text-center">
                                 <button v-on:click="remove(volume.id)"
-                                        class="inline-block w-full py-2 border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition duration-150 ease-in-out rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mx-auto">
-                                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-                                    </svg>
+                                        class="inline-block w-full py-2 border-2 border-black text-red-600 hover:bg-red-600 hover:text-white transition duration-150 ease-in-out">
+                                    <div class="flex sm:flex-cols-12 gap-4">
+                                        <div class="col-span-1 pl-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 mx-auto"><path d="M175 175C184.4 165.7 199.6 165.7 208.1 175L255.1 222.1L303 175C312.4 165.7 327.6 165.7 336.1 175C346.3 184.4 346.3 199.6 336.1 208.1L289.9 255.1L336.1 303C346.3 312.4 346.3 327.6 336.1 336.1C327.6 346.3 312.4 346.3 303 336.1L255.1 289.9L208.1 336.1C199.6 346.3 184.4 346.3 175 336.1C165.7 327.6 165.7 312.4 175 303L222.1 255.1L175 208.1C165.7 199.6 165.7 184.4 175 175V175zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"/></svg>
+                                    </div>
+                                    <div class="col-span-2">ELIMINAR</div>
+                                    </div>
                                 </button>
                             </div>
 
 
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -59,14 +74,16 @@ import AppLayout from '@/Layouts/AppLayout.vue';
     </AppLayout>
 </template>
 <script>
+import KProgress from 'k-progress-v3';
 export default {
-    props: ['comicteca', 'volumes'],
+    props: ['comicteca', 'edCol'],
     components: {
-        AppLayout
+        AppLayout,
+        KProgress
     },
     data() {
         return {
-            allVol: this.volumes,
+            allVol: this.edCol,
             cantVol: 0
         }
     },
@@ -83,7 +100,7 @@ export default {
         countVol() {
             this.cantVol = 0;
             this.allVol.forEach(element => {
-                this.cantVol += element.length;
+                this.cantVol += element['volumes'].length;
             });
         }
     }

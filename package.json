@@ -23,6 +23,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "k-progress-v3": "^1.0.0",
         "vue-ellipse-progress": "^2.1.1",
         "vue-final-modal": "^3.4.4",
         "vue-multiselect": "^3.0.0-alpha.2",
