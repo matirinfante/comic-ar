@@ -13,7 +13,7 @@ class Review extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->BelongsTo(User::class);
     }
 
     public function edition()

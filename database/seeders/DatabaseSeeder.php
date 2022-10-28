@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Artwork;
+use App\Models\Booklist;
+use App\Models\Comicteca;
 use App\Models\User;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -24,6 +28,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'a@a.com',
             'password' => Hash::make('admin123')
+        ]);
+
+        // Comicteca de administrador
+        Comicteca::create([
+            'user_id' => 1,
         ]);
 
         // crear 10 usuarios aleatorios
@@ -72,6 +81,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9789871858323',
             'argument' => 'Pocos superhéroes tienen un origen secreto tan tormentoso como Kick-Ass. De hecho, él y sus amigos se las ven bastante negras...¿Quien sobrevive? O mejor dicho... ¿Hay alguien que quede vivio después de todo esto? Una cosa te podemos asegurar: a varios les está esperando una buena paliza.',
             'coverImage' => 'https://i1.whakoom.com/small/16/12/06867944aa734106a056287ae6802178.jpg',
+            'edition_id' => 1,
+        ]);
+
+        // Creación de artworks (kick-ass)
+        Artwork::create([
+            'title' => 'Kick-Ass',
+            'description' => 'Comic style',
+            'imgUrl' => 'https://i.pinimg.com/originals/56/5e/c9/565ec9d779ff0967dd9da5cd428a533c.jpg',
+            'user_id' => 2,
+            'edition_id' => 1,
+        ]);
+        Artwork::create([
+            'title' => 'Crew',
+            'description' => 'Los héroes sin poderes',
+            'imgUrl' => 'https://i.pinimg.com/originals/8f/e3/c0/8fe3c0e62741459234dccf2d0b3a4d7e.jpg',
+            'user_id' => 3,
+            'edition_id' => 1,
+        ]);
+        Artwork::create([
+            'title' => 'Hit Girl',
+            'description' => 'By Darkone',
+            'imgUrl' => 'https://cafans.b-cdn.net/images/Category_68944/subcat_119123/Hit-Girl%20by%20Greg%20Darkone%20Williams.jpg',
+            'user_id' => 4,
             'edition_id' => 1,
         ]);
 
@@ -131,6 +163,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9788417787684',
             'argument' => 'Incluso para una ciudad como Gotham, la violencia que ha desplegado la KGBestia ha superado el límite tolerable. El caos se adueña del hogar de Batman en una guerra fría que esconde un secreto todavía más brutal que la verdad sobre el juicio de Mr. Frío.',
             'coverImage' => 'https://i1.whakoom.com/small/36/30/e02d41d70287416aac9f60f39c0c30c8.jpg',
+            'edition_id' => 2,
+        ]);
+
+        // artworks de batman
+        Artwork::create([
+            'title' => 'El caballero oscuro',
+            'description' => 'artwork',
+            'imgUrl' => 'https://images.hdqwalls.com/wallpapers/the-batman-artwork-2020-4k-pu.jpg',
+            'user_id' => 5,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'Batman',
+            'description' => 'Art deko style',
+            'imgUrl' => 'https://cdn.domestika.org/c_fit,dpr_auto,f_auto,t_base_params,w_820/v1630444921/content-items/008/973/973/ART-DECO-BatMan-original.jpg?1630444921',
+            'user_id' => 6,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'Guasón',
+            'description' => 'El bromas, pero enfermo',
+            'imgUrl' => 'https://i.pinimg.com/originals/98/8a/52/988a52f16673cda12829d05210f42cbc.jpg',
+            'user_id' => 7,
             'edition_id' => 2,
         ]);
 
@@ -210,6 +265,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 3,
         ]);
 
+        // Artworks de dorohedoro
+        Artwork::create([
+            'title' => 'Demons',
+            'description' => 'dorohedoro art',
+            'imgUrl' => 'https://img1.ak.crunchyroll.com/i/spire4/7b024210201748b731779ec3afd6d9fe1660914358_main.jpg',
+            'user_id' => 8,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Shin',
+            'description' => 'Dorohedoro',
+            'imgUrl' => 'https://wallpaperaccess.com/full/2007898.jpg',
+            'user_id' => 9,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Kaiman y Nikaido',
+            'description' => 'Saludando',
+            'imgUrl' => 'https://hiepsibaotap.com/wp-content/uploads/2020/02/aa87fe156bf01c0a2a3a971ef715f427ae33610dr1-1200-900v2_uhq.jpg',
+            'user_id' => 10,
+            'edition_id' => 3,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Sensor (E4) (Tomo Único)
@@ -229,6 +307,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => 'Kyoko Byakuya pasea sola al pie del monte Sengoku cuando se cruza con un hombre que la invita al pueblo perdido de Kiyokami. Al llegar, ¡encuentra que todo allí brilla como el oro! Cuando comienzan a relatarle la historia de ese extraño poblado, ella siente cada vez mayor conexión con el lugar. ¡¿Qué tiene esta misteriosa mujer que sin buscarlo puede hacer que el mundo entero quede a su merced?!',
             'coverImage' => 'https://i1.whakoom.com/small/37/19/0493912318794ed4b56b28976781dd3b.jpg',
+            'edition_id' => 4,
+        ]);
+
+        // creacion de artwork
+        Artwork::create([
+            'title' => 'Junji Ito',
+            'description' => 'Creepy',
+            'imgUrl' => 'https://i.pinimg.com/736x/26/14/46/26144680f730a4050b1472f120a83522--junji-ito-japanese-art.jpg',
+            'user_id' => 11,
+            'edition_id' => 4,
+        ]);
+        Artwork::create([
+            'title' => 'Sensor',
+            'description' => 'Junji Ito Manga',
+            'imgUrl' => 'https://preview.redd.it/d0l30h6jpeg71.jpg?auto=webp&s=0df1a215464b4d901a40c7f04ec3f786d03b61b2',
+            'user_id' => 3,
+            'edition_id' => 4,
+        ]);
+        Artwork::create([
+            'title' => 'Sensor',
+            'description' => 'Terror rural',
+            'imgUrl' => 'http://www.eslahoradelastortas.com/blog/media/2021/01/tumblr_pivl3nMmTG1wva86to1_500.jpg',
+            'user_id' => 6,
             'edition_id' => 4,
         ]);
 
@@ -254,6 +355,7 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 5,
         ]);
 
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Sensacional Wonder Woman (E6) (Tomo Único)
@@ -273,6 +375,39 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/3e/21/3f726c10ece047578509bd6a6097494d.jpg',
+            'edition_id' => 6,
+        ]);
+
+        // artwork de Sensacional Wonder Woman (A1)
+        Artwork::create([
+            'title' => 'WW',
+            'description' => 'Wonder Woman',
+            'imgUrl' => 'https://preview.redd.it/pd16g7j2z2r71.jpg?width=640&crop=smart&auto=webp&s=4877d31d8f8eec30b2ace0686c803721eca5cd73',
+            'user_id' => 4,
+            'edition_id' => 6,
+        ]);
+        // artwork de Sensacional Wonder Woman (A2)
+        Artwork::create([
+            'title' => 'Diana',
+            'description' => 'Close-up',
+            'imgUrl' => 'https://w0.peakpx.com/wallpaper/411/215/HD-wallpaper-wonder-woman-looking-wonder-woman-superheroes-artist-artwork-digital-art.jpg',
+            'user_id' => 8,
+            'edition_id' => 6,
+        ]);
+        // artwork de Sensacional Wonder Woman (A3)
+        Artwork::create([
+            'title' => 'Black & Gold',
+            'description' => 'WW variant',
+            'imgUrl' => 'https://preview.redd.it/y3plgvruh9i71.jpg?auto=webp&s=7fa1c7f499994ddae0949039a5662b852d2ae66b',
+            'user_id' => 6,
+            'edition_id' => 6,
+        ]);
+        // artwork de Sensacional Wonder Woman (A4)
+        Artwork::create([
+            'title' => 'Comic WW',
+            'description' => 'WW',
+            'imgUrl' => 'http://pm1.narvii.com/7505/b64048fc2f5bc9ac408aed0411218cada57f59ear1-1391-1325v2_uhq.jpg',
+            'user_id' => 10,
             'edition_id' => 6,
         ]);
 
@@ -334,6 +469,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 7,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Raiden',
+            'description' => 'Dios del trueno',
+            'imgUrl' => 'https://i.pinimg.com/originals/51/40/de/5140de14742b4856925ae518aa65a631.jpg',
+            'user_id' => 6,
+            'edition_id' => 7,
+        ]);
+        Artwork::create([
+            'title' => 'Kitana',
+            'description' => 'Mortal Kombat 11 art',
+            'imgUrl' => 'https://es.gamewallpapers.com/download.php?img=wallpaper_mortal_kombat_11_fan_art_01_1920x1080.jpg',
+            'user_id' => 5,
+            'edition_id' => 7,
+        ]);
+        Artwork::create([
+            'title' => 'Scorpion Rage',
+            'description' => 'Fighting game',
+            'imgUrl' => 'https://ae01.alicdn.com/kf/HTB1tNhTbBWD3KVjSZFsq6AqkpXaX/Q0002-Mortal-Kombat-Scorpion-Art.jpg',
+            'user_id' => 11,
+            'edition_id' => 7,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Así habló Kishibe Rohan (E8)
@@ -365,6 +523,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 8,
         ]);
 
+        Artwork::create([
+            'title' => 'Jolyne Gucci',
+            'description' => 'Fashion',
+            'imgUrl' => 'https://i.pinimg.com/736x/6c/f3/70/6cf37009d310d0757ebb655739fdbc01.jpg',
+            'user_id' => 8,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Kishibe Rohan',
+            'description' => 'Mangaka',
+            'imgUrl' => 'https://image.tmdb.org/t/p/w780/tNubPqMgMC61a8PS9nUqp8ot1Df.jpg',
+            'user_id' => 7,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'JJBA',
+            'description' => 'Jojos',
+            'imgUrl' => 'https://2.bp.blogspot.com/-dvNEAPN_IDM/XDDzOeFzI8I/AAAAAAAAAJ0/btT51TZoEKkJpwHVm9uGUHmIxj8jR70oACLcBGAs/s1600/Steamworkshop_webupload_previewfile_332969030_preview.png',
+            'user_id' => 4,
+            'edition_id' => 8,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Wanted (E9)
@@ -374,7 +554,7 @@ class DatabaseSeeder extends Seeder
             'language' => 'Español',
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
-            'description' => 'El autor ideó cada capítulo como un one-shot independiente. Cada uno se publicó en diferentes revistas de Shueisha a lo largo de los años sin seguir un orden cronológico específico. Esto permite apreciar la evolución de su dibujo, cada vez más estilizado y detallista, a la vez que recorrer varias temáticas de las que obsesionan al autor (y al personaje). Estas historias se recopilaron en 2013 y 2018 en dos tomos que publicaremos a principios de 2022 en formato B6 para hacer juego con los tomos de la serie principal.',
+            'description' => 'Wanted es la obra más gamberra del guionista de The Ultimates y The Authority, una historia que se desarrolla en un mundo aparentemente real en el que los superhéroes no existen y los villanos controlan el destino de multinacionales y la misma humanidad. Wesley Gibson, el protagonista, deberá descubrir sus habilidades como villano e hijo de uno de los mayores asesinos de todos los tiempos.',
         ]);
         // creación de volúmen Wanted (V1)
         Volume::create([
@@ -404,6 +584,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 9,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Wanted',
+            'description' => 'Comic art',
+            'imgUrl' => 'https://qph.cf2.quoracdn.net/main-qimg-d34c274d884d2f1dc571e0ead472ec20.webp',
+            'user_id' => 1,
+            'edition_id' => 9,
+        ]);
+        Artwork::create([
+            'title' => 'Killer Suit',
+            'description' => 'Wanted',
+            'imgUrl' => 'https://img.gta5-mods.com/q90/avatars/407061/159548-2904793-emask.jpg',
+            'user_id' => 5,
+            'edition_id' => 9,
+        ]);
+        Artwork::create([
+            'title' => 'Videojuego',
+            'description' => 'Wanted game',
+            'imgUrl' => 'https://assets-prd.ignimgs.com/2022/05/07/wanted-1651884107432.jpg',
+            'user_id' => 9,
+            'edition_id' => 9,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Hellboy: El Ataud Encadenado y otros relatos (E10) (Tomo Único)
@@ -423,6 +626,29 @@ class DatabaseSeeder extends Seeder
             'ISBN' => '9789876130608',
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/14/3b/1f70afa43ecf4d0eb4daa6d39ea2a84e.jpg',
+            'edition_id' => 10,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'Hellboy',
+            'description' => 'Rojo',
+            'imgUrl' => 'https://i.pinimg.com/originals/3a/8d/d1/3a8dd1e595d4b451d9019330d1891959.jpg',
+            'user_id' => 4,
+            'edition_id' => 10,
+        ]);
+        Artwork::create([
+            'title' => 'Pelicula',
+            'description' => 'Pelicula de Guillermo del Toro',
+            'imgUrl' => 'https://i.etsystatic.com/15590810/r/il/239699/2147012741/il_fullxfull.2147012741_gvit.jpg',
+            'user_id' => 4,
+            'edition_id' => 10,
+        ]);
+        Artwork::create([
+            'title' => 'Rojo',
+            'description' => 'HB',
+            'imgUrl' => 'http://images.fandango.com/images/fandangoblog/JuanCarlosRuiz%20copy.jpg',
+            'user_id' => 4,
             'edition_id' => 10,
         ]);
 
@@ -480,6 +706,164 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => null,
             'coverImage' => 'https://i1.whakoom.com/small/0d/0f/b518e88af12a4746a7eb056330693a7f.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V6)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 6,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/2e/0e/bfc2af6d703a49298e776d7cf9f9e720.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V7)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 7,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/34/22/c31b35588ed14d479e0067a6886256da.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V8)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 8,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/23/2d/c0a0597ac0c84e45aa8e1417eddfa74f.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V9)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 9,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/16/1e/be9c7b1ffa914ea1a7e29a5a7ac0a4c1.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V10)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 10,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/22/31/ca76cf8d8fe846b2ad88cf19c338c16f.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V11)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 11,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/39/00/df8bbe3bc2ce475d837a994489bfb8dd.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V12)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 12,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/08/03/b8701dc4ca5647969a75412a8cf41651.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V13)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 13,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/24/1b/c3f44d8c1f404ad1a23f4d5cf43ecafa.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V14)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 14,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/39/07/6dd117eb4dcc4ee1b9d1b44906cfbb15.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V15)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 15,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/01/27/bf0d20b0b73c401eac79cb90b6546fd1.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V16)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 16,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/21/03/63047046e3114b32985a1518106fe132.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V17)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 17,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/05/02/e6e7dab1ca6745fcbaad141b64afa16b.jpg',
+            'edition_id' => 11,
+        ]);
+        // creación de volúmen El puño de la Estrella del Norte (V18)
+        Volume::create([
+            'title' => 'El puño de la Estrella del Norte',
+            'number' => 18,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/1f/25/522b6abc8ea446bf826a053a182e5ba9.jpg',
+            'edition_id' => 11,
+        ]);
+
+        // artwork El puño de la Estrella del Norte (A1)
+        Artwork::create([
+            'title' => 'Kenshiro',
+            'description' => 'Hokuto No Ken',
+            'imgUrl' => 'https://www.manga-news.com/public/2016/news_fr_01/hokuto-no-ken-ex-libris-kaze-manga.jpg',
+            'user_id' => 7,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A2)
+        Artwork::create([
+            'title' => 'Hokuto No Ken',
+            'description' => 'Mad Max style',
+            'imgUrl' => 'https://www.playerone.vg/wp-content/uploads/2021/03/hokuto-no-ken-manga-spinoff-e1614977195267.png',
+            'user_id' => 8,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A3)
+        Artwork::create([
+            'title' => 'HNK',
+            'description' => 'Estrella del norte',
+            'imgUrl' => 'https://www.wallpapertip.com/wmimgs/18-186292_fist-of-the-north-star-hokuto-no-ken.jpg',
+            'user_id' => 10,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A4)
+        Artwork::create([
+            'title' => 'Tetsuo Hara Artwork',
+            'description' => 'HNK Img',
+            'imgUrl' => 'https://i.pinimg.com/originals/3e/f4/a8/3ef4a8b87f268f55154023b1061ed9e8.jpg',
+            'user_id' => 2,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A4)
+        Artwork::create([
+            'title' => 'Juria',
+            'description' => 'HNK Img',
+            'imgUrl' => 'https://www.gonagaiworld.com/wp-content/uploads/2021/09/julia-ken-il-guerriero.jpg',
+            'user_id' => 6,
             'edition_id' => 11,
         ]);
 
@@ -586,6 +970,29 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 12,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Poster',
+            'description' => 'Spy X Family',
+            'imgUrl' => 'https://i.pinimg.com/550x/9e/a0/cd/9ea0cd1593ee1e64ede8ddc2ced75588.jpg',
+            'user_id' => 8,
+            'edition_id' => 12,
+        ]);
+        Artwork::create([
+            'title' => 'Spy X Family',
+            'description' => 'Artwork',
+            'imgUrl' => 'https://dthezntil550i.cloudfront.net/wa/latest/wa2003132002055770008497197/1280_960/a6ec0083-b4b8-4948-9878-142434152cc5.png',
+            'user_id' => 6,
+            'edition_id' => 12,
+        ]);
+        Artwork::create([
+            'title' => 'SXF Poster',
+            'description' => 'Poster',
+            'imgUrl' => 'https://resizing.flixster.com/oKZx6R0LR26Hy_-BwPxj05F3dsg=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vYWZmMjgxMzYtMjg5Yi00ZmVhLWEwYjctYmEyMmI4MTFjNzBjLnBuZw==',
+            'user_id' => 5,
+            'edition_id' => 12,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Kamen Rider Kuuga (E13)
@@ -671,6 +1078,47 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 13,
         ]);
 
+        // artwork Kamen Rider Kuuga (A1)
+        Artwork::create([
+            'title' => 'Kamen Rider',
+            'description' => 'KM',
+            'imgUrl' => 'https://cdna.artstation.com/p/assets/images/images/000/523/786/large/chen-guan-yu-kamen-rider-by-kyzylhum-d8khuk4.jpg?1425568807&dl=1',
+            'user_id' => 1,
+            'edition_id' => 13,
+        ]);
+        // artwork Kamen Rider Kuuga (A2)
+        Artwork::create([
+            'title' => 'Zero-One',
+            'description' => 'Kamen Rider Zero-One',
+            'imgUrl' => 'https://pbs.twimg.com/media/D_Mr4jeXUAAPs4i.jpg',
+            'user_id' => 2,
+            'edition_id' => 13,
+        ]);
+        // artwork Kamen Rider Kuuga (A3)
+        Artwork::create([
+            'title' => 'Kuuga & Agito',
+            'description' => 'KM',
+            'imgUrl' => 'https://cdn.donmai.us/original/45/b8/45b881913b4391c2e681a1c35e226a33.jpg',
+            'user_id' => 3,
+            'edition_id' => 13,
+        ]);
+        // artwork Kamen Rider Kuuga (A4)
+        Artwork::create([
+            'title' => 'Kamen Riders',
+            'description' => 'KM',
+            'imgUrl' => 'https://wallpapercave.com/wp/wp1829068.jpg',
+            'user_id' => 9,
+            'edition_id' => 13,
+        ]);
+        // artwork Kamen Rider Kuuga (A5)
+        Artwork::create([
+            'title' => 'JP Poster KM',
+            'description' => 'KM',
+            'imgUrl' => 'https://c4.wallpaperflare.com/wallpaper/744/11/729/anime-kamen-rider-wallpaper-preview.jpg',
+            'user_id' => 7,
+            'edition_id' => 13,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Spider-Man (E14)
@@ -712,8 +1160,411 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 14,
         ]);
 
+        // artwork
+        Artwork::create([
+            'title' => 'Spiderman',
+            'description' => 'marvel',
+            'imgUrl' => 'https://preview.redd.it/j5lrkjiizun41.jpg?width=640&crop=smart&auto=webp&s=2d9d918506e83f3d2bec8f7892706285b6c42f4d',
+            'user_id' => 4,
+            'edition_id' => 14,
+        ]);
+        Artwork::create([
+            'title' => 'Peter Parker',
+            'description' => 'Spiderman',
+            'imgUrl' => 'https://i.pinimg.com/originals/ca/5d/18/ca5d18e760c9d328e9d0f64c67d5c134.jpg',
+            'user_id' => 5,
+            'edition_id' => 14,
+        ]);
+        Artwork::create([
+            'title' => 'Goblin',
+            'description' => 'Hombre Araña',
+            'imgUrl' => 'https://c4.wallpaperflare.com/wallpaper/901/280/30/spiderman-goblin-hd-artwork-wallpaper-preview.jpg',
+            'user_id' => 6,
+            'edition_id' => 14,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
+        // Chainsaw Man (E15)
+        Edition::create([
+            'title' => 'Chainsaw Man',
+            'publisher' => 'IVREA ARGENTINA',
+            'language' => 'Español',
+            'format' => 'Rustica/TPB (tapa blanda)',
+            'isStandalone' => 0,
+            'isClosed' => 0,
+            'description' => 'Póster de regalo con el tomo #1 (exclusivamente en comiquerías) y set de 5 postales de regalo con el tomo #11.',
+        ]);
+
+        // creación de volúmen Chainsaw Man (V1)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 1,
+            'ISBN' => '9788418562273',
+            'argument' => 'Chainsaw Man narra la historia de Denji, un pobre infeliz que haría cualquier cosa por guita. Su padre se suicidó dejándole una deuda impagable con la mafia, jamás en su vida lo abrazaron y gracias si puede apuntar a comerse una rodaja de pan lactal por día. Cuando ya casi no le quedan órganos que vender, empieza a cazar demonios con su perro-motosierra, Pochita, substiendo con el sueño de tener un futuro mejor… Hasta que el mismo mafioso para el que trabajaban les tiende una trampa y ambos mueren descuartizados… al menos por un rato.',
+            'coverImage' => 'https://i1.whakoom.com/large/22/19/c88fa1865ec3478fa3403ecba1218fb1.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V2)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 2,
+            'ISBN' => '9788418645006',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/10/3a/6c0781902d7041efa3fab6cb0152c0e9.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V3)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 3,
+            'ISBN' => '9788418645846',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/11/02/641417e3ff354cf6b1b8b844a1c2ebf4.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V4)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 4,
+            'ISBN' => '9788418751653',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/10/16/edc130df68824af18af101844b7cd1b4.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V5)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 5,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/0e/10/2ab45e92a6a24add8505eb48476ac54f.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V6)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 6,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/24/3b/aaa551fd27c8472e889b806f2d7c8898.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V7)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 7,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/13/1a/b785ec15abad482390576f1f09d2cc0f.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V8)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 8,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/29/1d/f14ab13171484a8fb624a4dcb57dea66.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V9)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 9,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/1d/06/58698339e6b24ae2acc28c999946ac1b.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V10)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 10,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/15/34/403f47bcd38e48efb031c861a42a68ce.jpg',
+            'edition_id' => 15,
+        ]);
+        // creación de volúmen Chainsaw Man (V11)
+        Volume::create([
+            'title' => 'Chainsaw Man',
+            'number' => 11,
+            'ISBN' => null,
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/0d/36/28fc071aff124142880dddf2db259166.jpg',
+            'edition_id' => 15,
+        ]);
+
+        // artwork
+        Artwork::create([
+            'title' => 'El pibe motosierra',
+            'description' => 'Chainsaw Man Img#1',
+            'imgUrl' => 'https://somoskudasai.com/wp-content/uploads/2022/07/chainsaw-man-anime.jpg',
+            'user_id' => 4,
+            'edition_id' => 15,
+        ]);
+        Artwork::create([
+            'title' => 'Red Chainsaw',
+            'description' => 'Chainsaw Man Img#2',
+            'imgUrl' => 'https://www.wallpapersun.com/wp-content/uploads/2021/07/Chainsaw-Man-Wallpapersun-4.jpg',
+            'user_id' => 5,
+            'edition_id' => 15,
+        ]);
+        Artwork::create([
+            'title' => 'Denji y Makima',
+            'description' => 'Chainsaw Man Img#3',
+            'imgUrl' => 'https://cdna.artstation.com/p/assets/covers/images/019/310/652/large/mikee-aranjuez-chainsaw-man.jpg?1562909681',
+            'user_id' => 6,
+            'edition_id' => 15,
+        ]);
+
+        // -------------------------------------------------------------------------------------------------------------------
+
+        // Neon Genesis Evangelion - Edición Deluxe (E16)
+        Edition::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'publisher' => 'IVREA ARGENTINA',
+            'language' => 'Español',
+            'format' => 'Rustica/TPB (tapa blanda)',
+            'isStandalone' => 0,
+            'isClosed' => 0,
+            'description' => 'Detalles de laca brillante sectorizada en tapa.',
+        ]);
+
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V1)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 1,
+            'ISBN' => '9788416040056',
+            'argument' => 'Según cuenta la historia, en el año 2000 un meteorito cayó en la Antártida, devastando gran parte del planeta. Ahora, en 2015, el mundo apenas está comenzando a reponerse cuando comienzan a atacar unos misteriosos seres, los "Ángeles". Shinji Ikari es un adolescente apático que un día recibe un llamado de su padre, Gendo, a quien no ve desde chico. Este le pide que maneje un robot gigante, la Unidad Evangelion, y pelee para salvar el mundo.',
+            'coverImage' => 'https://i1.whakoom.com/large/0b/2c/261b5aeef27c4c4eba6edd51daa44c47.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V2)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 2,
+            'ISBN' => '9788416243518',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/00/29/718acfdd40be4a6d94001b4328e03393.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V3)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 3,
+            'ISBN' => '9788416352241',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/0b/3d/9ccd75daa7dd4d78902405987ca82204.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V4)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 4,
+            'ISBN' => '9788416426348',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/10/28/7ac1b3696b504680b6452e07f858cf87.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V5)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 5,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/35/10/84d965571ca74e48b1835d51520f1c8c.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V6)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 6,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/0d/38/6d6776e82e7343afa9b3391fc86e4ba0.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V7)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 7,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/3f/1f/51174ac5673845d8ab920069031e2d2f.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V8)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 8,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/38/06/c4bccfca814b408181f97b0d65f65e93.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V9)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 9,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/17/28/305ffefb68e7449597c935bad4ad4cb9.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V10)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 10,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/23/31/ac96e701dc5544989fc4ec5f061a8fce.jpg',
+            'edition_id' => 16,
+        ]);
+        // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V11)
+        Volume::create([
+            'title' => 'Neon Genesis Evangelion - Edición Deluxe',
+            'number' => 11,
+            'ISBN' => '9788415108474',
+            'argument' => 'Enmarcada en un futuro post apocalíptico en que la Tierra ha sufrido una catástrofe conocida como el Segundo Impacto, cuenta la historia de un chico bastante depresivo y apático llamado Shinji Ikari. Este personaje se verá súbitamente envuelto en la guerra más importante que la humanidad alguna vez tuvo que enfrentar: la llegada de los Ángeles. Para enfrentarlos, la ONU crea NERV que será la encargada de mantener y manejar a los Evangelion, humanoides gigantes cubiertos de armaduras mecánicas, que constituyen la única línea de defensa posible contra este enemigo; los cuales solo pueden ser manejados por chicos que hayan nacido en la fecha de la catástrofe planetaria.',
+            'coverImage' => 'https://i1.whakoom.com/large/09/12/3b9281b0d4d642148101ca0ed14f7a8b.jpg',
+            'edition_id' => 16,
+        ]);
+
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A1)
+        Artwork::create([
+            'title' => 'NGE',
+            'description' => 'Neon Genesis Evangelion Img#1',
+            'imgUrl' => 'https://images.squarespace-cdn.com/content/v1/54fc8146e4b02a22841f4df7/1589417081407-TNZRTCBIRBRAVDDJ91C3/b.jpg',
+            'user_id' => 7,
+            'edition_id' => 16,
+        ]);
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A2)
+        Artwork::create([
+            'title' => 'Eva',
+            'description' => 'Neon Genesis Evangelion Img#2',
+            'imgUrl' => 'https://c4.wallpaperflare.com/wallpaper/560/695/780/neon-genesis-evangelion-artwork-eva-unit-01-3600x2327-anime-evangelion-hd-art-wallpaper-preview.jpg',
+            'user_id' => 8,
+            'edition_id' => 16,
+        ]);
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A3)
+        Artwork::create([
+            'title' => 'Finale',
+            'description' => 'Neon Genesis Evangelion Img#3',
+            'imgUrl' => 'https://pbncanvas.com/wp-content/uploads/2021/12/Neon-Genesis-Evangelion-Japanese-Anime-paint-by-numbers.jpg',
+            'user_id' => 9,
+            'edition_id' => 16,
+        ]);
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A4)
+        Artwork::create([
+            'title' => 'Ayanami Rei',
+            'description' => 'Neon Genesis Evangelion Img#4',
+            'imgUrl' => 'https://w0.peakpx.com/wallpaper/529/211/HD-wallpaper-neon-genesis-evangelion-dcchris-artwork-neon-genesis-evangelion-anime-girl-anime-artist-artwork-digital-art.jpg',
+            'user_id' => 10,
+            'edition_id' => 16,
+        ]);
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A5)
+        Artwork::create([
+            'title' => 'Asuka',
+            'description' => 'Neon Genesis Evangelion Img#5',
+            'imgUrl' => 'https://wallup.net/wp-content/uploads/2015/12/185279-Neon_Genesis_Evangelion-Asuka_Langley_Soryu-EVA_Unit_02-water-reflection-clouds-stars-anime.jpg',
+            'user_id' => 10,
+            'edition_id' => 16,
+        ]);
+        // artwork Neon Genesis Evangelion - Edición Deluxe (A6)
+        Artwork::create([
+            'title' => 'Team',
+            'description' => 'Neon Genesis Evangelion Img#6',
+            'imgUrl' => 'https://areablue.jp/wp-content/uploads/2019/01/sadamotoyoshiyukiillustrator7.jpg',
+            'user_id' => 2,
+            'edition_id' => 16,
+        ]);
+
+        // -------------------------------------------------------------------------------------------------------------------
+
+        // Tekken: Feudo de sangre (E17)
+        Edition::create([
+            'title' => 'Tekken: Feudo de sangre',
+            'publisher' => 'POP FICTION EDICIONES',
+            'language' => 'Español',
+            'format' => 'Grapa',
+            'isStandalone' => 0,
+            'isClosed' => 1,
+            'description' => 'Serie limitada de cuatro cómics basada en la exitosa franquicia gamer TEKKEN. Una historia pintada por la traición y la violencia. El clan Mishima no es una familia normal y ahora surge algo que amenaza destruir no sólo a esta dinastía rota, sino a todo el universo. ¡Es el momento de que los mejores luchadores del mundo combatan a las fuerzas del mal, el Torneo del Rey del Puño de Hierro espera! Escrita por Cavan Scott (STAR WARS, DOCTOR WHO) e ilustrada por Andie Tong (TRON: BETRAYAL y THE BATMAN STRIKES).',
+        ]);
+
+        // creación de volúmen Tekken: Feudo de sangre (V1)
+        Volume::create([
+            'title' => 'Tekken: Feudo de sangre',
+            'number' => 1,
+            'ISBN' => '9789874717146',
+            'argument' => '¡Toda una nueva serie de cómics basada en la icónica franquicia de juegos de lucha! Esta nueva y sensacional serie de cómics aprovechará la rica historia de TEKKEN y contará con personajes memorables del célebre canon de los videojuegos, incluidos Heihachi Mishima, Yoshimitsu, Nina Williams y Paul Phoenix.',
+            'coverImage' => 'https://i1.whakoom.com/large/35/00/59ec43c1935e4711bea20db424a87841.jpg',
+            'edition_id' => 17,
+        ]);
+        // creación de volúmen Tekken: Feudo de sangre (V2)
+        Volume::create([
+            'title' => 'Tekken: Feudo de sangre',
+            'number' => 2,
+            'ISBN' => '9789874717146',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/14/3d/c0c006664a26413e88219251b20810df.jpg',
+            'edition_id' => 17,
+        ]);
+        // creación de volúmen Tekken: Feudo de sangre (V3)
+        Volume::create([
+            'title' => 'Tekken: Feudo de sangre',
+            'number' => 3,
+            'ISBN' => '9789874717146',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/34/09/20ec620231964598a13d3129e59d7edc.jpg',
+            'edition_id' => 17,
+        ]);
+        // creación de volúmen Tekken: Feudo de sangre (V4)
+        Volume::create([
+            'title' => 'Tekken: Feudo de sangre',
+            'number' => 4,
+            'ISBN' => '9789874717146',
+            'argument' => null,
+            'coverImage' => 'https://i1.whakoom.com/large/1c/18/666641ca18664062931324aa1429adb9.jpg',
+            'edition_id' => 17,
+        ]);
+
+        // artwork Tekken: Feudo de sangre (A1)
+        Artwork::create([
+            'title' => 'Akuma & Heihachi',
+            'description' => 'Tekken: Feudo de sangre Img#1',
+            'imgUrl' => 'https://images3.alphacoders.com/694/thumb-1920-694711.jpg',
+            'user_id' => 10,
+            'edition_id' => 17,
+        ]);
+        // artwork Tekken: Feudo de sangre (A2)
+        Artwork::create([
+            'title' => 'King',
+            'description' => 'Tekken: Feudo de sangre Img#2',
+            'imgUrl' => 'https://wallpaperaccess.com/full/3575203.jpg',
+            'user_id' => 7,
+            'edition_id' => 17,
+        ]);
+        // artwork Tekken: Feudo de sangre (A3)
+        Artwork::create([
+            'title' => 'Nina Williams',
+            'description' => 'Tekken: Feudo de sangre Img#3',
+            'imgUrl' => 'https://wallup.net/wp-content/uploads/2016/01/41979-Tekken-Nina_Williams_Tekken-Jin_Kazama-video_games-purple-blonde.jpg',
+            'user_id' => 8,
+            'edition_id' => 17,
+        ]);
+        // artwork Tekken: Feudo de sangre (A4)
+        Artwork::create([
+            'title' => 'T7',
+            'description' => 'Tekken: Feudo de sangre Img#4',
+            'imgUrl' => 'https://wallpapercave.com/wp/wp6912816.png',
+            'user_id' => 9,
+            'edition_id' => 17,
+        ]);
+
+        // -------------------------------------------------------------------------------------------------------------------
 
         // foreach (range(1, 10) as $index) {
         //     Volume::factory()->create();
@@ -722,5 +1573,49 @@ class DatabaseSeeder extends Seeder
         foreach (range(1, 20) as $index) {
             Review::factory()->create();
         }
+
+        // Booklist (B1)
+        Booklist::create([
+            'name' => 'Lista #1',
+            'description' => 'Desc #1',
+            'user_id' => 1,
+        ]);
+        // Booklist (B2)
+        Booklist::create([
+            'name' => 'Hokuto No Ken',
+            'description' => 'Después de la Tercera Guerra Mundial, el mundo es un lugar desolado y hostil. El agua se ha convertido en el recurso más preciado y la fuerza, en la habilidad más necesaria, por eso los más fuertes dominan el mundo. Esto cambiará cuando Kenshiro, el hombre conocido como «El Puño de la Estrella Del Norte», heredero del arte marcial más poderosa jamás conocida, ayude a los indefensos pobladores a conseguir una vida más digna.',
+            'user_id' => 6,
+        ]);
+        // Booklist (B3)
+        Booklist::create([
+            'name' => 'Mix de tomos',
+            'description' => 'Mangas que he leído online o me han hablado de ellos y que me interesan... :)',
+            'classification' => 'Crossover',
+            'user_id' => 4,
+        ]);
+        // Booklist (B4)
+        Booklist::create([
+            'name' => 'Mi Booklist',
+            'description' => null,
+            'classification' => 'Personal',
+            'user_id' => 9,
+        ]);
+
+        $booklist2 = Booklist::find(2);
+        $booklist2->volumes()->attach(30);
+        $booklist2->volumes()->attach(31);
+        $booklist2->volumes()->attach(32);
+        $booklist2->volumes()->attach(33);
+        $booklist2->volumes()->attach(34);
+        $booklist2->volumes()->attach(35);
+
+        $booklist3 = Booklist::find(3);
+        $booklist3->volumes()->attach(73);
+        $booklist3->volumes()->attach(46);
+        $booklist3->volumes()->attach(89);
+        $booklist3->volumes()->attach(63);
+
+        $booklist4 = Booklist::find(4);
+        $booklist4->volumes()->attach(5);
     }
 }

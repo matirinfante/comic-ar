@@ -44,9 +44,10 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 </template>
 <script>
 export default{
-    props:['users'],
-    components:{
-        AppLayout
-    }
+    //Como no tenemos admin lo dejo comentado
+    // props:['users'],
+    // components:{
+    //     AppLayout
+    // }
 }
 </script>

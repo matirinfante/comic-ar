@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Booklist;
+use App\Models\Comicteca;
+use App\Models\Review;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +13,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -68,6 +70,31 @@ class User extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function comictecas()
+    {
+        return $this->hasOne(Comicteca::class);
+    }
+
+    public function objectives()
+    {
+        return $this->hasMany(Objective::class);
+    }
+
+    public function objnotifications()
+    {
+        return $this->hasMany(Objnotification::class);
+    }
+    
+    public function artworks()
+    {
+        return $this->hasMany(Artwork::class);
     }
 
 }

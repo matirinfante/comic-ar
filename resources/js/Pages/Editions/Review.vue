@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="modal__action">
-                <button :disabled="modified" @click="confirm"
+                <button :disabled="modified" @click="alreadyReviewed? edit($event): confirm($event)"
                         class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                         :class="{'hidden':modified}">
                     Publicar
@@ -33,13 +33,50 @@
                 </button>
             </div>
         </vue-final-modal>
+        <vue-final-modal v-model="showModalEdit" classes="modal-container" content-class="modal-content"
+                         @click-outside="clickOutsideEdit">
+            <button class="modal__close" @click="showModalEdit = false">
+            </button>
+            <span class="modal__title">Modificando reseña</span>
+            <div class="modal__content">
+                <star-rating v-model:rating="rating" :rounded-corners="true" :border-width="6"
+                             :show-rating="false" class="p-6"></star-rating>
+                <div class="flex justify-center">
+                    <div class="mb-3 mt-5 xl:w-96">
+                        <label for="exampleFormControlTextarea1" class="form-label inline-block mb-2 text-gray-700">Comentario
+                            (opcional)</label>
+                        <textarea
+                            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            placeholder="Tu comentario" v-model="comment">{{this.review}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__action">
+                <button :disabled="modified" @click="edit"
+                        class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                        :class="{'hidden':modified}">
+                    Modificar
+                </button>
+                <button @click="showModalEdit = false"
+                        class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                    Cancelar
+                </button>
+            </div>
+        </vue-final-modal>
         <div class="flex justify-center my-5">
             <button @click="showModal = true" :class="{'hidden':alreadyReviewed}"
                     class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
                 Añadir reseña
             </button>
+            <button @click="showModalEdit = true" :class="{'hidden':!alreadyReviewed}"
+                    class="inline-block px-6 py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+                Editar reseña
+            </button>
         </div>
     </div>
+    <!--Others reviews-->
     <div v-if="alreadyReviewed">
         <article class="mt-9 pr-9 ml-10 bg-yellow-200 mr-10 p-6 mb-9 rounded-md ">
             <div class="flex items-center mb-4 space-x-4">
@@ -49,7 +86,8 @@
                 </div>
             </div>
             <div class="flex items-center mb-1">
-                <star-rating inactive-color="#e1bad9" active-color="#cc1166" :inline="true" :star-size="15" :show-rating="false" :rating="this.review.rating"
+                <star-rating inactive-color="#e1bad9" active-color="#cc1166" :inline="true" :star-size="15"
+                             :show-rating="false" :rating="this.review.rating"
                              :read-only="true" :increment="0.01" :rounded-corners="true" :border-width="2"
                              :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"></star-rating>
                 <h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white"></h3>
@@ -70,7 +108,7 @@
             <article class="mt-9 pr-9 ml-10 ">
                 <div class="flex items-center mb-4 space-x-4">
                     <div class="space-y-1 font-bold dark:text-white">
-                        <p>{{ review.id }}
+                        <p>{{ review.user.name }}
                         </p>
                     </div>
                 </div>
@@ -107,6 +145,7 @@ export default {
     },
     data: () => ({
         showModal: false,
+        showModalEdit: false,
         showConfirmModal: false,
         rating: 0,
         comment: "",
@@ -120,6 +159,7 @@ export default {
     methods: {
         confirm(e) {
             e.preventDefault()
+            console.log("en confirm" + e)
             axios.post('/reviews', {
                 rating: this.rating,
                 description: this.comment,
@@ -136,8 +176,27 @@ export default {
                 )
             })
         },
+        edit(e) {
+            e.preventDefault()
+            axios.patch('/reviews/' + this.review.id, {
+                rating: this.rating,
+                description: this.comment,
+            }).then((response) => {
+                this.showModalEdit = false
+                //this.alreadyReviewed = true
+                this.review = response.data
+                this.$swal(
+                    'Éxito!',
+                    'Tu reseña ha sido modificada :)',
+                    'success'
+                )
+            })
+        },
         clickOutside() {
             this.rating = 0
+        },
+        clickOutsideEdit() {
+            this.rating = this.review.rating
         },
         checkReview() {
             axios.get('/check-review', {
@@ -149,6 +208,8 @@ export default {
                 if (response.data.length > 0) {
                     this.alreadyReviewed = true;
                     this.review = response.data[0];
+                    this.rating = this.review.rating
+                    this.comment = this.review.description
                 }
             })
             axios.get('/edition-reviews', {

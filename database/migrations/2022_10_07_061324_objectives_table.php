@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wishlist_volume',function(Blueprint $table){
-            $table->foreignId('wishlist_id')->constrained();
-            $table->foreignId('volume_id')->constrained();
+        Schema::create('objectives',function(Blueprint $table){
+            $table->id();
+            $table->string('name');
+            $table->integer('progress');            
+            $table->integer('days')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlist_volume');
+        Schema::dropIfExists('objectives');
     }
 };

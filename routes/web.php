@@ -1,13 +1,19 @@
 <?php
 
-use App\Http\Controllers\ReviewController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VolumeController;
+use App\Http\Controllers\ArtworkController;
 use App\Http\Controllers\EditionController;
+use App\Http\Controllers\ObjectiveController;
+use App\Http\Controllers\ObjnotificationController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ComictecaController;
+use App\Http\Controllers\BooklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +46,27 @@ Route::middleware([
     Route::resource('/users', UserController::class);
     Route::resource('/volumes', VolumeController::class);
     Route::resource('/reviews', ReviewController::class);
+    Route::resource('/wishlists', WishlistController::class);
+    Route::resource('/comictecas', ComictecaController::class);
+    Route::resource('/objectives',ObjectiveController::class);
+    Route::resource('/objnotifications',ObjnotificationController::class);
+    Route::resource('/artworks', ArtworkController::class);
+    Route::resource('/booklists', BooklistController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
     Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
+    Route::post('/comictecas-complete', [ComictecaController::class,'completeEdition']);
+    Route::post('/comictecas.update', [ComictecaController::class,'update']);
+    Route::get('/searchObj',[ObjectiveController::class,'searchBy']);
+    Route::get('/objectives-show',[ObjectiveController::class,'show']);
+    Route::post('/objectives-update',[ObjectiveController::class,'update']);
+    Route::post('/objectives-calculate',[ObjectiveController::class,'calculateProgress']);
+    Route::get('/objnotifications-ask',[ObjnotificationController::class,'ask']);
+    Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
+    Route::get('/searchList', [BooklistController::class, 'searchBy']);
+    Route::get('/searchVol', [VolumeController::class, 'searchBy']);
+
 });
 
 
