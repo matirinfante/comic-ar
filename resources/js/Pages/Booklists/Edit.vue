@@ -45,7 +45,8 @@ const submit = () => {
                     <!-- name -->
                     <div>
                         <JetLabel for="name" value="Nombre" />
-                        <JetInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" autofocus required/>
+                        <JetInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" autofocus
+                            required />
                         <JetInputError class="mt-2" :message="form.errors.name" />
                     </div>
 
@@ -121,12 +122,15 @@ export default {
                     this.options = response.data;
                     this.isLoading = false
                 });
+            } else if (term.length == 0) {
+                this.isLoading = false
             }
         },
         onSelect(selected) {
             // this.$inertia.get('/editions/' + selected.id);
+            this.isLoading = false
         },
-        onClose(value) {
+        onClose() {
             this.isLoading = false
         },
         close() {

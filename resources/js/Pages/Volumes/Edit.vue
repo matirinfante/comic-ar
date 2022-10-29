@@ -37,7 +37,9 @@ const submit = () => {
     <AppLayout title="Información del Tomo">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Editar Información del Tomo</span>
+                <!-- <span class="text-gray-500"> -->
+                    Editar Información del Tomo
+                <!-- </span> -->
             </h2>
         </template>
 
