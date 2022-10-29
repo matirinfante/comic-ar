@@ -23,7 +23,9 @@ const submit = () => {
     <AppLayout title="Crear Nueva Lista">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Crear Nueva Lista</span>
+                <!-- <span class="text-gray-500"> -->
+                    Crear Nueva Lista
+                <!-- </span> -->
             </h2>
         </template>
 
@@ -110,6 +112,8 @@ export default {
                     this.options = response.data;
                     this.isLoading = false
                 });
+            } else if (term.length == 0) {
+                this.isLoading = false
             }
         },
         onSelect(selected) {

@@ -8,7 +8,7 @@ import axios from 'axios';
     <AppLayout title="Lista de deseados">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">¡Esta es tu lista de deseados {{$page.props.user.name}}!</span>
+                ¡Esta es tu lista de deseados <span class="text-gray-500">{{$page.props.user.name}}</span>!
             </h2>
         </template>
 

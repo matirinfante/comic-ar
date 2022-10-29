@@ -39,7 +39,9 @@ const submit = () => {
     <AppLayout title="Información de la Edición">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Editar Información de la Edición</span>
+                <!-- <span class="text-gray-500"> -->
+                    Editar Información de la Edición
+                <!-- </span> -->
             </h2>
         </template>
 

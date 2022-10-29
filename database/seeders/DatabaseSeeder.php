@@ -107,6 +107,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 1,
         ]);
 
+        // Reviews de kick-ass (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'El guion es bien como debe ser un comic de estas características y bien pochoclero como estamos acostumbrados, Romita Jr. Es uno de los dibujantes que mas detesto pero aca se esforzo para hacer un gran trabajo y se nota.',
+            'user_id' => 2,
+            'edition_id' => 1,
+        ]);
+        // Reviews de kick-ass (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 3,
+            'edition_id' => 1,
+        ]);
+        // Reviews de kick-ass (R3)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 4,
+            'edition_id' => 1,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
 
@@ -118,6 +140,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Grapa',
             'isStandalone' => 0,
             'description' => 'A color. 26x17cm. Recopila Batman Vol.3 #48 al 57 (Agosto de 2018 a Diciembre de 2018) de la edición USA.',
+            'ratingAvg' => 3,
         ]);
 
         // creación de volúmen Batman (V1)
@@ -189,6 +212,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 2,
         ]);
 
+        // Reviews de batman (R1)
+        Review::create([
+            'rating' => 3,
+            'description' => null,
+            'user_id' => 5,
+            'edition_id' => 2,
+        ]);
+        // Reviews de batman (R2)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 6,
+            'edition_id' => 2,
+        ]);
+        // Reviews de batman (R3)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 7,
+            'edition_id' => 2,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Dorohedoro (E3)
@@ -199,6 +244,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
             'description' => 'Edición 2 en 1 con sobrecubierta reversible. Incluye páginas a color.',
+            'ratingAvg' => 5
         ]);
 
         // creación de volúmen Dorohedoro (V1)
@@ -288,6 +334,35 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 3,
         ]);
 
+        // Reviews de dorohedoro (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'No hay otra historia como esta y no existe un dibujo igual de sucio y fascinante como este! Además de todo esto, la edición es una joyita!',
+            'user_id' => 8,
+            'edition_id' => 3,
+        ]);
+        // Reviews de dorohedoro (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Lo compre por curiosidad y quede encantado. La calidad de las hojas, la presentación de su cubre portada doble, las hojas a color. Aparte que la historia es increíble. Deben darle una oportunidad a esta obra de la mano de esta iditorial. No se arrepentirán',
+            'user_id' => 9,
+            'edition_id' => 3,
+        ]);
+        // Reviews de dorohedoro (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => 'la edición de Ivrea está preciosa, la historia te engancha rápido…',
+            'user_id' => 10,
+            'edition_id' => 3,
+        ]);
+        // Reviews de dorohedoro (R4)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Todos deberían leer al menos una vez en la vida Dorohedoro.',
+            'user_id' => 2,
+            'edition_id' => 3,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Sensor (E4) (Tomo Único)
@@ -299,6 +374,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 1,
             'isClosed' => 1,
             'description' => null,
+            'ratingAvg' => 4
         ]);
         // creación de volúmen Sensor (V1)
         Volume::create([
@@ -333,6 +409,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 4,
         ]);
 
+        // Reviews de Sensor (R1)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Una obra de Junji Ito, está vez con pies y cabeza, historia que desarrollo y final, y con una interpretación abierta al lector. Comienza con un arte flojo pero poco a poco va mostrando esas ilustraciones tan características del autor.',
+            'user_id' => 3,
+            'edition_id' => 4,
+        ]);
+        // Reviews de Sensor (R2)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Sensor.... me gusto pero me dejo un sentimiento extraño. Muy religiosa por momentos , el guión muy volado pero predecible a la vez.... la ilustración de nivel como siempre.',
+            'user_id' => 4,
+            'edition_id' => 4,
+        ]);
+        // Reviews de Sensor (R3)
+        Review::create([
+            'rating' => 1,
+            'description' => 'Bueno es la primer obra de ito que leí y tenía las expectativas muy altas. Me llevé una gran decepción. La historia es un poco confunsa, a veces aburrida. Los personajes son bastante planos y no me lograron transmitir nada. El dibujo es excelente creo lo mejor de la obra, tiene dibujos y paneles tremendos que logran incomodar bastante al lector. Y la edición de ivrea es hermosa. Lástima la historia que pudo ser mejor.',
+            'user_id' => 5,
+            'edition_id' => 4,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // What a Wonderful World! (E5) (Tomo Único)
@@ -344,6 +442,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 1,
             'isClosed' => 1,
             'description' => 'Incluye páginas a color.',
+            'ratingAvg' => 4
         ]);
         // creación de volúmen What a Wonderful World! (V1)
         Volume::create([
@@ -352,6 +451,28 @@ class DatabaseSeeder extends Seeder
             'ISBN' => null,
             'argument' => 'What a wonderful world nos muestra como nuestro mundo puede ser tan precioso como horrible, donde los altibajos son moneda corriente y lo que para algunos es ridículo para otros es sublime. Asano desarrolla diferentes historias donde la cruda realidad de la sociedad moderna se mezcla con algo de fantasía, para entender el valor de la vida sin descuidar el caos en el que vivimos.',
             'coverImage' => 'https://i1.whakoom.com/small/22/36/0fed92ff6cd84dba8dc4b26258dc9f02.jpg',
+            'edition_id' => 5,
+        ]);
+
+        // Reviews de What a Wonderful World! (R1)
+        Review::create([
+            'rating' => 3,
+            'description' => 'Uno de los primeros trabajos de Asano, se nota su inexperiencia tanto en dibujo como en narrativa, no se compara ni de chiste a sus obras posteriores, sin embargo, a lo largo del tomo, se puede ver una curva de crecimiento muy interesante, eso es a mi parecer lo más valioso de este manga, además la edición es excelente en todo sentido.',
+            'user_id' => 6,
+            'edition_id' => 5,
+        ]);
+        // Reviews de What a Wonderful World! (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => 'He leído casi todos los tomos únicos de Asano y este es simplemente epico. Una mente brillante que logra conectar tantas historias escritas en distintos momentos de su vida es simplemente algo inimaginable. Solo reprocharia el formato y porte de esta edición, me hubiese gustado algo no tan pesado y grande que facilitará la lectura.',
+            'user_id' => 7,
+            'edition_id' => 5,
+        ]);
+        // Reviews de What a Wonderful World! (R3)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Me gustó bastante solo que no me convence para que sea un 10 de 10 sus historias no me convencieron taaaanto pero esta lindo deja un lindo mensaje creo',
+            'user_id' => 8,
             'edition_id' => 5,
         ]);
 
@@ -367,6 +488,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 1,
             'isClosed' => 1,
             'description' => 'Contiene: Sensational Wonder Woman #1-7 (2021) y Sensational Wonder Woman Special #1 (2022) USA',
+            'ratingAvg' => 3
         ]);
         // creación de volúmen Sensacional Wonder Woman (V1)
         Volume::create([
@@ -411,6 +533,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 6,
         ]);
 
+        // Reviews de Sensacional Wonder Woman (R1)
+        Review::create([
+            'rating' => 4,
+            'description' => 'El arte es excelente, mientras que los guiones van variando, algunos entretenidos, otros meh',
+            'user_id' => 9,
+            'edition_id' => 6,
+        ]);
+        // Reviews de Sensacional Wonder Woman (R2)
+        Review::create([
+            'rating' => 3,
+            'description' => null,
+            'user_id' => 10,
+            'edition_id' => 6,
+        ]);
+        // Reviews de Sensacional Wonder Woman (R3)
+        Review::create([
+            'rating' => 3,
+            'description' => null,
+            'user_id' => 2,
+            'edition_id' => 6,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Mortal Kombat: Battlewave (E7)
@@ -422,6 +566,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 1,
             'description' => null,
+            'ratingAvg' => 3
         ]);
         // creación de volúmen Mortal Kombat: Battlewave (V1)
         Volume::create([
@@ -492,6 +637,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 7,
         ]);
 
+        // Reviews de Mortal Kombat: Battlewave (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 3,
+            'edition_id' => 7,
+        ]);
+        // Reviews de Mortal Kombat: Battlewave (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 4,
+            'edition_id' => 7,
+        ]);
+        // Reviews de Mortal Kombat: Battlewave (R3)
+        Review::create([
+            'rating' => 1,
+            'description' => null,
+            'user_id' => 5,
+            'edition_id' => 7,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Así habló Kishibe Rohan (E8)
@@ -503,6 +670,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 1,
             'description' => 'El autor ideó cada capítulo como un one-shot independiente. Cada uno se publicó en diferentes revistas de Shueisha a lo largo de los años sin seguir un orden cronológico específico. Esto permite apreciar la evolución de su dibujo, cada vez más estilizado y detallista, a la vez que recorrer varias temáticas de las que obsesionan al autor (y al personaje). Estas historias se recopilaron en 2013 y 2018 en dos tomos que publicaremos a principios de 2022 en formato B6 para hacer juego con los tomos de la serie principal.',
+            'ratingAvg' => 5
         ]);
         // creación de volúmen Así habló Kishibe Rohan (V1)
         Volume::create([
@@ -545,6 +713,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 8,
         ]);
 
+        // Reviews de Así habló Kishibe Rohan (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Una obra hermosa. Vale 100% la pena adquirirla',
+            'user_id' => 6,
+            'edition_id' => 8,
+        ]);
+        // Reviews de Así habló Kishibe Rohan (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 7,
+            'edition_id' => 8,
+        ]);
+        // Reviews de Así habló Kishibe Rohan (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 8,
+            'edition_id' => 8,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Wanted (E9)
@@ -555,6 +745,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
             'description' => 'Wanted es la obra más gamberra del guionista de The Ultimates y The Authority, una historia que se desarrolla en un mundo aparentemente real en el que los superhéroes no existen y los villanos controlan el destino de multinacionales y la misma humanidad. Wesley Gibson, el protagonista, deberá descubrir sus habilidades como villano e hijo de uno de los mayores asesinos de todos los tiempos.',
+            'ratingAvg' => 4
         ]);
         // creación de volúmen Wanted (V1)
         Volume::create([
@@ -607,6 +798,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 9,
         ]);
 
+        // Reviews de Wanted (R1)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Un muy buen cómic de super héroes sin éstos. Es inevitable ver las referencias a DC y Marvel que se nos presentan. Esto enriquece mucho el cómic, haciendo pensar que podría ser un posible futuro de los cómics de super héroes. La edición es bastante pobre si se considera la calidad.',
+            'user_id' => 9,
+            'edition_id' => 9,
+        ]);
+        // Reviews de Wanted (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 10,
+            'edition_id' => 9,
+        ]);
+        // Reviews de Wanted (R3)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 2,
+            'edition_id' => 9,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Hellboy: El Ataud Encadenado y otros relatos (E10) (Tomo Único)
@@ -618,6 +831,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 1,
             'isClosed' => 1,
             'description' => null,
+            'ratingAvg' => 4
         ]);
         // creación de volúmen Hellboy: El Ataud Encadenado y otros relatos (V1)
         Volume::create([
@@ -652,6 +866,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 10,
         ]);
 
+        // Reviews de Hellboy: El Ataud Encadenado y otros relatos (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 3,
+            'edition_id' => 10,
+        ]);
+        // Reviews de Hellboy: El Ataud Encadenado y otros relatos (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 4,
+            'edition_id' => 10,
+        ]);
+        // Reviews de Hellboy: El Ataud Encadenado y otros relatos (R3)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 5,
+            'edition_id' => 10,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // El puño de la Estrella del Norte (E11)
@@ -662,6 +898,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
             'description' => 'Incluye páginas a color.',
+            'ratingAvg' => 4
         ]);
         // creación de volúmen El puño de la Estrella del Norte (V1)
         Volume::create([
@@ -867,6 +1104,35 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 11,
         ]);
 
+        // Reviews de El puño de la Estrella del Norte (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Voy a remarcar las cosas positivas de la edición, son tomos super maleables, la hoja no es la mejor pero no se transparenta tampoco, al menos no como a Panini, tiene muchas páginas a color (incluso capítulos enteros a color) y con inflación de todas las editoriales ya no duele tanto pagar por un tomo a pesar de que sigue siendo algo elevado, si tenes unos pesos y queres leer este super clásico del manga, yo lo recomiendo.',
+            'user_id' => 5,
+            'edition_id' => 11,
+        ]);
+        // Reviews de El puño de la Estrella del Norte (R2)
+        Review::create([
+            'rating' => 2,
+            'description' => 'Edición carísima por lo que da, impresión horrible llena de manchas, los negros en un tomo van del gis claro al negro saturado que empasta y destruye la nitidez del dibujo, tiene errores de tipeo siendo una reimpresión de la española, quedaron ingentes cantidades de onomatoepyas sin aclarar y las aclaradas lo hacen con una insulsa tipografía, se nota mucho donde borrar los diálogos originales fuera de globo porque dejan los espacios en blanco, sobrecubiertas mal dobladas, tapas que una vez leído quedan más chicas que las hojas, páginas descentradas que dejan ver zonas blancas en la parte del guillotinado y podría seguir describiendo las falencias de esta edición PÉSIMA de Planeta Argentina. Comprate la española que tiene más calidad en los materiales y te sale apenas un poquito más que esta, de lo contrario esta es la única manera de leer este shonen sobre Kenshiro y su justicia por mano propia en las tierras baldías a lo Mad Max. La historia lo vale, la edición NO!!!',
+            'user_id' => 6,
+            'edition_id' => 11,
+        ]);
+        // Reviews de El puño de la Estrella del Norte (R3)
+        Review::create([
+            'rating' => 1,
+            'description' => 'El precio no está acordé a lo que se compra... No vale la pena por eso, es una lastima',
+            'user_id' => 7,
+            'edition_id' => 11,
+        ]);
+        // Reviews de El puño de la Estrella del Norte (R4)
+        Review::create([
+            'rating' => 5,
+            'description' => null,
+            'user_id' => 8,
+            'edition_id' => 11,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Spy x Family (E12)
@@ -877,6 +1143,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
             'description' => 'Sobrecubierta con tinta metalizada.',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Spy x Family (V1)
@@ -993,6 +1260,35 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 12,
         ]);
 
+        // Reviews de Spy x Family (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Una obra excepcional, infaltable, es una obra de lo mejorcito que hay ♡.',
+            'user_id' => 8,
+            'edition_id' => 12,
+        ]);
+        // Reviews de Spy x Family (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Muy buena historia, te encariñas rápido con los personajes. Es una muy linda comedia de espías',
+            'user_id' => 9,
+            'edition_id' => 12,
+        ]);
+        // Reviews de Spy x Family (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => 'En mi opinión, es uno de los mejores mangas que ha publicado la Shonen Jump.',
+            'user_id' => 10,
+            'edition_id' => 12,
+        ]);
+        // Reviews de Spy x Family (R4)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Está god (como dicen los chicos de ahora). Me entretengo mucho y disfruto de esta obra. Me gustaría que se compliquen más las cosas para los protagonistas. Voy el tomo 7 y a pesar de disfrutarla, creo que debería avanzar un poco la trama. Después de eso 0 quejas. La edición de Ivrea está linda El dibujo está lindo',
+            'user_id' => 2,
+            'edition_id' => 12,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Kamen Rider Kuuga (E13)
@@ -1003,6 +1299,7 @@ class DatabaseSeeder extends Seeder
             'format' => 'Rustica/TPB (tapa blanda)',
             'isStandalone' => 0,
             'description' => '¡Ovni Manga publicará KAMEN RIDER KUUGA! Llega la franquicia de Kamen Rider a la Argentina de la mano de Ovni y lo hace con la edición de KUUGA, la adaptación a manga del punto de inicio de la franquicia lanzado para su 30 aniversario.',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Kamen Rider Kuuga (V1)
@@ -1119,6 +1416,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 13,
         ]);
 
+        // Reviews de Kamen Rider Kuuga (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Gran obra del mítico Kamen Rider, el dibujo es tremendo, las peleas muy buenas y es el único manga en el país de este estilo, super recomendable!',
+            'user_id' => 2,
+            'edition_id' => 13,
+        ]);
+        // Reviews de Kamen Rider Kuuga (R2)
+        Review::create([
+            'rating' => 5,
+            'description' => 'En verdad no tenía fe en kuuga,pero logró atrapar con su historia ,10 de 10',
+            'user_id' => 3,
+            'edition_id' => 13,
+        ]);
+        // Reviews de Kamen Rider Kuuga (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Un género necesario para el mercado pisó la Argentina con una edición excelente del legendario Kamen raider Kuuga. Simplemente IMPERDIBLE.',
+            'user_id' => 4,
+            'edition_id' => 13,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Spider-Man (E14)
@@ -1130,6 +1449,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 1,
             'description' => 'Tomos recopilatorios.',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Spider-Man (V1)
@@ -1183,6 +1503,14 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 14,
         ]);
 
+        // Reviews de Spider-Man (R1)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 4,
+            'edition_id' => 14,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Chainsaw Man (E15)
@@ -1194,6 +1522,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 0,
             'description' => 'Póster de regalo con el tomo #1 (exclusivamente en comiquerías) y set de 5 postales de regalo con el tomo #11.',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Chainsaw Man (V1)
@@ -1319,6 +1648,42 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 15,
         ]);
 
+        // Reviews de Chainsaw Man (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Me lo leí en 3 días! Al principio no me enganche pero le di otra oportunidad y acá me tienen como una fan total! Vamo el Pibe Motosierra! Excelente manga! Recomendadisimo! 🔥⛓💔',
+            'user_id' => 5,
+            'edition_id' => 15,
+        ]);
+        // Reviews de Chainsaw Man (R2)
+        Review::create([
+            'rating' => 4,
+            'description' => 'Muy buena la edición argentina de chainsaw Man,una calidad excelente y la historia ni hablar ,lo único malo es que en varias frases pudieron ponerle otras cosas que la hubieran dejado como algo mucho más argentino todavía pero bueno 9/10',
+            'user_id' => 6,
+            'edition_id' => 15,
+        ]);
+        // Reviews de Chainsaw Man (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Te amo pochita',
+            'user_id' => 7,
+            'edition_id' => 15,
+        ]);
+        // Reviews de Chainsaw Man (R4)
+        Review::create([
+            'rating' => 5,
+            'description' => 'La obra me parece increíble y es una experiencia distinta a cualquier otro shonen, la edición de Ivrea está bien, solo que a veces la edición puede llega a fallar teniendo páginas mal cortadas, pero dentro de todo está excelente',
+            'user_id' => 8,
+            'edition_id' => 15,
+        ]);
+        // Reviews de Chainsaw Man (R5)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Bastante bueno!!!',
+            'user_id' => 9,
+            'edition_id' => 15,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Neon Genesis Evangelion - Edición Deluxe (E16)
@@ -1330,6 +1695,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 0,
             'description' => 'Detalles de laca brillante sectorizada en tapa.',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Neon Genesis Evangelion - Edición Deluxe (V1)
@@ -1481,6 +1847,28 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 16,
         ]);
 
+        // Reviews de Neon Genesis Evangelion - Edición Deluxe (R1)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Recomiendo esta edición no solo porque es bellísima sino porque también tiene muchas cosas extra que escribe el autor y que son muy interesantes de leer. También tiene unos dibujos que te vuelan la peluca',
+            'user_id' => 10,
+            'edition_id' => 16,
+        ]);
+        // Reviews de Neon Genesis Evangelion - Edición Deluxe (R2)
+        Review::create([
+            'rating' => 4,
+            'description' => 'La trama e ilustración 10 puntos como siempre. Las páginas finales dan placer a la lectura y educan muchísimo más al lector sobre la historia y su autor. Lastima que no encuentre algunos tomos por estar agotados y vaya uno a saber cuando volverán a hacerlos **pronto**',
+            'user_id' => 2,
+            'edition_id' => 16,
+        ]);
+        // Reviews de Neon Genesis Evangelion - Edición Deluxe (R3)
+        Review::create([
+            'rating' => 5,
+            'description' => 'Excelente, el guión, el desarrollo de los personajes, la narrativa. Una joya de los 90',
+            'user_id' => 3,
+            'edition_id' => 16,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // Tekken: Feudo de sangre (E17)
@@ -1492,6 +1880,7 @@ class DatabaseSeeder extends Seeder
             'isStandalone' => 0,
             'isClosed' => 1,
             'description' => 'Serie limitada de cuatro cómics basada en la exitosa franquicia gamer TEKKEN. Una historia pintada por la traición y la violencia. El clan Mishima no es una familia normal y ahora surge algo que amenaza destruir no sólo a esta dinastía rota, sino a todo el universo. ¡Es el momento de que los mejores luchadores del mundo combatan a las fuerzas del mal, el Torneo del Rey del Puño de Hierro espera! Escrita por Cavan Scott (STAR WARS, DOCTOR WHO) e ilustrada por Andie Tong (TRON: BETRAYAL y THE BATMAN STRIKES).',
+            'ratingAvg' => 4
         ]);
 
         // creación de volúmen Tekken: Feudo de sangre (V1)
@@ -1564,15 +1953,23 @@ class DatabaseSeeder extends Seeder
             'edition_id' => 17,
         ]);
 
+        // Reviews de Tekken: Feudo de sangre (R1)
+        Review::create([
+            'rating' => 4,
+            'description' => null,
+            'user_id' => 4,
+            'edition_id' => 17,
+        ]);
+
         // -------------------------------------------------------------------------------------------------------------------
 
         // foreach (range(1, 10) as $index) {
         //     Volume::factory()->create();
         // }
 
-        foreach (range(1, 20) as $index) {
-            Review::factory()->create();
-        }
+        // foreach (range(1, 20) as $index) {
+        //     Review::factory()->create();
+        // }
 
         // Booklist (B1)
         Booklist::create([

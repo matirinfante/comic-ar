@@ -22,7 +22,9 @@ const submit = () => {
     <AppLayout title="Subir artwork">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Subir artwork</span>
+                <!-- <span class="text-gray-500"> -->
+                    Subir artwork
+                <!-- </span> -->
             </h2>
         </template>
 

@@ -43,7 +43,9 @@ const filterBookLists = (id) => {
     <AppLayout title="Listas">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Listas</span>
+                <!-- <span class="text-gray-500"> -->
+                    Listas
+                <!-- </span> -->
             </h2>
         </template>
 
@@ -195,9 +197,10 @@ export default {
             if (term.length > 2) {
                 axios.get('/searchList', {params: {query: term}}).then(response => {
                     this.options = response.data;
-                    // console.log(response.data)
                     this.isLoading = false
                 });
+            } else if (term.length == 0) {
+                this.isLoading = false
             }
         },
         onSelect(selected) {

@@ -12,7 +12,9 @@ defineProps({
     <AppLayout title="Ediciones">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Ediciones</span>
+                <!-- <span class="text-gray-500"> -->
+                    Ediciones
+                <!-- </span> -->
             </h2>
         </template>
 
