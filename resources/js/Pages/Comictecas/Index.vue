@@ -1,69 +1,68 @@
 <script setup>
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 </script>
 <template>
     <AppLayout title="Comicteca">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Mi Comicteca</span>
+                <!-- <span class="text-gray-500"> -->
+                    Mi Comicteca
+                <!-- </span> -->
             </h2>
         </template>
-        <div class="pt-3 bg-violet-50">            
+        <div class="pt-3 bg-violet-50">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <p class="font-bold text-xl mb-3 ml-3 mt-2 text-white w-fit bg-violet-700 px-2 rounded-xl">Cantidad de
-                    Volumenes: {{ cantVol }}</p>
+                    Volúmenes: {{ cantVol }}</p>
 
                 <div v-for="edition in allVol" class="divide-y divide-y-1 divide-blue-200">
                     <p class="font-semibold text-lg mt-2 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-6 w-6 pb-1 inline">
-                            <path
-                                d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C87.5 32 35.1 48.6 9 59.9c-5.6 2.4-9 8-9 14V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V73.9c0-6.1-3.4-11.6-9-14C540.9 48.6 488.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="#6D28D9" class="w-6 h-6 inline">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                         </svg>
-                        {{ edition.title }}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-6 w-6 pb-1 inline">
-                            <path
-                                d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C87.5 32 35.1 48.6 9 59.9c-5.6 2.4-9 8-9 14V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V73.9c0-6.1-3.4-11.6-9-14C540.9 48.6 488.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"/>
+                        <span class="text-gray-600">&nbsp;{{ edition.title }}&nbsp;</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="#6D28D9" class="w-6 h-6 inline">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                         </svg>
+
                     </p>
                     <div>
-                <k-progress 
-             active 
-      status="success" 
-      type="line"
-      :border="true"
-      :color="['#210FFF', '#8A30B7', '#CA21A4']"
-      :bg-color="'#D9CFFC'"
-      :percent=edition.progress >
-    </k-progress>
-            
-                    <div class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center pt-2">
+                        <k-progress active status="success" type="line" :border="true"
+                            :color="['#210FFF', '#8A30B7', '#CA21A4']" :bg-color="'#D9CFFC'" :percent=edition.progress>
+                        </k-progress>
 
-                        <div v-for="volume in edition['volumes']" :key="volume.id" class="mb-3">
-                            <div class="relative">
-                                <Link :href="route('volumes.show', volume.id)">
+                        <div class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center pt-2">
+
+                            <div v-for="volume in edition['volumes']" :key="volume.id" class="mb-3">
+                                <div class="relative">
+                                    <Link :href="route('volumes.show', volume.id)">
                                     <img class="h-60" :src="volume.coverImage">
                                     <div
                                         class="font-semibold absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300">
                                         {{ volume.title }} #{{ volume.number }}
                                     </div>
-                                </Link>
-                            </div>
-                            <div class="text-center">
-                                <button v-on:click="remove(volume.id)"
-                                        class="inline-block w-full py-2 border-2 border-black text-red-600 hover:bg-red-600 hover:text-white transition duration-150 ease-in-out">
-                                    <div class="flex sm:flex-cols-12 gap-4">
-                                        <div class="col-span-1 pl-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-5 h-5 mx-auto"><path d="M175 175C184.4 165.7 199.6 165.7 208.1 175L255.1 222.1L303 175C312.4 165.7 327.6 165.7 336.1 175C346.3 184.4 346.3 199.6 336.1 208.1L289.9 255.1L336.1 303C346.3 312.4 346.3 327.6 336.1 336.1C327.6 346.3 312.4 346.3 303 336.1L255.1 289.9L208.1 336.1C199.6 346.3 184.4 346.3 175 336.1C165.7 327.6 165.7 312.4 175 303L222.1 255.1L175 208.1C165.7 199.6 165.7 184.4 175 175V175zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"/></svg>
-                                    </div>
-                                    <div class="col-span-2">ELIMINAR</div>
-                                    </div>
-                                </button>
-                            </div>
+                                    </Link>
+                                </div>
+                                <div class="text-center group">
+                                    <button v-on:click="remove(volume.id)"
+                                        class=" inline-block w-full py-2 border-2 border-red-400 text-red-400 hover:bg-red-400 hover:text-white transition duration-150 ease-in-out">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto inline">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+                                        <span class="text-xs hidden group-hover:inline transition delay-250 ease-in-out">Quitar</span>
+                                    </button>
+                                </div>
 
 
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -92,7 +91,7 @@ export default {
     },
     methods: {
         remove(id) {
-            axios.post('/comictecas.update', {volume_id: id, status: false}).then(response => {
+            axios.post('/comictecas.update', { volume_id: id, status: false }).then(response => {
                 this.allVol = response.data;
                 this.countVol()
             })

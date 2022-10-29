@@ -16,7 +16,7 @@ defineProps({
     <AppLayout :title="edition.title">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Artworks de {{ edition.title }}</span>
+                Artworks de <span class="text-gray-500">{{ edition.title }}</span>
             </h2>
         </template>
         <div>
@@ -84,7 +84,7 @@ defineProps({
                             <div
                                 class="bg-green-700 text-white hover:text-gray-100 hover:bg-green-600 mt-4 py-1 pr-5 rounded-l-full">
                                 <p class="pl-4 md:pl-8">
-                                    <Link :href="route('artworks.create')" :data="{id:edition.id}">
+                                    <Link :href="route('artworks.create')" :data="{ id: edition.id }">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -120,11 +120,11 @@ defineProps({
                                     <div class="flex flex-wrap w-1/3" v-for="art in artworks" :key="art.id">
                                         <div v-if="modalShow == false" class="w-full p-1 md:p-2 relative cursor-pointer"
                                             @click="showModal(art.imgUrl, art.usr)">
-                                            <img class="block object-cover object-center w-full h-40 rounded-lg border-2"
+                                            <img class="block object-cover object-center w-full h-40 rounded-lg border-2 bg-slate-300"
                                                 :src="art.imgUrl" :alt="art.description" />
                                             <div
                                                 class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300 rounded-lg">
-                                                {{art.title}}
+                                                {{ art.title }}
                                             </div>
                                         </div>
                                         <div v-if="modalShow" class="w-full p-1 md:p-2">
@@ -144,7 +144,7 @@ defineProps({
 
 
                     <!-- The Modal -->
-                    <div v-if="modalShow" id="modal" @click-outside="clickOutside"
+                    <div v-if="modalShow" id="modal" @click="clickOutside"
                         class="fixed top-0 left-0 z-80 w-screen h-screen bg-black/70 flex justify-center items-center">
 
                         <!-- The close button -->
@@ -155,18 +155,18 @@ defineProps({
                             </svg>
                         </button>
 
-                        <!-- A big image will be displayed here -->
-                        <div class="relative">
-                            <img :src="modalContent"
-                                class="max-w-full md:max-w-[768px] lg:max-w-[1024px] max-h-[550px] object-cover" />
-                            <div class="absolute inset-0 z-10 text-white flex flex-col">
-                                <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de
-                                    {{author}}</p>
+                        <div class="modal__content" @click="clickInside">
+                            <!-- A big image will be displayed here -->
+                            <div class="relative">
+                                <img :src="modalContent"
+                                    class="max-w-full md:max-w-[768px] lg:max-w-[1024px] max-h-[550px] object-cover" />
+                                <div class="absolute inset-0 z-10 text-white flex flex-col">
+                                    <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de
+                                        {{ author }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div>
@@ -181,6 +181,8 @@ export default {
             modalShow: false,
             modalContent: null,
             author: null,
+            countClic: false,
+            inside: false
         };
     },
     methods: {
@@ -190,7 +192,14 @@ export default {
             this.author = person
         },
         clickOutside() {
-            this.modalShow = false
+            if (this.inside != true) {
+                this.modalShow = false
+            } else {
+                this.inside = false
+            }
+        },
+        clickInside() {
+            this.inside = true
         }
     }
 }

@@ -10,7 +10,9 @@
     <AppLayout title="Objetivos">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Objetivos de lectura</span>
+                <!-- <span class="text-gray-500"> -->
+                    Objetivos de lectura
+                <!-- </span> -->
             </h2>
         </template>      
         <div class="flex justify-between mt-3">
