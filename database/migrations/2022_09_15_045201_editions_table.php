@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->enum('format', ['Rustica/TPB (tapa blanda)', 'Grapa', 'Tapa dura', 'Bolsillo']);
             $table->boolean('isStandalone');
             $table->boolean('isClosed')->default(false);
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->float('ratingAvg')->default(0);
             $table->timestamps();
         });

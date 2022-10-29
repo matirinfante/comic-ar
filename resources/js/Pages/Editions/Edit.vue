@@ -34,7 +34,7 @@ const submit = () => {
     });
 };
 </script>
-            
+
 <template>
     <AppLayout title="Información de la Edición">
         <template #header>
@@ -52,13 +52,13 @@ const submit = () => {
                     <div class="mb-6">
                         <label class="flex items-center">
                             <JetCheckbox v-model:checked="form.isClosed" name="isClosed" class="shadow-md" />
-                            <span class="ml-2 text-sm text-gray-600">Is closed?</span>
+                            <span class="ml-2 text-sm text-gray-600">¿Está cerrada?</span>
                         </label>
                     </div>
 
                     <!-- title -->
                     <div>
-                        <JetLabel for="title" value="Title" />
+                        <JetLabel for="title" value="Título" />
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
                             required autofocus />
                         <JetInputError class="mt-2" :message="form.errors.title" />
@@ -66,7 +66,7 @@ const submit = () => {
 
                     <!-- publisher -->
                     <div class="mt-4">
-                        <JetLabel for="publisher" value="Publisher" />
+                        <JetLabel for="publisher" value="Editorial" />
                         <JetInput id="publisher" v-model="form.publisher" type="text"
                             class="mt-1 block w-full bg-slate-200" required autocomplete="current-publisher" />
                         <JetInputError class="mt-2" :message="form.errors.publisher" />
@@ -74,7 +74,7 @@ const submit = () => {
 
                     <!-- language -->
                     <div class="mt-4">
-                        <JetLabel for="language" value="Language" />
+                        <JetLabel for="language" value="Idioma" />
                         <JetInput id="language" v-model="form.language" type="text"
                             class="mt-1 block w-full bg-slate-200" required autocomplete="current-language" />
                         <JetInputError class="mt-2" :message="form.errors.language" />
@@ -82,7 +82,7 @@ const submit = () => {
 
                     <!-- format -->
                     <div class="mt-4">
-                        <JetLabel for="format" value="Format" />
+                        <JetLabel for="format" value="Formato" />
                         <select id="format" v-model="form.format" required class="h-fit text-xs bg-slate-200">
                             <option value="Rustica/TPB (tapa blanda)">Rustica/TPB (tapa blanda)</option>
                             <option value="Grapa">Grapa</option>
@@ -91,7 +91,7 @@ const submit = () => {
                         </select>
                     </div>
 
-                    
+
 
                     <!-- isStandalone -->
                     <!-- <div class="mt-6">
@@ -112,8 +112,8 @@ const submit = () => {
 
                     <!-- description -->
                     <div class="mt-5">
-                        <JetLabel for="description" value="Description (Optional)" />
-                        <textarea v-model="form.description" placeholder="Edition's description"
+                        <JetLabel for="description" value="Descripcion (Opcional)" />
+                        <textarea v-model="form.description" placeholder="Una descripción"
                             class="w-full bg-slate-200"></textarea>
                         <JetInputError class="mt-2" :message="form.errors.description" />
                     </div>
@@ -129,4 +129,3 @@ const submit = () => {
         </div>
     </AppLayout>
 </template>
-            

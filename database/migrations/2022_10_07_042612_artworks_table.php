@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wishlist_volume',function(Blueprint $table){
-            $table->foreignId('wishlist_id')->constrained();
-            $table->foreignId('volume_id')->constrained();
+        Schema::create('artworks', function (Blueprint $table){
+            $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->string('imgUrl');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('edition_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlist_volume');
+        Schema::dropIfExists('artworks');
     }
 };

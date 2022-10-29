@@ -7,7 +7,7 @@ defineProps({
     editions: Object,
 })
 </script>
-    
+
 <template>
     <AppLayout title="Ediciones">
         <template #header>
@@ -22,12 +22,20 @@ defineProps({
 
                 <div class="flex flex-col md:flex-row justify-between mx-6 mb-5">
                     <!-- Buscador -->
-                    <div class="md:w-6/12 px-4 py-2 bg-indigo-300 text-gray-600 rounded-full">
-                        Buscar...
+                    <div class="md:w-6/12 px-4 py-2">
+                        <!-- Buscar... -->
+                        <VueMultiselect v-model="value" :options="options" :close-on-select="true" :clear-on-select="false"
+                        placeholder="Busca una edición..." label="title" track-by="id" :show-no-options="false"
+                        :loading="isLoading" :internal-search="false" @search-change="onSearchChange" @select="onSelect"
+                        :select-label="selectLabel" @close="onClose">
+                        <template v-slot:noResult>
+                            <span>No se han encontrado resultados</span>
+                        </template>
+                    </VueMultiselect>
                     </div>
                     <!-- Botón de creación -->
-                    <div class="md:mt-0 mt-4 w-fit px-4 py-2 bg-indigo-500 hover:bg-indigo-700 text-white rounded-md">
-                        <Link :href="route('editions.create')" class="">Añadir Nueva
+                    <div class="">
+                        <Link :href="route('editions.create')" class="mt-6 text-center w-full md:mt-0 inline-block px-6 my-auto py-2 border-2 border-purple-600 text-purple-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Añadir Nueva
                         Edición
                         </Link>
                     </div>
@@ -35,13 +43,13 @@ defineProps({
                 <SectionBorder />
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-10">
                     <div v-for="edition in editions" :key="edition.id"
-                        class="w-36 h-52 mx-auto mb-36 md:mb-32 shadow-md hover:shadow-indigo-400 border-2 border-gray-300">
+                        class="w-50 h-60 mx-auto mb-20 md:mb-14 shadow-md hover:shadow-indigo-400 relative">
                         <Link :href="route('editions.show', edition)">
 
-                        <img class="w-full h-52" :src="edition.cover" :alt="edition.title" />
-
-                        <div class="text-center py-4 bg-gray-300 text-gray-500">
-                            <h4 class="text-xl font-semibold tracking-tight">{{edition.title}}</h4>
+                        <img class="w-full h-60" :src="edition.cover" :alt="edition.title" />
+                        <div
+                            class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300">
+                            {{edition.title}}
                         </div>
                         </Link>
                     </div>
@@ -50,4 +58,39 @@ defineProps({
         </div>
     </AppLayout>
 </template>
-    
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
+<script>
+import VueMultiselect from 'vue-multiselect'
+import axios from "axios";
+
+export default {
+    components: {VueMultiselect},
+    data() {
+        return {
+            value: null,
+            options: [],
+            isLoading: false,
+            selectLabel: "Ver más"
+        }
+    },
+    methods: {
+        onSearchChange(term) {
+            this.options = []
+            this.isLoading = true
+            if (term.length > 2) {
+                axios.get('/search', {params: {query: term}}).then(response => {
+                    this.options = response.data;
+                    // console.log(response.data)
+                    this.isLoading = false
+                });
+            }
+        },
+        onSelect(selected) {
+            this.$inertia.get('/editions/' + selected.id);
+        },
+        onClose(value) {
+            this.isLoading = false
+        }
+    }
+}
+</script>
