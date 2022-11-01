@@ -4,6 +4,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import Review from "@/Pages/Editions/Review.vue";
 import Score from "@/Pages/Editions/Score.vue";
+import Characters from "@/Pages/Editions/Characters.vue";
 
 defineProps({
     edition: JSON,
@@ -194,6 +195,7 @@ defineProps({
 
 
                     </div>
+                    <Characters/>
                     <div class="text-gray-800 border-y-2 bg-white py-10 flex flex-row justify-between">
                         <!-- Valoración/Idioma/Propietarios? -->
                         <div class="grid place-items-center ml-8 md:ml-20 lg:ml-28">

@@ -10,7 +10,7 @@ class Edition extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'publisher', 'language', 'format', 'isStandalone', 'isClosed', 'description', 'ratingAvg'
+        'title', 'publisher', 'language', 'format', 'isStandalone', 'isClosed', 'description', 'ratingAvg', 'characters'
     ];
 
     public function volumes()
