@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Http;
+
 
 class EditionController extends Controller
 {
@@ -69,7 +71,7 @@ class EditionController extends Controller
         $edition = Edition::create($request->validated());
 
         $edition->save();
-        
+
         $contNumber = 1;
 
         // si no es edición única, se crean los volúmenes asociados a la edición
@@ -85,7 +87,7 @@ class EditionController extends Controller
 
                 $contNumber++;
             }
-        }else{  //si es edición única se crea un solo volumen
+        } else {  //si es edición única se crea un solo volumen
             Volume::create([
                 'title' => $edition->title,
                 'number' => $contNumber,
@@ -104,7 +106,7 @@ class EditionController extends Controller
     public function show(Edition $edition)
     {
         $userId = Auth::id();
-        $comictecaId=Comicteca::where('user_id',$userId)->get('id');
+        $comictecaId = Comicteca::where('user_id', $userId)->get('id');
         $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
@@ -117,11 +119,11 @@ class EditionController extends Controller
             } else {
                 $volume['coverImage'] = "/assets/cover/default.png";
             }
-            $volComic=$volume->comictecas()->where('id',$comictecaId[0]->id)->get();
-            if (count($volComic)>0){
-                $volume['inComicteca']=1;
-            }else{
-                $volume['inComicteca']=0;
+            $volComic = $volume->comictecas()->where('id', $comictecaId[0]->id)->get();
+            if (count($volComic) > 0) {
+                $volume['inComicteca'] = 1;
+            } else {
+                $volume['inComicteca'] = 0;
             }
         }
         return Inertia::render('Editions/Show', compact('edition', 'volumes'));
@@ -157,6 +159,7 @@ class EditionController extends Controller
             'format' => $request->format,
             'isClosed' => $request->isClosed,
             'description' => $request->description,
+            'characters' => $request->characters
         ]);
 
         return Redirect::route('editions.show', $edition->id);
@@ -177,5 +180,13 @@ class EditionController extends Controller
     {
         $results = DB::table('editions')->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title']);
         return $results;
+    }
+
+    public function getCharactersFromAPI(Request $request)
+    {
+        $theUrl = config('app.API')
+            . '&filter=name:' . $request->partialText . '&field_list=id,name,image&limit=5';
+        $response = Http::get($theUrl);
+        return $response->json();
     }
 }
