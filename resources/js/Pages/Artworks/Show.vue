@@ -24,7 +24,7 @@ defineProps({
                 <!-- CONTENIDO CENTRAL -->
                 <div class="flex justify-end">
                     <JetNavLink :href="route('editions.edit', edition.id)"
-                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800 text-base">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path
                                 d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
@@ -100,13 +100,13 @@ defineProps({
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('editions.show', edition.id)">
+                            <JetNavLink :href="route('editions.show', edition.id)" class="text-base">
                                 Información
                             </JetNavLink>
                         </div>
                         <div class="align-middle ml-10 my-auto">
                             <JetNavLink :href="route('artworks.show', edition.id)"
-                                :active="route().current('artworks.show', edition.id)">
+                                :active="route().current('artworks.show', edition.id)" class="text-base border-purple-400">
                                 Artworks
                             </JetNavLink>
                         </div>

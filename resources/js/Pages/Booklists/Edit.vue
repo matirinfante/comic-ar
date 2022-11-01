@@ -41,10 +41,12 @@ const submit = () => {
         <div>
             <div class="max-w-md mx-auto py-10 mt-10 sm:px-6 lg:px-8 bg-white shadow md:shadow-lg">
                 <!-- CONTENIDO CENTRAL -->
+                <h5 class="text-gray-400 text-center text-xs">Los campos con <span class="text-red-500">*</span> son
+                    obligatorios</h5>
                 <form @submit.prevent="submit" class="p-4">
                     <!-- name -->
                     <div>
-                        <JetLabel for="name" value="Nombre" />
+                        <JetLabel for="name" value="Nombre" class="starlabel"/>
                         <JetInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" autofocus
                             required />
                         <JetInputError class="mt-2" :message="form.errors.name" />
@@ -60,7 +62,7 @@ const submit = () => {
 
                     <!-- classification -->
                     <div class="mt-4">
-                        <JetLabel for="classification" value="Clasificación" />
+                        <JetLabel for="classification" value="Clasificación" class="starlabel"/>
                         <select id="classification" v-model="form.classification" required class="h-fit text-xs">
                             <option value="Guía de lectura">Guía de lectura</option>
                             <option value="Crossover">Crossover</option>
