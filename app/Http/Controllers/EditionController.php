@@ -185,7 +185,7 @@ class EditionController extends Controller
     public function getCharactersFromAPI(Request $request)
     {
         $theUrl = config('app.API')
-            . '&filter=name:' . $request->partialText . '&field_list=id,name&limit=10';
+            . '&filter=name:' . $request->partialText . '&field_list=id,name,image&limit=5';
         $response = Http::get($theUrl);
         return $response->json();
     }

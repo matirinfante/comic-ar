@@ -31,16 +31,18 @@ export default {
     },
     methods: {
         asyncFind(query) {
-            this.isLoading = true
-            axios.get('/characters', {
-                params: {
-                    partialText: query
-                }
-            })
-                .then((response) => {
-                    this.isLoading = false
-                    this.characters = response.data.results
+            if (query.length > 3) {
+                this.isLoading = true
+                axios.get('/characters', {
+                    params: {
+                        partialText: query
+                    }
                 })
+                    .then((response) => {
+                        this.isLoading = false
+                        this.characters = response.data.results
+                    })
+            }
         },
         sendSelected() {
             this.$emit('selected', this.selectedCharacters)
