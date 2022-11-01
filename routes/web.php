@@ -66,10 +66,9 @@ Route::middleware([
     Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
-
 });
 
-
+Route::get('/translate', [VolumeController::class, 'translate']);
 Route::get('/apibooks', function () {
     return Inertia::render('googlebooks', []);
 });
