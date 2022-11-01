@@ -39,7 +39,7 @@ function formatDate(date) {
     <AppLayout :title="volume[0].title">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Tomo de <span class="text-gray-500">{{volume[0].title}}</span>
+                Tomo de <span class="text-gray-500">{{ volume[0].title }}</span>
             </h2>
         </template>
 
@@ -48,7 +48,7 @@ function formatDate(date) {
                 <!-- CONTENIDO CENTRAL -->
                 <div class="flex justify-end">
                     <JetNavLink :href="route('volumes.edit', volume[0].id)"
-                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800 text-base">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path
                                 d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
@@ -65,8 +65,8 @@ function formatDate(date) {
                             <img class="" :src="volume[0].coverImage" :alt="volume[0].title" />
                         </div>
                         <div
-                            class="w-1/2 h-36 flex justify-start absolute left-28 md:left-44 lg:left-60 top-2 md:top-10">
-                            <p class="text-white md:text-2xl font-bold ml-6">#{{volume[0].number}}</p>
+                            class="w-1/2 h-36 flex justify-start absolute left-32 md:left-44 lg:left-60 top-2 md:top-10">
+                            <p class="text-white md:text-2xl font-bold ml-6">#{{ volume[0].number }}</p>
                         </div>
 
                     </div>
@@ -76,8 +76,8 @@ function formatDate(date) {
                         </div>
                         <div class="h-fit text-center flex text-2xl">
                             <Link :href="route('editions.show', edition[0].id)"
-                                class="text-gray-500 hover:text-gray-800 inline p-3">
-                            {{edition[0].title}}
+                                class="text-gray-500 hover:text-gray-800 block sm:inline p-3">
+                            {{ edition[0].title }}
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6 inline">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -87,10 +87,11 @@ function formatDate(date) {
                             <!-- añadir a lista de deseados -->
 
                             <!-- si no está en la lista de deseados -->
-                            <div v-if="volume[0].inWishlist == 0" class="text-base absolute my-4 right-6">
+                            <div v-if="volume[0].inWishlist == 0"
+                                class="text-base relative ml-12 sm:absolute sm:ml-0 my-4 right-6">
                                 <form @submit.prevent="submit">
                                     <button type="submit" :disabled="form.processing">
-                                        <p class="text-gray-400">
+                                        <p class="text-gray-400 hover:text-red-400 transition delay-150">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -103,7 +104,7 @@ function formatDate(date) {
                             </div>
 
                             <!-- si ya está en la lista de deseados -->
-                            <div v-if="volume[0].inWishlist == 1" class="text-base absolute my-4 right-6">
+                            <div v-if="volume[0].inWishlist == 1" class="text-base relative ml-12 sm:ml-0 sm:absolute my-4 right-6">
                                 <p class="text-red-500">
                                     <Link :href="route('wishlists.index')">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#F78182" viewBox="0 0 24 24"
@@ -124,7 +125,7 @@ function formatDate(date) {
                                 Argumento
                             </h2>
                             <p v-if="volume[0].argument != null" class="text-mm text-gray-700 px-10">
-                                {{volume[0].argument}}
+                                {{ volume[0].argument }}
                             </p>
                             <p v-else class="text-mm text-gray-700 px-10">
                                 El tomo/volúmen no cuenta con un argumento actualmente
@@ -136,7 +137,7 @@ function formatDate(date) {
                                 ISBN
                             </h2>
                             <p v-if="volume[0].ISBN != null" class="text-mm text-gray-700 px-10 w-50">
-                                {{volume[0].ISBN}}
+                                {{ volume[0].ISBN }}
                             </p>
                             <p v-else class="text-mm text-gray-700 px-10">
                                 El tomo/volúmen no cuenta con un ISBN actualmente
