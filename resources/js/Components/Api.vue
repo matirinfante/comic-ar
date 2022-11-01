@@ -4,7 +4,7 @@ import Modalapi from '@/Components/Modalapi.vue';
 <template>
 <div class="m-5">
     
-    <input  v-model="query" v-on:keyup="borrar" placeholder="Titulo o ISBN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3">
+    <input  v-model="query" v-on:keyup="borrar" placeholder="Título o ISBN" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3">
     <div class="flex justify-between">
         <div>
             <button v-on:click="fetch" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded m-2">Buscar por Nombre</button>

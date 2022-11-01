@@ -57,6 +57,8 @@ const submit = () => {
         <div>
             <div class="max-w-md mx-auto py-10 mt-10 sm:px-6 lg:px-8 bg-white shadow md:shadow-lg">
                 <!-- CONTENIDO CENTRAL -->
+                <h5 class="text-gray-400 text-center text-xs">Los campos con <span class="text-red-500">*</span> son
+                    obligatorios</h5>
                 <form @submit.prevent="submit" class="p-4">
 
                     <!-- isClosed? -->
@@ -69,7 +71,7 @@ const submit = () => {
 
                     <!-- title -->
                     <div>
-                        <JetLabel for="title" value="Título"/>
+                        <JetLabel for="title" value="Título" class="starlabel"/>
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
                                   required autofocus/>
                         <JetInputError class="mt-2" :message="form.errors.title"/>
@@ -77,7 +79,7 @@ const submit = () => {
 
                     <!-- publisher -->
                     <div class="mt-4">
-                        <JetLabel for="publisher" value="Editorial"/>
+                        <JetLabel for="publisher" value="Editorial" class="starlabel"/>
                         <JetInput id="publisher" v-model="form.publisher" type="text"
                                   class="mt-1 block w-full bg-slate-200" required autocomplete="current-publisher"/>
                         <JetInputError class="mt-2" :message="form.errors.publisher"/>
@@ -85,7 +87,7 @@ const submit = () => {
 
                     <!-- language -->
                     <div class="mt-4">
-                        <JetLabel for="language" value="Idioma"/>
+                        <JetLabel for="language" value="Idioma" class="starlabel"/>
                         <JetInput id="language" v-model="form.language" type="text"
                                   class="mt-1 block w-full bg-slate-200" required autocomplete="current-language"/>
                         <JetInputError class="mt-2" :message="form.errors.language"/>
@@ -93,7 +95,7 @@ const submit = () => {
 
                     <!-- format -->
                     <div class="mt-4">
-                        <JetLabel for="format" value="Formato"/>
+                        <JetLabel for="format" value="Formato" class="starlabel"/>
                         <select id="format" v-model="form.format" required class="h-fit text-xs bg-slate-200">
                             <option value="Rustica/TPB (tapa blanda)">Rustica/TPB (tapa blanda)</option>
                             <option value="Grapa">Grapa</option>
