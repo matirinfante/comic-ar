@@ -108,12 +108,13 @@ export default {
     },
     methods:{
         getQuote(){
+            setTimeout(() => 
             axios.get("/translate").then(response=>{
             this.anime=response.data.anime;
             this.char=response.data.character+' -';
-            this.quote='"'+response.data.quote+'"';});
-            this.isloading=false;
-        },
+            this.quote='"'+response.data.quote+'"';
+            this.isloading=false}), 400);
+        }
     }
 }
 </script>
