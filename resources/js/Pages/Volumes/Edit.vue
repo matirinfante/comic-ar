@@ -46,19 +46,20 @@ const submit = () => {
         <div>
             <div class="max-w-md mx-auto py-10 mt-10 sm:px-6 lg:px-8 bg-white shadow md:shadow-lg">
                 <!-- CONTENIDO CENTRAL -->
-
+                <h5 class="text-gray-400 text-center text-xs">Los campos con <span class="text-red-500">*</span> son
+                    obligatorios</h5>
                 <form @submit.prevent="submit" class="p-4" enctype="multipart/form-data">
                     <!-- title -->
                     <div>
-                        <JetLabel for="title" value="Título" />
+                        <JetLabel for="title" value="Título" class="starlabel"/>
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
                             required autofocus />
                         <JetInputError class="mt-2" :message="form.errors.title" />
                     </div>
 
                     <!-- number -->
-                    <div>
-                        <JetLabel for="number" value="Título" />
+                    <div class="mt-4">
+                        <JetLabel for="number" value="Número" class="starlabel"/>
                         <JetInput id="number" v-model="form.number" type="text" class="mt-1 block w-full bg-slate-200"
                             required autofocus />
                         <JetInputError class="mt-2" :message="form.errors.number" />
@@ -74,7 +75,7 @@ const submit = () => {
 
                     <!-- argument -->
                     <div class="mt-5">
-                        <JetLabel for="argument" value="Argumento (Opcional)" />
+                        <JetLabel for="argument" value="Argumento" />
                         <textarea v-model="form.argument" placeholder="Argument..."
                             class="w-full bg-slate-200"></textarea>
                         <JetInputError class="mt-2" :message="form.errors.argument" />

@@ -25,7 +25,8 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = Edition::all();
+        // $editions = Edition::all();
+        $editions = Edition::orderBy('created_at', 'desc')->paginate(6);
         $cont = 0;
         // Si la edición cuenta con al menos un volúmen, ésta tendrá la portada del primer volumen encontrado
         foreach ($editions as $edition) {
@@ -107,7 +108,9 @@ class EditionController extends Controller
     {
         $userId = Auth::id();
         $comictecaId = Comicteca::where('user_id', $userId)->get('id');
-        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
+        $totalVol = count(Volume::where('edition_id', $edition->id)->get());
+        $edition['totalVol'] = $totalVol;
+        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->paginate(6);
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
                 if (str_contains($volume['coverImage'], 'comicar-cover')) {
@@ -125,6 +128,8 @@ class EditionController extends Controller
             } else {
                 $volume['inComicteca'] = 0;
             }
+            $totalVol++;
+            $volume['totalVol'] = $totalVol;
         }
         return Inertia::render('Editions/Show', compact('edition', 'volumes'));
     }

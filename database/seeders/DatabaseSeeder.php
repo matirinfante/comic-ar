@@ -211,6 +211,27 @@ class DatabaseSeeder extends Seeder
             'user_id' => 7,
             'edition_id' => 2,
         ]);
+        Artwork::create([
+            'title' => 'Batman',
+            'description' => 'BatmanImg',
+            'imgUrl' => 'https://i.pinimg.com/736x/f1/e8/cb/f1e8cbfd2b21a9fd47e0a2a6027dfe33.jpg',
+            'user_id' => 8,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'The Batman',
+            'description' => 'BatmanImg',
+            'imgUrl' => 'https://images.squarespace-cdn.com/content/v1/51b3dc8ee4b051b96ceb10de/1621450047754-B7T8OL9SUEZEF6JUJHPG/E1taWOjWEAMbMpH.jpeg',
+            'user_id' => 9,
+            'edition_id' => 2,
+        ]);
+        Artwork::create([
+            'title' => 'Harley Quinn',
+            'description' => 'BatmanImg',
+            'imgUrl' => 'https://i.pinimg.com/originals/1e/29/60/1e2960a913e9ea70a49d01293fd638e4.jpg',
+            'user_id' => 10,
+            'edition_id' => 2,
+        ]);
 
         // Reviews de batman (R1)
         Review::create([
@@ -331,6 +352,41 @@ class DatabaseSeeder extends Seeder
             'description' => 'Saludando',
             'imgUrl' => 'https://hiepsibaotap.com/wp-content/uploads/2020/02/aa87fe156bf01c0a2a3a971ef715f427ae33610dr1-1200-900v2_uhq.jpg',
             'user_id' => 10,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Dorohedoro',
+            'description' => 'DorohedoroImg',
+            'imgUrl' => 'https://images4.alphacoders.com/123/1231734.jpg',
+            'user_id' => 2,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Familia de En',
+            'description' => 'DorohedoroImg',
+            'imgUrl' => 'https://w0.peakpx.com/wallpaper/301/862/HD-wallpaper-dorohedoro-anime-japon.jpg',
+            'user_id' => 3,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Kaiman y Nikkaido bailando',
+            'description' => 'DorohedoroImg',
+            'imgUrl' => 'https://pbs.twimg.com/media/Ed172AiWsAEnPWs.png',
+            'user_id' => 4,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Kaiman',
+            'description' => 'DorohedoroImg',
+            'imgUrl' => 'https://i.pinimg.com/736x/55/35/e9/5535e97c0a6c5d1d94f4fc21c1ac369c.jpg',
+            'user_id' => 5,
+            'edition_id' => 3,
+        ]);
+        Artwork::create([
+            'title' => 'Shin',
+            'description' => 'DorohedoroImg',
+            'imgUrl' => 'https://w0.peakpx.com/wallpaper/242/295/HD-wallpaper-shin-anime-dorohedoro-ebisu-netflix.jpg',
+            'user_id' => 6,
             'edition_id' => 3,
         ]);
 
@@ -710,6 +766,48 @@ class DatabaseSeeder extends Seeder
             'description' => 'Jojos',
             'imgUrl' => 'https://2.bp.blogspot.com/-dvNEAPN_IDM/XDDzOeFzI8I/AAAAAAAAAJ0/btT51TZoEKkJpwHVm9uGUHmIxj8jR70oACLcBGAs/s1600/Steamworkshop_webupload_previewfile_332969030_preview.png',
             'user_id' => 4,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Giorno',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://i.pinimg.com/originals/74/7f/7b/747f7bdff7fbbfd5551ebc0a3e7ba57e.jpg',
+            'user_id' => 5,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'JOJOS',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://wallpaper.dog/large/20497954.jpg',
+            'user_id' => 6,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Yasuho Hirose',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://images6.alphacoders.com/755/thumb-1920-755393.png',
+            'user_id' => 7,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Killer Queen',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://www.seekpng.com/png/detail/162-1625288_killer-queen-render-killer-queen-jojo-png.png',
+            'user_id' => 7,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Gyro Zeppeli',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://images3.alphacoders.com/774/thumb-1920-774574.jpg',
+            'user_id' => 8,
+            'edition_id' => 8,
+        ]);
+        Artwork::create([
+            'title' => 'Stone Ocean',
+            'description' => 'JojosImg',
+            'imgUrl' => 'https://wallpapercave.com/wp/wp5457142.jpg',
+            'user_id' => 9,
             'edition_id' => 8,
         ]);
 
@@ -1097,10 +1195,34 @@ class DatabaseSeeder extends Seeder
         ]);
         // artwork El puño de la Estrella del Norte (A4)
         Artwork::create([
-            'title' => 'Juria',
+            'title' => 'Yuria',
             'description' => 'HNK Img',
             'imgUrl' => 'https://www.gonagaiworld.com/wp-content/uploads/2021/09/julia-ken-il-guerriero.jpg',
             'user_id' => 6,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A5)
+        Artwork::create([
+            'title' => 'The Lost Paradise',
+            'description' => 'HNK Img',
+            'imgUrl' => 'https://static.zerochan.net/Hokuto.no.Ken.full.3680366.jpg',
+            'user_id' => 7,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A5)
+        Artwork::create([
+            'title' => 'Kenshiro & Yuria',
+            'description' => 'HNK Img',
+            'imgUrl' => 'https://i.pinimg.com/originals/bc/3c/42/bc3c4224e059b06ece767e5c7ba30e97.jpg',
+            'user_id' => 8,
+            'edition_id' => 11,
+        ]);
+        // artwork El puño de la Estrella del Norte (A6)
+        Artwork::create([
+            'title' => 'Hokuto No Ken - Kenshiro',
+            'description' => 'HNK Img',
+            'imgUrl' => 'https://bignadaquasar.files.wordpress.com/2010/08/hokuto-no-ken-kenshiro.jpg?w=640',
+            'user_id' => 9,
             'edition_id' => 11,
         ]);
 

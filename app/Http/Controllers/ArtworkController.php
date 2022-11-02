@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ArtworkRequest;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 
 class ArtworkController extends Controller
@@ -84,7 +85,8 @@ class ArtworkController extends Controller
         }
         $edition = Edition::where('id', $editionId)->get()->first();
         $volumes = Volume::where('edition_id', $editionId)->get();
-        $artworks = Artwork::where('edition_id', $editionId)->orderBy('id', 'desc')->get();
+        // $artworks = Artwork::where('edition_id', $editionId)->orderBy('id', 'desc')->get();
+        $artworks = Artwork::where('edition_id', $editionId)->orderBy('id', 'desc')->paginate(3);
         foreach ($artworks as $art) {
             $art['usr'] = $art->user()->get()->first()->name;
             if ($art['imgUrl'] != "/assets/cover/default.png") {
@@ -97,7 +99,9 @@ class ArtworkController extends Controller
                 $art['imgUrl'] = "/assets/cover/default.png";
             }
         }
-        return Inertia::render('Artworks/Show', compact('edition', 'volumes','artworks'));
+        
+        // return Inertia::render('Artworks/Show', compact('edition', 'volumes','artworks'));
+        return redirect(session('artworks_url'));
     }
 
     /**
@@ -108,9 +112,11 @@ class ArtworkController extends Controller
      */
     public function show($id)
     {
+        Session::put('artworks_url', request()->fullUrl());
         $edition = Edition::where('id', $id)->get()->first();
         $volumes = Volume::where('edition_id', $id)->get();
-        $artworks = Artwork::where('edition_id', $id)->orderBy('id', 'desc')->get();
+        // $artworks = Artwork::where('edition_id', $id)->orderBy('id', 'desc')->get();
+        $artworks = Artwork::where('edition_id', $id)->orderBy('id', 'desc')->paginate(6);
         foreach ($artworks as $art) {
             $art['usr'] = $art->user()->get()->first()->name;
             if ($art['imgUrl'] != "/assets/cover/default.png") {
