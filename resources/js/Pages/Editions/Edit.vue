@@ -124,7 +124,7 @@ const submit = () => {
 
                     <!-- description -->
                     <div class="mt-5">
-                        <JetLabel for="description" value="Descripcion (Opcional)"/>
+                        <JetLabel for="description" value="Descripción"/>
                         <textarea v-model="form.description" placeholder="Una descripción"
                                   class="w-full bg-slate-200"></textarea>
                         <JetInputError class="mt-2" :message="form.errors.description"/>
