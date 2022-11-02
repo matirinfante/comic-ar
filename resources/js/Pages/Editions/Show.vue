@@ -5,6 +5,7 @@ import JetNavLink from '@/Components/NavLink.vue';
 import Review from "@/Pages/Editions/Review.vue";
 import Score from "@/Pages/Editions/Score.vue";
 import Characters from "@/Pages/Editions/Characters.vue";
+import Pagination from '../../Components/Pagination.vue';
 
 defineProps({
     edition: JSON,
@@ -44,7 +45,7 @@ defineProps({
                         <h2 class="px-4 text-3xl font-bold text-white sm:ml-4 md:ml-10 mt-2">
                             {{ edition.title }}
                         </h2>
-                        <p v-if="volumes.length > 0"
+                        <p v-if="edition.totalVol > 0"
                             class="px-4 text-md text-green-400 font-semibold sm:ml-4 md:ml-10 pt-6">
                         <div class="flex">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -52,11 +53,11 @@ defineProps({
                                 <path
                                     d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
                             </svg>
-                            <div v-if="volumes.length > 1">
-                                {{ volumes.length }} tomos
+                            <div v-if="edition.totalVol > 1">
+                                {{ edition.totalVol }} tomos
                             </div>
                             <div v-else>
-                                {{ volumes.length }} tomo
+                                {{ edition.totalVol }} tomo
                             </div>
                         </div>
                         <p v-if="edition.isStandalone == 1" class="text-orange-300">
@@ -109,7 +110,7 @@ defineProps({
                                     </div>
                                 </div>
                                 <!-- agregar tomos si es standalone (max 1) -->
-                                <div v-if="edition.isStandalone == true && volumes.length < 1" class="">
+                                <div v-if="edition.isStandalone == true && volumes.data.length < 1" class="">
                                     <div
                                         class="bg-green-700 text-white hover:text-gray-100 hover:bg-green-600 mt-4 py-1 pr-5 rounded-l-full">
                                         <p class="pl-4 md:pl-8">
@@ -133,7 +134,8 @@ defineProps({
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
                             <JetNavLink :href="route('editions.show', edition.id)"
-                                :active="route().current('editions.show', edition.id)" class="text-base border-purple-400">
+                                :active="route().current('editions.show', edition.id)"
+                                class="text-base border-purple-400">
                                 Información
                             </JetNavLink>
                         </div>
@@ -143,11 +145,11 @@ defineProps({
                             </JetNavLink>
                         </div>
                     </div>
-                    <div v-if="volumes.length > 0" class="bg-white">
+                    <div v-if="edition.totalVol > 0" class="bg-white">
                         <!-- Tomos/Volumenes -->
 
                         <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-5">
-                            <div v-for="volume in dataVolumes" :key="volume.id"
+                            <div v-for="volume in dataVolumes.data" :key="volume.id"
                                 class="w-26 p-3 mx-auto mb-4 rounded-lg">
                                 <Link :href="route('volumes.show', volume.id)">
                                 <div class="relative">
@@ -162,7 +164,8 @@ defineProps({
                                     <button v-on:click="comicteca(volume.id, true); volume.inComicteca = 1"
                                         class="inline-block w-full py-2 border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition duration-150 ease-in-out">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto inline group-hover:w-5 group-hover:h-5">
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-6 h-6 mx-auto inline group-hover:w-5 group-hover:h-5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                                         </svg>
                                         <span
@@ -184,7 +187,9 @@ defineProps({
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                         </svg>
-                                        <span class="text-xs hidden group-hover:inline transition delay-250 ease-in-out">Quitar de
+                                        <span
+                                            class="text-xs hidden group-hover:inline transition delay-250 ease-in-out">Quitar
+                                            de
                                             comicteca</span>
                                     </button>
                                 </div>
@@ -192,10 +197,12 @@ defineProps({
 
                             </div>
                         </div>
-
+                        <div class="p-2">
+                            <Pagination :links="dataVolumes.links" />
+                        </div>
 
                     </div>
-                    <Characters/>
+                    <Characters />
                     <div class="text-gray-800 border-y-2 bg-white py-10 flex flex-row justify-between">
                         <!-- Valoración/Idioma/Propietarios? -->
                         <div class="grid place-items-center ml-8 md:ml-20 lg:ml-28">
@@ -299,13 +306,13 @@ export default {
         },
         complete(id) {
             axios.post('/comictecas-complete', { edition_id: id }).then(response => {
-                this.dataVolumes = response.data;
+                this.dataVolumes.data = response.data;
                 this.checkAll()
             })
         },
         checkAll() {
             this.hasAll = false;
-            this.dataVolumes.forEach(volume => {
+            this.dataVolumes.data.forEach(volume => {
                 if (volume['inComicteca'] == 0) {
                     this.hasAll = true;
                 }

@@ -31,28 +31,30 @@ const submit = () => {
         <div>
             <div class="max-w-md mx-auto py-10 mt-10 sm:px-6 lg:px-8 bg-white shadow md:shadow-lg">
                 <!-- CONTENIDO CENTRAL -->
+                <h5 class="text-gray-400 text-center text-xs">Los campos con <span class="text-red-500">*</span> son
+                    obligatorios</h5>
                 <form @submit.prevent="submit" class="p-4">
 
                     <!-- title -->
                     <div>
-                        <JetLabel for="title" value="Título" />
+                        <JetLabel for="title" value="Título" class="starlabel"/>
                         <JetInput id="title" v-model="form.title" type="text" class="mt-1 block w-full bg-slate-200"
-                            autofocus />
+                            autofocus required/>
                         <JetInputError class="mt-2" :message="form.errors.title" />
                     </div>
 
                     <!-- description -->
                     <div class="mt-4">
-                        <JetLabel for="description" value="Descripción"/>
-                        <textarea v-model="form.description" placeholder="Una descripción..." class="w-full"></textarea>
+                        <JetLabel for="description" value="Descripción" class="starlabel"/>
+                        <textarea v-model="form.description" placeholder="Una descripción..." class="w-full" required></textarea>
                         <JetInputError class="mt-2" :message="form.errors.description"/>
                     </div>
 
                     <!-- imgUrl -->
                     <div class="mt-4">
-                        <JetLabel for="imgUrl" value="Imagen" />
+                        <JetLabel for="imgUrl" value="Imagen (.jpg / .png)" class="starlabel"/>
                         <JetInput id="imgUrl" @input="form.imgUrl = $event.target.files[0]" type="file"
-                            class="mt-1 block w-full bg-slate-200 text-gray-500" />
+                            class="mt-1 block w-full bg-slate-200 text-gray-500" required/>
                         <JetInputError class="mt-2" :message="form.errors.imgUrl" />
                     </div>
 
