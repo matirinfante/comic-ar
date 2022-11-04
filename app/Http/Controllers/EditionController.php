@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditionRequest;
 use App\Models\Comicteca;
+use GuzzleHttp\Client;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -12,8 +13,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\Auth;
+use Mtownsend\XmlToArray\XmlToArray;
 use Ramsey\Uuid\Type\Integer;
 use Illuminate\Support\Facades\Http;
+use SimpleXMLElement;
+use Spatie\ArrayToXml\ArrayToXml;
 
 
 class EditionController extends Controller
@@ -193,5 +197,31 @@ class EditionController extends Controller
             . '&filter=name:' . $request->partialText . '&field_list=id,name,image&limit=5';
         $response = Http::get($theUrl);
         return $response->json();
+    }
+
+    public function checkISBN(Request $request)
+    {
+        $client = new Client();
+        $headers = [
+            'Content-Type' => 'text/xml; charset=utf-8'
+        ];
+
+        $xml = [
+            'soap:Body' => [
+                'IsValidISBN13' => [
+                    '_attributes' => ['xmlns' => "http://webservices.daehosting.com/ISBN"],
+                    'sISBN' => $request->isbn
+                ]
+            ]
+        ];
+
+        $requestBody = ArrayToXml::convert($xml, [
+            'rootElementName' => 'soap:Envelope',
+            '_attributes' => ['xmlns:soap' => "http://schemas.xmlsoap.org/soap/envelope/"]
+        ], true, 'UTF-8');
+        $payload = new \GuzzleHttp\Psr7\Request('POST', 'http://webservices.daehosting.com/services/isbnservice.wso', $headers, $requestBody);
+        $res = $client->sendAsync($payload)->wait();
+        $responseString = XmlToArray::convert($res->getBody()->getContents());
+        return Response()->json($responseString['soap:Body']['m:IsValidISBN13Response']['m:IsValidISBN13Result']);
     }
 }

@@ -67,6 +67,7 @@ Route::middleware([
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
     Route::get('/characters', [EditionController::class, 'getCharactersFromAPI']);
+    Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
