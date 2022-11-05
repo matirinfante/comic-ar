@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -15,8 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $id=Auth::id();
+        $user=User::find($id);
         $users= User::all();
-        return Inertia::render('Users/Index',compact('users'));
+        return Inertia::render('Users/Profile',compact('user'));
     }
 
     /**
