@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comicteca;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,12 @@ class UserController extends Controller
     {
         $id=Auth::id();
         $user=User::find($id);
-        $users= User::all();
-        return Inertia::render('Users/Profile',compact('user'));
+        $comicteca=Comicteca::where('user_id',$id)->first();
+        $allVol=$comicteca->volumes()->get();
+        $amount=count($allVol);
+        $volumes=$comicteca->volumes()->orderByPivot('created_at','desc')->take(5)->get();
+
+        return Inertia::render('Users/Profile',compact('user','volumes','amount'));
     }
 
     /**
