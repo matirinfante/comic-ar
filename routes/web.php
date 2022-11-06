@@ -68,11 +68,12 @@ Route::middleware([
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
     Route::get('/characters', [EditionController::class, 'getCharactersFromAPI']);
     Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
+
+    Route::get('/apibooks', function () {
+        return Inertia::render('googlebooks', []);
+    });
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
-Route::get('/apibooks', function () {
-    return Inertia::render('googlebooks', []);
-});
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
