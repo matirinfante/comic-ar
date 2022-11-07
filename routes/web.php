@@ -70,6 +70,7 @@ Route::middleware([
     Route::get('/apibooks', function () {
         return Inertia::render('googlebooks', []);
     });
+    Route::get('/getStats', [UserController::class, 'getStats']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
