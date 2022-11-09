@@ -18,13 +18,13 @@ import Stats from '@/Pages/Users/Stats.vue';
                         <img class="w-screen blur" :src="user.profile_photo_url">
                     </div>
                     <div class="absolute sm:left-20 md:left-20 lg:left-40 xl:left-52">
-                        <div class="rounded-full -mt-10 md:-mt-14 ml-3 md:ml-0 h-20 w-20 lg:h-24 lg:w-24 xl:h-28 xl:w-28 xl:pt-6 bg-green-500 text-center">
-                            <p class="text-white text-2xl font-semibold">{{amount}}</p> 
-                            <p class="text-white">COMICS</p>
+                        <div class="rounded-full sm:-ml-16 sm:-mt-10 sm:h-16 sm:w-16 md:-ml-8 md:-mt-12 md:h-20 md:w-20 lg:-mt-14 lg:h-24 lg:w-24 xl:h-28 xl:w-28 xl:pt-6 bg-black text-center border-x-[1px] border-t-[1px] border-white drop-shadow-xl">
+                            <p class="text-white sm:text-lg md:mt-3 md:text-xl lg:text-2xl xl:text-3xl xl:mt-0 font-semibold">{{amount}}</p> 
+                            <p class="text-white sm:text-sm lg:text-lg">COMICS</p>
                         </div>
                     </div>
-                    <div class="absolute sm:left-20 md:left-64 lg:left-60 xl:left-96">
-                        <img class="contrast-125 rounded-full -mt-10 md:-mt-20 ml-3 md:ml-0 sm:h-20 sm:w-20 md:h-32 md:w-32 lg:h-36 lg:w-36 xl:h-40 xl:w-40 border-[2px] border-white bg-white" :src="user.profile_photo_url">
+                    <div class="absolute sm:left-20 md:left-40 lg:left-72 xl:left-96">
+                        <img class="contrast-125 rounded-full -mt-10 ml-3 md:ml-0 sm:-mt-14 sm:h-28 sm:w-28 md:-mt-16 md:h-32 md:w-32 lg:-mt-20 lg:h-36 lg:w-36 xl:-mt-20 xl:h-40 xl:w-40 2xl:-mt-24 2xl:h-44 2xl:w-44 border-[2px] border-white bg-white drop-shadow-xl" :src="user.profile_photo_url">
                         <div class="text-center pt-5 font-bold">{{user.name}}</div>
                         
                     </div>
@@ -42,7 +42,7 @@ import Stats from '@/Pages/Users/Stats.vue';
                     <!-- ACTIVIDAD -->
                     <div v-if="option=='actividad'">
                         <p class="mb-4 pt-4 text-center tracking-wide text-lg font-semibold">ULTIMOS EN COMICTECA</p>
-                        <div class="grid grid-cols-5 gap-4 justify-items-center">
+                        <div class="grid sm:grid-cols-2 sm:gap-1 md:grid-cols-3 xl:grid-cols-5 lg:gap-4 justify-items-center">
                             <div v-for="volume in volumes" :key="volume.id">
                                 <div class="relative">
                                     <img class="h-60" :src="volume.coverImage">

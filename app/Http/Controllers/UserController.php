@@ -51,37 +51,48 @@ class UserController extends Controller
         $wishlist=Wishlist::where('user_id',$id)->first();
         $vol=$wishlist->volumes()->get();
         $volInWish=count($vol);    //Cantidad de volumenes en la wishlist
-        $obj=Objective::where('user_id',$id)->where('progress',100)->get();
-        $completedObj=count($obj);  //Objetivos completados
+        $objectives=Objective::where('user_id',$id)->get();
+        $completedObj=0;  //Objetivos completados
+        $uncompletedObj=0;  //Objetivos no completados
+        foreach ($objectives as $obj){
+            if ($obj['progress']==100){
+                $completedObj++;
+            }else{
+                $uncompletedObj++;
+            }
+        }
+        
 
         $today=Carbon::now();
         $month=intval($today->isoFormat('OM'));
         $year=intval($today->isoFormat('OY'));
 
-        $month=12;
+        //$month=12;
         if ($month<=6){
             $initMonth=$month+12-6;
             $year--;
         }else{
             $initMonth=$month-6;
         }
-        $monthLists=[];
-        $monthWish=[];
-        $monthObj=[];
+        $allData=[];
+        $values=['Mes','Listas','Objetivos','Deseados'];
+        array_push($allData,$values);
+        
         for($i=0; $i<6; $i++){
             $thisMonth=$initMonth+$i;
             if ($thisMonth>12){
                 $thisMonth-=12;
             }
+            $fakeDate=Carbon::create(0,$thisMonth,1,0,0,0);
+            $name=$fakeDate->isoFormat('MMM');
             $lists=Booklist::where('user_id',$id)->where('created_at','like',$year."%".$thisMonth."-%")->get();
-            array_push($monthLists,count($lists));
             $vol=$wishlist->volumes()->wherePivot('created_at','like',$year."%".$thisMonth."-%")->get();
-            array_push($monthWish,count($vol));
             $obj=Objective::where('user_id',$id)->where('progress',100)->where('created_at','like',$year."%".$thisMonth."-%")->get();
-            array_push($monthObj,count($obj));
+            $values=[$name,count($lists),count($vol),count($obj)];
+            array_push($allData,$values);
         }
 
-        return (compact('booklists','volInWish','completedObj','monthLists','monthObj','monthWish'));
+        return (compact('booklists','volInWish','completedObj','uncompletedObj','allData'));
     }
 
     /**
