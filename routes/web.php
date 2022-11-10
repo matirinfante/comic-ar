@@ -70,9 +70,9 @@ Route::middleware([
     Route::get('/apibooks', function () {return Inertia::render('googlebooks', []);});
     Route::get('/getStats', [UserController::class, 'getStats']);
     Route::get('/objMessage', [UserController::class, 'objMessage']);
+    Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
-
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);
