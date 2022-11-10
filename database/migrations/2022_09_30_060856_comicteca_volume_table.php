@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('comicteca_volume',function(Blueprint $table){
             $table->foreignId('comicteca_id')->constrained();
-            $table->foreignId('volume_id')->constrained();            
+            $table->foreignId('volume_id')->constrained();     
+            $table->timestamps();       
         });
     }
 

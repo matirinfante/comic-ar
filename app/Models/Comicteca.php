@@ -17,6 +17,6 @@ class Comicteca extends Model
         return $this->belongsTo(User::class,'user_id');
     }
     public function volumes(){
-        return $this->belongsToMany(Volume::class,'comicteca_volume','comicteca_id','volume_id');
+        return $this->belongsToMany(Volume::class,'comicteca_volume','comicteca_id','volume_id')->withTimestamps();
     }
 }
