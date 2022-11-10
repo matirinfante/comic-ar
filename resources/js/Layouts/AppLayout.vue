@@ -361,7 +361,8 @@ export default {
     },
     mounted(){
         var option=1;
-        axios.get('/objnotifications-ask',{params:{option:option}}).then(response=>{this.alert=response.data});
+        setTimeout(() => 
+        axios.get('/objnotifications-ask',{params:{option:option}}).then(response=>{this.alert=response.data}),10);
     }
 }
 </script>

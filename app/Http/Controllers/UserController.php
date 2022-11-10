@@ -95,6 +95,36 @@ class UserController extends Controller
         return (compact('booklists','volInWish','completedObj','uncompletedObj','allData'));
     }
 
+    public function objMessage(){
+        $user_id=Auth::id();
+        $objectives=Objective::where('user_id',$user_id)->where('progress','<',100)->get();
+        $message=null;
+        if (count($objectives)>0){      
+            foreach ($objectives as $objective){
+                $days=$objective['days'];
+                if ($days!=null){
+                    $actualLocalDate=Carbon::parse(now())->timezone('America/Argentina/Buenos_Aires')->format('d-m-Y');
+                    $objDate=Carbon::parse($objective['created_at'])->timezone('America/Argentina/Buenos_Aires')->format('d-m-Y');
+                    $endDate=Carbon::parse($objDate)->addDays($days-1)->format('d-m-Y');
+                    $diffDate=Carbon::parse($actualLocalDate)->diffInDays($endDate); 
+                    $message.="Tu objetivo '".$objective['name']."' tiene un progreso de ".$objective['progress']."% ";
+                    if($actualLocalDate==$endDate){
+                        $message.="y es tu ultimo dia para completarlo.</br>";
+                    }
+                    if($actualLocalDate<$endDate){
+                        $message.="y te quedan ".$diffDate." dia/s mas para completarlo.</br>";
+                    }
+                    if($actualLocalDate>$endDate){
+                        $message.="y se encuentra retrasado por ".$diffDate." dia/s.</br>";
+                    }
+                }else{
+                    $message.="Tu objetivo '".$objective['name']."' tiene un progreso de ".$objective['progress']."%.</br>";
+                }
+            }
+        }
+        return $message;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

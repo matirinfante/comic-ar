@@ -67,10 +67,9 @@ Route::middleware([
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
     Route::get('/characters', [EditionController::class, 'getCharactersFromAPI']);
-    Route::get('/apibooks', function () {
-        return Inertia::render('googlebooks', []);
-    });
+    Route::get('/apibooks', function () {return Inertia::render('googlebooks', []);});
     Route::get('/getStats', [UserController::class, 'getStats']);
+    Route::get('/objMessage', [UserController::class, 'objMessage']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
