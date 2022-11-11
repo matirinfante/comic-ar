@@ -27,4 +27,9 @@ class Edition extends Model
     {
         return $this->hasMany(Artwork::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class)->withTimestamps();
+        // return $this->hasMany(User::class);
+    }
 }
