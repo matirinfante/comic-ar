@@ -97,4 +97,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Artwork::class);
     }
 
+    public function editions()
+    {
+        return $this->belongsToMany(Edition::class)->withTimestamps();
+    }
+
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\ObjnotificationController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ComictecaController;
 use App\Http\Controllers\BooklistController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,8 @@ Route::middleware([
     Route::get('/getStats', [UserController::class, 'getStats']);
     Route::get('/objMessage', [UserController::class, 'objMessage']);
     Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
+    Route::post('/edition-subscription', [SubscriptionController::class, 'editionSubscription']);
+    Route::post('/edition-unsubscription', [SubscriptionController::class, 'editionUnsubscription']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
