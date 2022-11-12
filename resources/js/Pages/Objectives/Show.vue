@@ -4,7 +4,7 @@
       <h3 class="text-center pb-1">Por Leer</h3>
       <div class="flex justify-center">
       <draggable
-        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
         :list="volLeer"
         group="people"
         @change="log"
@@ -21,7 +21,7 @@
       <h3 class="text-center pb-1">Leyendo</h3>
       <div class="flex justify-center">
       <draggable
-        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
         :list="volLeyendo"
         group="people"
         @change="log"
@@ -38,7 +38,7 @@
       <h3 class="text-center pb-1">Leido</h3>
       <div class="flex justify-center">
       <draggable
-        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600"
+        class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
         :list="volLeido"
         group="people"
         @change="log"
