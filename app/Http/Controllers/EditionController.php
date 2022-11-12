@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EditionRequest;
-use App\Models\Comicteca;
-use GuzzleHttp\Client;
+use App\Models\User;
 use Inertia\Inertia;
+use SimpleXMLElement;
 use App\Models\Volume;
+use GuzzleHttp\Client;
 use App\Models\Edition;
+use App\Models\Comicteca;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Integer;
+use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Mtownsend\XmlToArray\XmlToArray;
+use App\Http\Requests\EditionRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
-use Illuminate\Support\Facades\Auth;
-use Mtownsend\XmlToArray\XmlToArray;
-use Ramsey\Uuid\Type\Integer;
-use Illuminate\Support\Facades\Http;
-use SimpleXMLElement;
-use Spatie\ArrayToXml\ArrayToXml;
 
 
 class EditionController extends Controller
@@ -111,6 +113,21 @@ class EditionController extends Controller
     public function show(Edition $edition)
     {
         $userId = Auth::id();
+        // determinar si el usuario actual esta suscripto a la edición actual para recibir novedades
+        $user = User::find($userId);
+        $subscriptions = $user->editions()->get();
+        $isUsrSubscribe = "n";
+        $usrFound = false;
+        $k = 0;
+        while (($k < count($subscriptions)) && ($usrFound == false)) {
+            if (($subscriptions[$k]['pivot']['user_id'] == $userId) && ($subscriptions[$k]['pivot']['edition_id'] == $edition->id)) {
+                $usrFound = true;
+                $isUsrSubscribe = "y";
+            }
+            $k++;
+        }
+        $edition['usrSubscribe'] = $isUsrSubscribe;
+
         $comictecaId = Comicteca::where('user_id', $userId)->get('id');
         $totalVol = count(Volume::where('edition_id', $edition->id)->get());
         $edition['totalVol'] = $totalVol;
@@ -135,7 +152,8 @@ class EditionController extends Controller
             $totalVol++;
             $volume['totalVol'] = $totalVol;
         }
-        return Inertia::render('Editions/Show', compact('edition', 'volumes'));
+        // return Inertia::render('Editions/Show', compact('edition', 'volumes'));
+        return Inertia::render('Editions/Show', compact('edition', 'volumes', 'subscriptions'));
     }
 
     /**

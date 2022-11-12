@@ -9,7 +9,9 @@ import Pagination from '../../Components/Pagination.vue';
 
 defineProps({
     edition: JSON,
-    volumes: Object
+    volumes: Object,
+    subscriptions: Object
+
 })
 
 </script>
@@ -24,7 +26,6 @@ defineProps({
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
-
                 <div class="flex justify-end">
                     <JetNavLink :href="route('editions.edit', edition.id)"
                         class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800 text-base">
@@ -39,9 +40,30 @@ defineProps({
                 </div>
                 <div class="mx-6 z-40 border-2 rounded-lg">
                     <div class="w-full pb-8 sm:px-0 bg-slate-700 rounded-t-lg">
-                        <p class="px-4 text-md text-yellow-300 font-semibold sm:ml-4 md:ml-10 pt-6">
-                            {{ edition.publisher }}
-                        </p>
+                        <div class="flex justify-between">
+                            <p class="px-4 text-md text-yellow-300 font-semibold sm:ml-4 md:ml-10 pt-6">
+                                {{ edition.publisher }}
+                            </p>
+                            <button v-if="edition.usrSubscribe == 'n'" v-on:click="subscribe(edition.id)"
+                                class="px-4 text-md text-gray-300 font-semibold sm:ml-4 md:ml-10 pt-6 hover:text-white hover:underline">
+                                <span class="font-thin">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                    </svg>Quiero novedades!</span>
+                            </button>
+                            <button v-if="edition.usrSubscribe == 'y'" v-on:click="unsubscribe(edition.id)"
+                                class="px-4 text-md text-gray-300 font-semibold sm:ml-4 md:ml-10 pt-6 hover:text-white hover:underline">
+                                <span class="font-thin">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9.143 17.082a24.248 24.248 0 003.844.148m-3.844-.148a23.856 23.856 0 01-5.455-1.31 8.964 8.964 0 002.3-5.542m3.155 6.852a3 3 0 005.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 003.536-1.003A8.967 8.967 0 0118 9.75V9A6 6 0 006.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53" />
+                                    </svg>
+                                    Anular novedades</span>
+                            </button>
+                        </div>
                         <h2 class="px-4 text-3xl font-bold text-white sm:ml-4 md:ml-10 mt-2">
                             {{ edition.title }}
                         </h2>
@@ -309,6 +331,20 @@ export default {
                 this.dataVolumes.data = response.data;
                 this.checkAll()
             })
+        },
+        subscribe(id) {
+            axios.post('/edition-subscription', { edition_id: id }).then(response => {
+                // console.log(response.data);
+                this.$inertia.get('/editions/' + this.edition.id);
+            })
+
+        },
+        unsubscribe(id) {
+            axios.post('/edition-unsubscription', { edition_id: id }).then(response => {
+                // console.log(response.data)
+                this.$inertia.get('/editions/' + this.edition.id);
+            })
+
         },
         checkAll() {
             this.hasAll = false;
