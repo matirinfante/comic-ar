@@ -48,30 +48,31 @@ Route::middleware([
     Route::resource('/reviews', ReviewController::class);
     Route::resource('/wishlists', WishlistController::class);
     Route::resource('/comictecas', ComictecaController::class);
-    Route::resource('/objectives',ObjectiveController::class);
-    Route::resource('/objnotifications',ObjnotificationController::class);
+    Route::resource('/objectives', ObjectiveController::class);
+    Route::resource('/objnotifications', ObjnotificationController::class);
     Route::resource('/artworks', ArtworkController::class);
     Route::resource('/booklists', BooklistController::class);
     Route::get('/search', [EditionController::class, 'searchBy']);
     Route::get('/check-review', [ReviewController::class, 'checkReview']);
     Route::get('/edition-reviews', [ReviewController::class, 'showReviews']);
     Route::get('/edition-score', [ReviewController::class, 'scoreReviews']);
-    Route::post('/comictecas-complete', [ComictecaController::class,'completeEdition']);
-    Route::post('/comictecas.update', [ComictecaController::class,'update']);
-    Route::get('/searchObj',[ObjectiveController::class,'searchBy']);
-    Route::get('/objectives-show',[ObjectiveController::class,'show']);
-    Route::post('/objectives-update',[ObjectiveController::class,'update']);
-    Route::post('/objectives-calculate',[ObjectiveController::class,'calculateProgress']);
-    Route::get('/objnotifications-ask',[ObjnotificationController::class,'ask']);
-    Route::get('/objnotifications-update',[ObjnotificationController::class,'update']);
+    Route::post('/comictecas-complete', [ComictecaController::class, 'completeEdition']);
+    Route::post('/comictecas.update', [ComictecaController::class, 'update']);
+    Route::get('/searchObj', [ObjectiveController::class, 'searchBy']);
+    Route::get('/objectives-show', [ObjectiveController::class, 'show']);
+    Route::post('/objectives-update', [ObjectiveController::class, 'update']);
+    Route::post('/objectives-calculate', [ObjectiveController::class, 'calculateProgress']);
+    Route::get('/objnotifications-ask', [ObjnotificationController::class, 'ask']);
+    Route::get('/objnotifications-update', [ObjnotificationController::class, 'update']);
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
-
+    Route::get('/characters', [EditionController::class, 'getCharactersFromAPI']);
+    Route::get('/apibooks', function () {return Inertia::render('googlebooks', []);});
+    Route::get('/getStats', [UserController::class, 'getStats']);
+    Route::get('/objMessage', [UserController::class, 'objMessage']);
+    Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
 });
 
-
-Route::get('/apibooks', function () {
-    return Inertia::render('googlebooks', []);
-});
+Route::get('/translate', [VolumeController::class, 'translate']);
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);

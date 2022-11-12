@@ -83,6 +83,12 @@ class ObjnotificationController extends Controller
                 $resp=$objnotification[0]['message'];
             }
         }
+        //elseif($request->option==3){
+            // $objnotification=Objnotification::where('user_id',$user_id)->where('created_at','like',$utcDate."%")->get();
+            // if(count($objnotification)==1){
+            //     $resp=$objnotification[0]['message'];
+            // }
+        //}
         
         return $resp;
     }

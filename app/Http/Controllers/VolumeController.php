@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 class VolumeController extends Controller
 {
@@ -246,5 +247,19 @@ class VolumeController extends Controller
         // ->where('volumes.title', 'like', "%{$request->input('query')}%")
         // ->get();
         return $results;
+    }
+    public function translate(){
+        $url="https://animechan.vercel.app/api/random";
+        //Busqueda de una frase que no supere 200 caracteres
+        do{
+            $data=json_decode(file_get_contents($url),true);
+            $length=strlen($data['quote']);
+        }while($length>200);
+        //Traduccion
+        $tr = new GoogleTranslate(); 
+        $tr->setSource('en'); 
+        $tr->setTarget('es'); 
+        $data['quote']=$tr->translate($data['quote']);
+        return $data;
     }
 }

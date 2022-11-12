@@ -3,6 +3,8 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import NoArtwork from '../../Components/NoArtwork.vue';
+import Pagination from '../../Components/Pagination.vue';
+
 
 defineProps({
     edition: Object,
@@ -16,7 +18,7 @@ defineProps({
     <AppLayout :title="edition.title">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Artworks de {{ edition.title }}</span>
+                Artworks de <span class="text-gray-500">{{ edition.title }}</span>
             </h2>
         </template>
         <div>
@@ -24,7 +26,7 @@ defineProps({
                 <!-- CONTENIDO CENTRAL -->
                 <div class="flex justify-end">
                     <JetNavLink :href="route('editions.edit', edition.id)"
-                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800 text-base">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path
                                 d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
@@ -84,7 +86,7 @@ defineProps({
                             <div
                                 class="bg-green-700 text-white hover:text-gray-100 hover:bg-green-600 mt-4 py-1 pr-5 rounded-l-full">
                                 <p class="pl-4 md:pl-8">
-                                    <Link :href="route('artworks.create')" :data="{id:edition.id}">
+                                    <Link :href="route('artworks.create')" :data="{ id: edition.id }">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -100,31 +102,32 @@ defineProps({
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('editions.show', edition.id)">
+                            <JetNavLink :href="route('editions.show', edition.id)" class="text-base">
                                 Información
                             </JetNavLink>
                         </div>
                         <div class="align-middle ml-10 my-auto">
                             <JetNavLink :href="route('artworks.show', edition.id)"
-                                :active="route().current('artworks.show', edition.id)">
+                                :active="route().current('artworks.show', edition.id)"
+                                class="text-base border-purple-400">
                                 Artworks
                             </JetNavLink>
                         </div>
                     </div>
 
                     <!-- Artworks -->
-                    <div v-if="artworks.length > 0" class="bg-white">
+                    <div v-if="artworks.data.length > 0" class="bg-white">
                         <section class="overflow-hidden text-gray-700 pb-20">
                             <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
                                 <div class="flex flex-wrap -m-1 md:-m-2">
-                                    <div class="flex flex-wrap w-1/3" v-for="art in artworks" :key="art.id">
+                                    <div class="flex flex-wrap w-1/3" v-for="art in artworks.data" :key="art.id">
                                         <div v-if="modalShow == false" class="w-full p-1 md:p-2 relative cursor-pointer"
                                             @click="showModal(art.imgUrl, art.usr)">
-                                            <img class="block object-cover object-center w-full h-40 rounded-lg border-2"
+                                            <img class="block object-cover object-center w-full h-40 rounded-lg border-2 bg-slate-300"
                                                 :src="art.imgUrl" :alt="art.description" />
                                             <div
                                                 class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300 rounded-lg">
-                                                {{art.title}}
+                                                {{ art.title }}
                                             </div>
                                         </div>
                                         <div v-if="modalShow" class="w-full p-1 md:p-2">
@@ -135,6 +138,9 @@ defineProps({
                                 </div>
                             </div>
                         </section>
+                        <div class="p-2">
+                            <Pagination :links="artworks.links" />
+                        </div>
                     </div>
                     <div v-else>
                         <div class="text-gray-800 bg-white py-4 flex flex-row justify-center px-10">
@@ -144,7 +150,7 @@ defineProps({
 
 
                     <!-- The Modal -->
-                    <div v-if="modalShow" id="modal" @click-outside="clickOutside"
+                    <div v-if="modalShow" id="modal" @click="clickOutside"
                         class="fixed top-0 left-0 z-80 w-screen h-screen bg-black/70 flex justify-center items-center">
 
                         <!-- The close button -->
@@ -155,18 +161,18 @@ defineProps({
                             </svg>
                         </button>
 
-                        <!-- A big image will be displayed here -->
-                        <div class="relative">
-                            <img :src="modalContent"
-                                class="max-w-full md:max-w-[768px] lg:max-w-[1024px] max-h-[550px] object-cover" />
-                            <div class="absolute inset-0 z-10 text-white flex flex-col">
-                                <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de
-                                    {{author}}</p>
+                        <div class="modal__content" @click="clickInside">
+                            <!-- A big image will be displayed here -->
+                            <div class="relative">
+                                <img :src="modalContent"
+                                    class="max-w-full md:max-w-[768px] lg:max-w-[1024px] max-h-[550px] object-cover" />
+                                <div class="absolute inset-0 z-10 text-white flex flex-col">
+                                    <p class="bg-purple-700 w-fit pl-2 pr-4 bg-opacity-90 rounded-br-full">Artwork de
+                                        {{ author }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div>
@@ -181,6 +187,8 @@ export default {
             modalShow: false,
             modalContent: null,
             author: null,
+            countClic: false,
+            inside: false
         };
     },
     methods: {
@@ -190,7 +198,14 @@ export default {
             this.author = person
         },
         clickOutside() {
-            this.modalShow = false
+            if (this.inside != true) {
+                this.modalShow = false
+            } else {
+                this.inside = false
+            }
+        },
+        clickInside() {
+            this.inside = true
         }
     }
 }

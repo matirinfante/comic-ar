@@ -80,7 +80,7 @@
     <div v-if="alreadyReviewed">
         <article class="mt-9 pr-9 ml-10 bg-yellow-200 mr-10 p-6 mb-9 rounded-md ">
             <div class="flex items-center mb-4 space-x-4">
-                <div class="space-y-1 font-bold dark:text-white">
+                <div class="space-y-1 font-bold">
                     <p>{{ $page.props.user.name }}
                     </p>
                 </div>
@@ -90,14 +90,14 @@
                              :show-rating="false" :rating="this.review.rating"
                              :read-only="true" :increment="0.01" :rounded-corners="true" :border-width="2"
                              :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"></star-rating>
-                <h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white"></h3>
+                <h3 class="ml-2 text-sm font-semibold text-gray-900"></h3>
             </div>
-            <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
+            <footer class="mb-5 text-sm text-gray-500">
                 <p>Reseñó la edición el
                     <time datetime="2017-03-03 19:00">{{ this.review.created_at }}</time>
                 </p>
             </footer>
-            <p v-if="this.review.description !== ''" class="mb-2 font-light text-gray-500 dark:text-gray-400">
+            <p v-if="this.review.description !== ''" class="mb-2 font-light text-gray-500">
                 {{ this.review.description }}</p>
         </article>
     </div>
@@ -107,7 +107,7 @@
         <div v-for="review in editionReviews">
             <article class="mt-9 pr-9 ml-10 ">
                 <div class="flex items-center mb-4 space-x-4">
-                    <div class="space-y-1 font-bold dark:text-white">
+                    <div class="space-y-1 font-bold">
                         <p>{{ review.user.name }}
                         </p>
                     </div>
@@ -116,14 +116,14 @@
                     <star-rating :inline="true" :star-size="15" :show-rating="false" :rating="review.rating"
                                  :read-only="true" :increment="0.01" :rounded-corners="true" :border-width="2"
                                  :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"></star-rating>
-                    <h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white"></h3>
+                    <h3 class="ml-2 text-sm font-semibold text-gray-900"></h3>
                 </div>
-                <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
+                <footer class="mb-5 text-sm text-gray-500">
                     <p>Reseñó la edición el
                         <time datetime="2017-03-03 19:00">{{ review.created_at }}</time>
                     </p>
                 </footer>
-                <p v-if="review.description !== ''" class="mb-2 font-light text-gray-500 dark:text-gray-400">
+                <p v-if="review.description !== ''" class="mb-2 font-light text-gray-500 ">
                     {{ review.description }}</p>
             </article>
         </div>

@@ -31,7 +31,7 @@ function formatDate(date) {
     <AppLayout :title="booklist.name">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <span class="text-gray-500">Lista: {{ booklist.name }}</span>
+                Lista: <span class="text-gray-500">{{ booklist.name }}</span>
             </h2>
         </template>
 
@@ -41,7 +41,7 @@ function formatDate(date) {
 
                 <div v-if="booklist.editPermission == 'y'" class="flex justify-end">
                     <JetNavLink :href="route('booklists.edit', booklist.id)"
-                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800">
+                        class="text-gray-500 mr-10 mt-2 mb-2 md:mb-0 hover:text-gray-800 text-base">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path
                                 d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
@@ -108,11 +108,11 @@ function formatDate(date) {
                     <div v-if="volumes.length > 0" class="bg-white">
                         <SectionBorder />
                         <!-- Tomos/Volumenes -->
-                        <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6">
-                            <div v-for="volume in volumes" :key="volume.id" class="w-26 mx-2 mb-4 rounded-lg">
+                        <div class="grid sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-6 pt-5">
+                            <div v-for="volume in volumes" :key="volume.id" class="w-36 mx-auto mb-4 rounded-lg border-2">
                                 <Link :href="route('volumes.show', volume.id)">
                                 <div class="relative">
-                                    <img class="w-full h-50" :src="volume.coverImage" :alt="volume.title" />
+                                    <img class="w-full h-52" :src="volume.coverImage" :alt="volume.title" />
                                     <div
                                         class="absolute inset-0 z-10 text-white text-center flex flex-col items-center justify-center opacity-0 bg-gray-900 hover:opacity-100 bg-opacity-50 duration-300">
                                         {{ volume.title }} #{{ volume.number }}

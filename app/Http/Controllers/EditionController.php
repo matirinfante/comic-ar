@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditionRequest;
 use App\Models\Comicteca;
+use GuzzleHttp\Client;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
@@ -12,7 +13,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Facades\Auth;
+use Mtownsend\XmlToArray\XmlToArray;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\Http;
+use SimpleXMLElement;
+use Spatie\ArrayToXml\ArrayToXml;
+
 
 class EditionController extends Controller
 {
@@ -23,7 +29,8 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = Edition::all();
+        // $editions = Edition::all();
+        $editions = Edition::orderBy('created_at', 'desc')->paginate(6);
         $cont = 0;
         // Si la edición cuenta con al menos un volúmen, ésta tendrá la portada del primer volumen encontrado
         foreach ($editions as $edition) {
@@ -69,7 +76,7 @@ class EditionController extends Controller
         $edition = Edition::create($request->validated());
 
         $edition->save();
-        
+
         $contNumber = 1;
 
         // si no es edición única, se crean los volúmenes asociados a la edición
@@ -85,7 +92,7 @@ class EditionController extends Controller
 
                 $contNumber++;
             }
-        }else{  //si es edición única se crea un solo volumen
+        } else {  //si es edición única se crea un solo volumen
             Volume::create([
                 'title' => $edition->title,
                 'number' => $contNumber,
@@ -104,8 +111,10 @@ class EditionController extends Controller
     public function show(Edition $edition)
     {
         $userId = Auth::id();
-        $comictecaId=Comicteca::where('user_id',$userId)->get('id');
-        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
+        $comictecaId = Comicteca::where('user_id', $userId)->get('id');
+        $totalVol = count(Volume::where('edition_id', $edition->id)->get());
+        $edition['totalVol'] = $totalVol;
+        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->paginate(6);
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
                 if (str_contains($volume['coverImage'], 'comicar-cover')) {
@@ -117,12 +126,14 @@ class EditionController extends Controller
             } else {
                 $volume['coverImage'] = "/assets/cover/default.png";
             }
-            $volComic=$volume->comictecas()->where('id',$comictecaId[0]->id)->get();
-            if (count($volComic)>0){
-                $volume['inComicteca']=1;
-            }else{
-                $volume['inComicteca']=0;
+            $volComic = $volume->comictecas()->where('id', $comictecaId[0]->id)->get();
+            if (count($volComic) > 0) {
+                $volume['inComicteca'] = 1;
+            } else {
+                $volume['inComicteca'] = 0;
             }
+            $totalVol++;
+            $volume['totalVol'] = $totalVol;
         }
         return Inertia::render('Editions/Show', compact('edition', 'volumes'));
     }
@@ -157,6 +168,7 @@ class EditionController extends Controller
             'format' => $request->format,
             'isClosed' => $request->isClosed,
             'description' => $request->description,
+            'characters' => $request->characters
         ]);
 
         return Redirect::route('editions.show', $edition->id);
@@ -177,5 +189,39 @@ class EditionController extends Controller
     {
         $results = DB::table('editions')->where('title', 'like', "%{$request->input('query')}%")->get(['id', 'title']);
         return $results;
+    }
+
+    public function getCharactersFromAPI(Request $request)
+    {
+        $theUrl = config('app.API')
+            . '&filter=name:' . $request->partialText . '&field_list=id,name,image&limit=5';
+        $response = Http::get($theUrl);
+        return $response->json();
+    }
+
+    public function checkISBN(Request $request)
+    {
+        $client = new Client();
+        $headers = [
+            'Content-Type' => 'text/xml; charset=utf-8'
+        ];
+
+        $xml = [
+            'soap:Body' => [
+                'IsValidISBN13' => [
+                    '_attributes' => ['xmlns' => "http://webservices.daehosting.com/ISBN"],
+                    'sISBN' => $request->isbn
+                ]
+            ]
+        ];
+
+        $requestBody = ArrayToXml::convert($xml, [
+            'rootElementName' => 'soap:Envelope',
+            '_attributes' => ['xmlns:soap' => "http://schemas.xmlsoap.org/soap/envelope/"]
+        ], true, 'UTF-8');
+        $payload = new \GuzzleHttp\Psr7\Request('POST', 'http://webservices.daehosting.com/services/isbnservice.wso', $headers, $requestBody);
+        $res = $client->sendAsync($payload)->wait();
+        $responseString = XmlToArray::convert($res->getBody()->getContents());
+        return Response()->json($responseString['soap:Body']['m:IsValidISBN13Response']['m:IsValidISBN13Result']);
     }
 }

@@ -2,11 +2,16 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "ext-simplexml": "*",
+        "codedredd/laravel-soap": "^3.0",
+        "guzzlehttp/guzzle": "^7.5",
         "inertiajs/inertia-laravel": "^0.6.3",
         "intervention/image": "^2.7",
         "laravel/framework": "^9.19",
@@ -14,7 +19,12 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laraveles/spanish": "^1.5",
+        "mtownsend/xml-to-array": "^2.0",
         "nesbot/carbon": "^2.62",
+        "nyholm/psr7": "^1.5",
+        "spatie/array-to-xml": "^3.1",
+        "stichoza/google-translate-php": "^4.1",
+        "symfony/psr-http-message-bridge": "^2.1",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
