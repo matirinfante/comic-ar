@@ -96,7 +96,7 @@ color="#000000" fill="#fff" style="-inkscape-stroke:none" />
 Saludos! {{$usrName}}.
 <br>
 @component('mail::panel')
-La edición <a href="{{env('APP_URL')}}editions/{{$edition->id}}">
+La edición <a href="{{env('APP_URL')}}/editions/{{$edition->id}}">
 <span style="color: #575757;">
 {{$edition->title}}
 </span>
@@ -114,11 +114,11 @@ Se ha agregado el siguiente tomo/volúmen:
 <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
 <li class="py-3 sm:py-4">
 <div class="flex items-center space-x-4">
-<a href="{{env('APP_URL')}}volumes/{{$volume->id}}">
+<a href="{{env('APP_URL')}}/volumes/{{$volume->id}}">
 <div class="flex-shrink-0">    
 @if ($volume->coverImage == "/assets/cover/default.png")
 <img style="height: 100px;"
-src="{{env('APP_URL')."assets/cover/default.png"}}" alt="{{$volume->title}}">  
+src="{{env('APP_URL')."/assets/cover/default.png"}}" alt="{{$volume->title}}">  
 @endif                    
 @if (str_contains($volume->coverImage, 'comicar-cover'))
 <img style="height: 100px;"
