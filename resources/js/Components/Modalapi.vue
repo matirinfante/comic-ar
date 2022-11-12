@@ -30,7 +30,7 @@
                                             <form v-on:submit.prevent="submitForm">
                                                 <div>
                                                     <label for="title" class="starlabel">Título</label>
-                                                    <input v-model="ftitle" id="title" type="text"
+                                                    <input v-model="title" id="title" type="text"
                                                         class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500"
                                                         required>
                                                 </div>
@@ -42,20 +42,20 @@
                                                 </div>
                                                 <div class="mt-2">
                                                     <label for="isbn">ISBN:</label>
-                                                    <input v-model="fisbn" id="isbn" type="text"
+                                                    <input v-model="isbn" id="isbn" type="text"
                                                         class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                                 </div>
                                                 <div>
-                                                    <input type="hidden" id="edition_id" v-model="editionid" required>
+                                                    <input type="hidden" id="edition_id" v-model="idEdition" required>
                                                 </div>
                                                 <div class="mt-2">
                                                     <label for="argument">Reseña:</label>
-                                                    <textarea v-model="freview" id="argument"
+                                                    <textarea v-model="review" id="argument"
                                                         class="resize-none pb-20 w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500"></textarea>
                                                 </div>
                                                 <div v-if='ruta'>
                                                     <label for="coverImage">Ruta imagen:</label>
-                                                    <input v-model="fimg" id="coverImage" type="text"
+                                                    <input v-model="img" id="coverImage" type="text"
                                                         class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                                 </div>
                                                 <div v-else>
@@ -101,7 +101,12 @@ export default {
             ruta: true,
             imgButton: "Subir imagen del ordenador",
             file: null,
-            volumeNum: ""
+            volumeNum: "",
+            title:this.ftitle,
+            isbn:this.fisbn,
+            idEdition:this.editionid,
+            review:this.freview,
+            img:this.fimg
         }
     },
     methods: {
@@ -115,11 +120,11 @@ export default {
                 alert('La reseña es muy larga');
             } else {
                 axios.post('/volumes', {
-                    title: this.ftitle,
-                    ISBN: this.fisbn,
-                    argument: this.freview,
-                    coverImage: this.fimg,
-                    edition_id: this.editionid,
+                    title: this.title,
+                    ISBN: this.isbn,
+                    argument: this.review,
+                    coverImage: this.img,
+                    edition_id: this.idEdition,
                     coverFile: this.file,
                     number: this.volumeNum
                 }, {

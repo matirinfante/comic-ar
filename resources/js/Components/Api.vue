@@ -1,5 +1,6 @@
 <script setup>
 import Modalapi from '@/Components/Modalapi.vue';
+import NotFound from '@/Components/NotFound.vue';
 </script>
 <template>
     <div class="m-5">
@@ -121,6 +122,15 @@ import Modalapi from '@/Components/Modalapi.vue';
                 </div>
             </div>
 
+            <!-- SI NO ENCUENTRA RESULTADOS EN LA BUSQUEDA -->
+            <div v-if="noData" class="mt-5">
+                <div class="flex justify-center mb-5">
+                    <p  class="font-bold text-xl mb-3 ml-3 mt-2 text-black px-2 border-double border-b-4 border-violet-700 drop-shadow-md">No se encontraron resultados</p>
+                </div>
+                <div class="flex justify-center">
+                    <NotFound class="w-1/2 h-fit"/>
+                </div>
+            </div>
         </div>
 
         <Modalapi :modal="modal" :editionid="editionid" :ftitle="ftitle" :fisbn="fisbn" :freview="freview" :fimg="fimg"
@@ -139,6 +149,7 @@ export default {
         return {
             query: "",
             mostrar: false,
+            noData:false,
             volumes: null,
             verVol: true,
             cantidad: null,
@@ -165,24 +176,33 @@ export default {
         fetch() {
             var url = 'https://www.googleapis.com/books/v1/volumes?q=' + this.query + '&maxResults=40';
             axios.get(url).then(response => {
-                this.mostrar = true;
-                this.verVol = true;
-                this.cantidad = response.data.items.length;
-                this.volumes = response.data.items;
+                if(response.data.items!=null){
+                    this.mostrar = true;
+                    this.verVol = true;
+                    this.cantidad = response.data.items.length;
+                    this.volumes = response.data.items;                    
+                }else{
+                    this.noData=true;
+                }                
             }).catch(e => (console.log(e)))
         },
         isbn() {
             var url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + this.query + '&maxResults=40';
             axios.get(url).then(response => {
-                this.mostrar = true;
-                this.verVol = true;
-                this.cantidad = response.data.items.length;
-                this.volumes = response.data.items;
+                if(response.data.items!=null){
+                    this.mostrar = true;
+                    this.verVol = true;
+                    this.cantidad = response.data.items.length;
+                    this.volumes = response.data.items;                    
+                }else{
+                    this.noData=true;
+                }   
             }).catch(e => (console.log(e)))
         },
         borrar() {
             this.mostrar = false;
             this.verVol = false;
+            this.noData=false;
         },
         choosed(id) {
             var url = 'https://www.googleapis.com/books/v1/volumes/' + id;
