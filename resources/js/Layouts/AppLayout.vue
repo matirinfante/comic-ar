@@ -73,14 +73,16 @@ const logout = () => {
 
                             <!-- Comicteca -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <JetNavLink :href="route('comictecas.index')" :active="route().current('comictecas.index')">
+                                <JetNavLink :href="route('comictecas.index')"
+                                    :active="route().current('comictecas.index')">
                                     Mi Comicteca
                                 </JetNavLink>
                             </div>
-                            
+
                             <!-- Booklist -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <JetNavLink :href="route('booklists.index')" :active="route().current('booklists.index')">
+                                <JetNavLink :href="route('booklists.index')"
+                                    :active="route().current('booklists.index')">
                                     Listas
                                 </JetNavLink>
                             </div>
@@ -191,15 +193,23 @@ const logout = () => {
                                         <JetDropdownLink :href="route('profile.show')">
                                             Configuración de Perfil
                                         </JetDropdownLink>
-                                        
+
                                         <div class="border-t border-gray-100" />
+
+                                        <div class="block px-4 py-2 text-xs text-gray-400">
+                                            Mis Secciones
+                                        </div>
 
                                         <JetDropdownLink :href="route('wishlists.index')">
                                             Lista de deseados
                                         </JetDropdownLink>
 
                                         <JetDropdownLink v-show="alert" :href="route('objectives.index')">
-                                            <p>Lectura <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="h-5 w-5 pb-1 inline fill-red-600"><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg></p>
+                                            <p>Lectura <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                                    class="h-5 w-5 pb-1 inline fill-red-600">
+                                                    <path
+                                                        d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z" />
+                                                </svg></p>
                                         </JetDropdownLink>
 
                                         <JetDropdownLink v-show="!alert" :href="route('objectives.index')">
@@ -228,14 +238,14 @@ const logout = () => {
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
                                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
-                                @click="showingNavigationDropdown = ! showingNavigationDropdown">
+                                @click="showingNavigationDropdown = !showingNavigationDropdown">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path
-                                        :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
+                                        :class="{ 'hidden': showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M4 6h16M4 12h16M4 18h16" />
                                     <path
-                                        :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                        :class="{ 'hidden': !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12" />
                                 </svg>
@@ -245,9 +255,9 @@ const logout = () => {
                 </div>
 
                 <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
+                <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
                     class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
+                    <div class="pt-2 pb-3 space-y-1 text-center">
                         <JetResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Inicio
                         </JetResponsiveNavLink>
@@ -255,37 +265,97 @@ const logout = () => {
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="flex items-center px-4">
-                            <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
-                                <img class="h-10 w-10 rounded-full object-cover"
-                                    :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                        <div class="flex justify-between mx-10">
+                            <div class="w-full">
+                                <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
+                                    <img class="h-10 w-10 rounded-full object-cover"
+                                        :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
+                                </div>
+                                <div>
+                                    <div class="font-medium text-base text-gray-800">
+                                        {{ $page.props.user.name }}
+                                    </div>
+                                    <div class="font-medium text-sm text-gray-500">
+                                        {{ $page.props.user.email }}
+                                    </div>
+                                </div>
                             </div>
-
-                            <div>
-                                <div class="font-medium text-base text-gray-800">
-                                    {{ $page.props.user.name }}
-                                </div>
-                                <div class="font-medium text-sm text-gray-500">
-                                    {{ $page.props.user.email }}
-                                </div>
+                            <div class="w-full">
+                                <JetResponsiveNavLink :href="route('profile.show')"
+                                    :active="route().current('profile.show')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6 inline">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    Configuración de Perfil
+                                </JetResponsiveNavLink>
                             </div>
                         </div>
 
-                        <div class="mt-3 space-y-1">
-                            <JetResponsiveNavLink :href="route('profile.show')"
-                                :active="route().current('profile.show')">
-                                Profile
-                            </JetResponsiveNavLink>
+                        <div class="mt-3 space-y-1 text-center">
+
 
                             <JetResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"
                                 :href="route('api-tokens.index')" :active="route().current('api-tokens.index')">
                                 API Tokens
                             </JetResponsiveNavLink>
 
+                            <div class="border-t border-gray-200" />
+
+                            <div class="flex justify-between">
+                                <div class="w-full">
+                                    <!-- Perfil -->
+                                    <JetResponsiveNavLink :href="route('users.index')"
+                                        :active="route().current('users.index')">
+                                        Mi Perfil
+                                    </JetResponsiveNavLink>
+
+
+                                    <!-- Comicteca -->
+                                    <JetResponsiveNavLink :href="route('comictecas.index')"
+                                        :active="route().current('comictecas.index')">
+                                        Mi Comicteca
+                                    </JetResponsiveNavLink>
+
+                                    <!-- Ediciones -->
+                                    <JetResponsiveNavLink :href="route('editions.index')"
+                                        :active="route().current('editions.index')">
+                                        Ediciones
+                                    </JetResponsiveNavLink>
+                                </div>
+                                <div class="w-full">
+                                    <!-- Booklist -->
+                                    <JetResponsiveNavLink :href="route('booklists.index')"
+                                        :active="route().current('booklists.index')">
+                                        Listas
+                                    </JetResponsiveNavLink>
+
+                                    <JetResponsiveNavLink :href="route('wishlists.index')">
+                                        Lista de deseados
+                                    </JetResponsiveNavLink>
+
+                                    <JetResponsiveNavLink v-show="alert" :href="route('objectives.index')">
+                                        <p>Lectura <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                                class="h-5 w-5 pb-1 inline fill-red-600">
+                                                <path
+                                                    d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z" />
+                                            </svg></p>
+                                    </JetResponsiveNavLink>
+
+                                    <JetResponsiveNavLink v-show="!alert" :href="route('objectives.index')">
+                                        Lectura
+                                    </JetResponsiveNavLink>
+                                </div>
+                            </div>
+
+
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <JetResponsiveNavLink as="button">
-                                    Log Out
+                                    Cerrar Sesión
                                 </JetResponsiveNavLink>
                             </form>
 
@@ -351,18 +421,23 @@ const logout = () => {
         <Footer />
     </div>
 </template>
+<style>
+button.block.pl-3.pr-4.py-2.border-l-4.border-transparent.text-base.font-medium.text-gray-600.hover\:text-gray-800.hover\:bg-gray-50.hover\:border-gray-300.focus\:outline-none.focus\:text-gray-800.focus\:bg-gray-50.focus\:border-gray-300.transition.w-full.text-left {
+    text-align: center;
+}
+</style>
 <script>
 import axios from 'axios';
 export default {
-    data(){
-        return{
-            alert:""
+    data() {
+        return {
+            alert: ""
         }
     },
-    mounted(){
-        var option=1;
-        setTimeout(() => 
-        axios.get('/objnotifications-ask',{params:{option:option}}).then(response=>{this.alert=response.data}),10);
+    mounted() {
+        var option = 1;
+        setTimeout(() =>
+            axios.get('/objnotifications-ask', { params: { option: option } }).then(response => { this.alert = response.data }), 10);
     }
 }
 </script>
