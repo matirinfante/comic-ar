@@ -102,12 +102,12 @@ defineProps({
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('editions.show', edition.id)" class="text-base">
+                            <JetNavLink preserve-scroll :href="route('editions.show', edition.id)" class="text-base">
                                 Información
                             </JetNavLink>
                         </div>
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('artworks.show', edition.id)"
+                            <JetNavLink preserve-scroll :href="route('artworks.show', edition.id)"
                                 :active="route().current('artworks.show', edition.id)"
                                 class="text-base border-purple-400">
                                 Artworks
