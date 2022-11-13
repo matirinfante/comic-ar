@@ -101,13 +101,15 @@ export default {
             ruta: true,
             imgButton: "Subir imagen del ordenador",
             file: null,
-            volumeNum: "",
-            title:this.ftitle,
-            isbn:this.fisbn,
-            idEdition:this.editionid,
-            review:this.freview,
-            img:this.fimg
+            volumeNum: ""
         }
+    },
+    computed:{
+        title(){return this.ftitle;},
+        isbn(){return this.fisbn;},
+        idEdition(){return this.editionid},
+        review(){return this.freview},
+        img(){return this.fimg}
     },
     methods: {
         close() {
