@@ -36,6 +36,8 @@ defineProps({
 </template>
 <script>
 import axios from 'axios';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css'; 
 export default {
     mounted(){
         setTimeout(() =>{
@@ -44,7 +46,15 @@ export default {
     },
     methods:{
         badge(){
-            axios.get('/registerCheck').then(response=>{console.log(response.data)});
+            axios.get('/registerCheck').then(response=>{
+                if (!response.data){
+                    this.toast();                
+                }
+            });
+        },
+        toast(){
+            toastr.options.positionClass="toast-bottom-right";
+            toastr.success('Insignia desbloqueada');
         }
     }
 }
