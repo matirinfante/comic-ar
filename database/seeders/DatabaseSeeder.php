@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artwork;
+use App\Models\Badge;
 use App\Models\Booklist;
 use App\Models\Comicteca;
 use App\Models\User;
@@ -2136,5 +2137,21 @@ class DatabaseSeeder extends Seeder
 
         $booklist4 = Booklist::find(4);
         $booklist4->volumes()->attach(5);
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------B-A-D-G-E-S-----------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------------
+        Badge::create([
+            'name' => 'register',
+            'imgUrl' => '/assets/badges/register.svg'
+        ]);
+        Badge::create([
+            'name' => 'firstBooklist',
+            'imgUrl' => '/assets/badges/first_booklist.svg'
+        ]);
+        Badge::create([
+            'name' => 'firstEdition',
+            'imgUrl' => '/assets/badges/first_edition.svg'
+        ]);
     }
 }

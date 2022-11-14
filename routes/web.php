@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\ObjnotificationController;
@@ -74,6 +75,7 @@ Route::middleware([
     Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
     Route::post('/edition-subscription', [SubscriptionController::class, 'editionSubscription']);
     Route::post('/edition-unsubscription', [SubscriptionController::class, 'editionUnsubscription']);
+    Route::get('/registerCheck',[BadgeController::class,'registerCheck']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);

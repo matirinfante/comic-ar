@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('percentage');
             $table->foreignId('badge_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->timestamps();
         });
     }
 

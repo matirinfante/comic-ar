@@ -102,4 +102,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Edition::class)->withTimestamps();
     }
 
+    public function badges(){
+        return $this->belongsToMany(Badge::class)->withPivot('percentage');
+    }
+
 }

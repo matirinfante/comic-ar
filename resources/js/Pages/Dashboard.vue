@@ -34,3 +34,18 @@ defineProps({
         </div>
     </AppLayout>
 </template>
+<script>
+import axios from 'axios';
+export default {
+    mounted(){
+        setTimeout(() =>{
+            this.badge();
+        }, 10);
+    },
+    methods:{
+        badge(){
+            axios.get('/registerCheck').then(response=>{console.log(response.data)});
+        }
+    }
+}
+</script>
