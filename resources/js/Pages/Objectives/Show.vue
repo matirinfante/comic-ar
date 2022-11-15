@@ -1,7 +1,7 @@
 <template>
-  <div class="grid grid-cols-3 bg-purple-100 divide-x-2 divide-purple-400 py-3">
+  <div class="grid grid-cols-3 bg-purple-100 divide-x-2 divide-purple-400 py-3 ml-4 mr-4 rounded p-4">
     <div>
-      <h3 class="text-center pb-1">Por Leer</h3>
+      <h3 class="text-center pb-1 font-bold text-xl">Por Leer</h3>
       <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <h3 class="text-center pb-1">Leyendo</h3>
+      <h3 class="text-center pb-1 font-bold text-xl">Leyendo</h3>
       <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
@@ -35,7 +35,7 @@
     </div>
 
     <div class="">
-      <h3 class="text-center pb-1">Leido</h3>
+      <h3 class="text-center pb-1 font-bold text-xl">Leido</h3>
       <div class="flex justify-center">
       <draggable
         class="w-32 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
