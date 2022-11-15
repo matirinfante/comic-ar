@@ -123,13 +123,7 @@ export default {
         },
         onClose(value) {
             this.isLoading = false
-        },
-        close() {
-            this.$emit('close', false);
-        },
-        updt(data) {
-            this.$emit('updt', data)
-        },
+        }
     }
 }
 </script>

@@ -75,7 +75,7 @@ Route::middleware([
     Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
     Route::post('/edition-subscription', [SubscriptionController::class, 'editionSubscription']);
     Route::post('/edition-unsubscription', [SubscriptionController::class, 'editionUnsubscription']);
-    Route::get('/registerCheck',[BadgeController::class,'registerCheck']);
+    Route::get('/badgeCheck',[BadgeController::class,'badgeCheck']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);

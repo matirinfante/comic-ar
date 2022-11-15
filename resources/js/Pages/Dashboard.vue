@@ -46,15 +46,13 @@ export default {
     },
     methods:{
         badge(){
-            axios.get('/registerCheck').then(response=>{
+            axios.get('/badgeCheck',{params:{badge:'register'}}).then(response=>{
                 if (!response.data){
-                    this.toast();                
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.warning('Insignia desbloqueada');    
                 }
             });
-        },
-        toast(){
-            toastr.options.positionClass="toast-bottom-right";
-            toastr.success('Insignia desbloqueada');
         }
     }
 }

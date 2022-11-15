@@ -8,21 +8,23 @@ use Illuminate\Support\Facades\Auth;
 
 class BadgeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
+    // public function registerCheck(){
+    //     $badge='register';
+    //     $found=BadgeController::checking($badge);
+    //     return $found;
+    // }
+    // public function booklistCheck(){
+    //     $badge='firstBooklist';
+    //     $found=BadgeController::checking($badge);
+    //     return $found;
+    // }
 
-    //  Busca la insignia (badge) 'register' y consulta si el usuario actual está relacionado.
+    //  Busca la insignia (badge) y consulta si el usuario actual está relacionado.
     //  Si esta relacionado retorna true.
     //  Si no esta relacionado, lo relaciona y luego retorna false.
-    public function registerCheck(){
+    public function badgeCheck(Request $request){
         $id=Auth::id();
-        $regBadge=Badge::where('name','register')->first();
+        $regBadge=Badge::where('name',$request->badge)->first();
         $found=false;
         if($regBadge!=null){
             $user=$regBadge->users()->wherePivot('user_id',$id)->first();
@@ -35,24 +37,4 @@ class BadgeController extends Controller
         }
         return $found;
     }
-
-
-    // public function create()
-    // {
-    // }
-    // public function store(Request $request)
-    // {
-    // }
-    // public function show(Badge $badge)
-    // {
-    // }
-    // public function edit(Badge $badge)
-    // {
-    // }
-    // public function update(Request $request, Badge $badge)
-    // {
-    // }
-    // public function destroy(Badge $badge)
-    // {
-    // }
 }
