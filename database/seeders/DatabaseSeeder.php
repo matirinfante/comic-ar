@@ -2153,5 +2153,29 @@ class DatabaseSeeder extends Seeder
             'name' => 'firstEdition',
             'imgUrl' => '/assets/badges/first_edition.svg'
         ]);
+        Badge::create([
+            'name' => 'comictecaBronze',
+            'imgUrl' => '/assets/badges/comicteca_bronze.svg'
+        ]);
+        Badge::create([
+            'name' => 'comictecaSilver',
+            'imgUrl' => '/assets/badges/comicteca_silver.svg'
+        ]);
+        Badge::create([
+            'name' => 'comictecaGold',
+            'imgUrl' => '/assets/badges/comicteca_gold.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistBronze',
+            'imgUrl' => '/assets/badges/wishlist_bronze.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistSilver',
+            'imgUrl' => '/assets/badges/wishlist_silver.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistGold',
+            'imgUrl' => '/assets/badges/wishlist_gold.svg'
+        ]);
     }
 }
