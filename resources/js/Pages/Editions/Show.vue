@@ -305,6 +305,8 @@ defineProps({
 </template>
 
 <script>
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css'; 
 export default {
     data() {
         return {
@@ -325,12 +327,29 @@ export default {
             axios.post('/comictecas', { volume_id: id, status: state }).then(response => {
                 this.checkAll()
             })
+            if(state){
+                axios.post('/comictecaStatus').then(response=>{
+                    if (!response.data){
+                        toastr.options.positionClass="toast-bottom-right";
+                        toastr.options.progressBar = true;
+                        toastr.warning('Insignia desbloqueada');    
+                }});
+                
+            }
         },
         complete(id) {
             axios.post('/comictecas-complete', { edition_id: id }).then(response => {
                 this.dataVolumes.data = response.data;
                 this.checkAll()
-            })
+            });
+            axios.post('/comictecaStatus').then(response=>{
+                console.log(response.data);
+                if (!response.data){
+                    console.log(response.data);
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.warning('Insignia desbloqueada');    
+            }});
         },
         subscribe(id) {
             axios.post('/edition-subscription', { edition_id: id }).then(response => {

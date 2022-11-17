@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Stats from '@/Pages/Users/Stats.vue';
+import Badges from '@/Pages/Users/Badges.vue';
 import NotFound from '@/Components/NotFound.vue';
 </script>
 <template>
@@ -79,7 +80,7 @@ import NotFound from '@/Components/NotFound.vue';
                     
                     <!-- INSIGNIAS -->
                     <div v-else-if="option=='badges'">
-                        Insignias
+                        <Badges/>
                     </div>
                 </div>
                 

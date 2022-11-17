@@ -76,6 +76,9 @@ Route::middleware([
     Route::post('/edition-subscription', [SubscriptionController::class, 'editionSubscription']);
     Route::post('/edition-unsubscription', [SubscriptionController::class, 'editionUnsubscription']);
     Route::get('/badgeCheck',[BadgeController::class,'badgeCheck']);
+    Route::post('/comictecaStatus',[BadgeController::class,'comictecaStatus']);
+    Route::post('/wishStatus',[BadgeController::class,'wishStatus']);
+    Route::get('/showBadges',[BadgeController::class,'showBadges']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
