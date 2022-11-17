@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Artwork;
+use App\Models\Badge;
 use App\Models\Booklist;
 use App\Models\Comicteca;
 use App\Models\User;
@@ -2136,5 +2137,45 @@ class DatabaseSeeder extends Seeder
 
         $booklist4 = Booklist::find(4);
         $booklist4->volumes()->attach(5);
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // ---------------------------------------B-A-D-G-E-S-----------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------------
+        Badge::create([
+            'name' => 'register',
+            'imgUrl' => '/assets/badges/register.svg'
+        ]);
+        Badge::create([
+            'name' => 'firstBooklist',
+            'imgUrl' => '/assets/badges/first_booklist.svg'
+        ]);
+        Badge::create([
+            'name' => 'firstEdition',
+            'imgUrl' => '/assets/badges/first_edition.svg'
+        ]);
+        Badge::create([
+            'name' => 'comictecaBronze',
+            'imgUrl' => '/assets/badges/comicteca_bronze.svg'
+        ]);
+        Badge::create([
+            'name' => 'comictecaSilver',
+            'imgUrl' => '/assets/badges/comicteca_silver.svg'
+        ]);
+        Badge::create([
+            'name' => 'comictecaGold',
+            'imgUrl' => '/assets/badges/comicteca_gold.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistBronze',
+            'imgUrl' => '/assets/badges/wishlist_bronze.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistSilver',
+            'imgUrl' => '/assets/badges/wishlist_silver.svg'
+        ]);
+        Badge::create([
+            'name' => 'wishlistGold',
+            'imgUrl' => '/assets/badges/wishlist_gold.svg'
+        ]);
     }
 }
