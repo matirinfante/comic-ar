@@ -179,7 +179,8 @@ const filterBookLists = (id) => {
 <script>
 import VueMultiselect from 'vue-multiselect'
 import axios from "axios";
-
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css'; 
 export default {
     components: {VueMultiselect},
     data() {
@@ -189,6 +190,11 @@ export default {
             isLoading: false,
             selectLabel: "Ver más"
         }
+    },
+    mounted(){
+        setTimeout(() =>{
+            this.badge();
+        }, 10);
     },
     methods: {
         onSearchChange(term) {
@@ -208,6 +214,15 @@ export default {
         },
         onClose(value) {
             this.isLoading = false
+        },
+        badge(){
+            axios.get('/badgeCheck',{params:{badge:'firstBooklist'}}).then(response=>{
+                if (!response.data){
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.warning('Insignia desbloqueada');    
+                }
+            });
         }
     }
 }
