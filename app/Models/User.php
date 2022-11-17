@@ -103,7 +103,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function badges(){
-        return $this->belongsToMany(Badge::class)->withPivot('percentage');
+        return $this->belongsToMany(Badge::class);
     }
 
 }
