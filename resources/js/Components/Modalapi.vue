@@ -105,11 +105,23 @@ export default {
         }
     },
     computed:{
-        title(){return this.ftitle;},
-        isbn(){return this.fisbn;},
+        title:{
+                get() { return this.ftitle },
+                set(value) {this.$emit('changeTitle',value)}
+            },
+        isbn:{
+            get(){return this.fisbn},
+            set(value){this.$emit('changeIsbn',value)}
+        },
         idEdition(){return this.editionid},
-        review(){return this.freview},
-        img(){return this.fimg}
+        review:{
+            get(){return this.freview},
+            set(value){this.$emit('changeReview',value)}
+        },
+        img:{
+            get(){return this.fimg},
+            set(value){this.$emit('changeImg',value)}
+        }
     },
     methods: {
         close() {
@@ -150,7 +162,9 @@ export default {
 
         },
         fileSelected(event) {
+            var value="";
             this.file = event.target.files[0];
+            this.$emit('changeImg',value);  //Si hay url no toma la imagen del archivo
         }
     }
 }
