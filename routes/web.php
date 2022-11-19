@@ -5,17 +5,18 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\ArtworkController;
-use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EditionController;
-use App\Http\Controllers\ObjectiveController;
-use App\Http\Controllers\ObjnotificationController;
+use App\Http\Controllers\BooklistController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ComictecaController;
-use App\Http\Controllers\BooklistController;
+use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ObjnotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,24 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/about-us', function () {
+    return Inertia::render('aboutUS', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('aboutUs');
+
+Route::get('/privacy-policy', function () {
+    return Inertia::render('PrivacyPolicy', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('PrivacyPolicy');
 
 Route::middleware([
     'auth:sanctum',
