@@ -14,8 +14,9 @@ defineProps({
 <template>
     <AppLayout title="Home">
         <template #header>
+            <span class="sr-only">Esta es la página principal</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                ¡Buenas
+                ¡Hola
                 <span class="text-gray-500">{{ $page.props.user.name }}</span>! ¿Qué vas a leer hoy?
             </h2>
         </template>

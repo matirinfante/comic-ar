@@ -8,6 +8,7 @@ import NotFound from '@/Components/NotFound.vue';
 <template>
     <AppLayout title="Perfil">
         <template #header>
+            <span class="sr-only">Esta es la vista de tu perfil</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Mi Perfil
             </h2>
