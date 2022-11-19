@@ -19,6 +19,7 @@ defineProps({
 <template>
     <AppLayout :title="edition.title">
         <template #header>
+            <span class="sr-only">Esta es la vista de la Edicion {{edition.title}}</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edición de <span class="text-gray-500">{{ edition.title }}</span>
             </h2>
