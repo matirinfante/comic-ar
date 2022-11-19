@@ -67,8 +67,8 @@ defineProps({
 <script>
 import VueMultiselect from 'vue-multiselect'
 import axios from "axios";
-import toastr from 'toastr';
-import 'toastr/build/toastr.min.css'; 
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 
 export default {
     components: {VueMultiselect},

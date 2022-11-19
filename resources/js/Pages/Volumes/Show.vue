@@ -4,8 +4,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import axios from 'axios';
-import toastr from 'toastr';
-import 'toastr/build/toastr.min.css'; 
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 
 const props = defineProps({
     volume: Object,
@@ -23,7 +23,7 @@ const submit = () => {
         if (!response.data){
             toastr.options.positionClass="toast-bottom-right";
             toastr.options.progressBar = true;
-            toastr.warning('Insignia desbloqueada');    
+            toastr.success('Insignia desbloqueada');    
         }
     });
 };

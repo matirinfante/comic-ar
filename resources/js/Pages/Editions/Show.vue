@@ -305,8 +305,8 @@ defineProps({
 </template>
 
 <script>
-import toastr from 'toastr';
-import 'toastr/build/toastr.min.css'; 
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 export default {
     data() {
         return {
@@ -332,7 +332,7 @@ export default {
                     if (!response.data){
                         toastr.options.positionClass="toast-bottom-right";
                         toastr.options.progressBar = true;
-                        toastr.warning('Insignia desbloqueada');    
+                        toastr.error('Insignia desbloqueada');    
                 }});
                 
             }
@@ -348,7 +348,7 @@ export default {
                     console.log(response.data);
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
-                    toastr.warning('Insignia desbloqueada');    
+                    toastr.error('Insignia desbloqueada');    
             }});
         },
         subscribe(id) {
