@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EditionRequest;
-use App\Models\Comicteca;
+use App\Models\User;
 use Inertia\Inertia;
+use SimpleXMLElement;
 use App\Models\Volume;
+use GuzzleHttp\Client;
 use App\Models\Edition;
+use App\Models\Comicteca;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Integer;
+use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Mtownsend\XmlToArray\XmlToArray;
+use App\Http\Requests\EditionRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Database\Query\Expression;
-use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\Type\Integer;
-use Illuminate\Support\Facades\Http;
 
 
 class EditionController extends Controller
@@ -25,7 +31,8 @@ class EditionController extends Controller
      */
     public function index()
     {
-        $editions = Edition::all();
+        // $editions = Edition::all();
+        $editions = Edition::orderBy('created_at', 'desc')->paginate(6);
         $cont = 0;
         // Si la edición cuenta con al menos un volúmen, ésta tendrá la portada del primer volumen encontrado
         foreach ($editions as $edition) {
@@ -106,8 +113,25 @@ class EditionController extends Controller
     public function show(Edition $edition)
     {
         $userId = Auth::id();
+        // determinar si el usuario actual esta suscripto a la edición actual para recibir novedades
+        $user = User::find($userId);
+        $subscriptions = $user->editions()->get();
+        $isUsrSubscribe = "n";
+        $usrFound = false;
+        $k = 0;
+        while (($k < count($subscriptions)) && ($usrFound == false)) {
+            if (($subscriptions[$k]['pivot']['user_id'] == $userId) && ($subscriptions[$k]['pivot']['edition_id'] == $edition->id)) {
+                $usrFound = true;
+                $isUsrSubscribe = "y";
+            }
+            $k++;
+        }
+        $edition['usrSubscribe'] = $isUsrSubscribe;
+
         $comictecaId = Comicteca::where('user_id', $userId)->get('id');
-        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->get();
+        $totalVol = count(Volume::where('edition_id', $edition->id)->get());
+        $edition['totalVol'] = $totalVol;
+        $volumes = Volume::where('edition_id', $edition->id)->orderBy('number', 'asc')->paginate(6);
         foreach ($volumes as $volume) {
             if ($volume['coverImage'] != "/assets/cover/default.png") {
                 if (str_contains($volume['coverImage'], 'comicar-cover')) {
@@ -125,8 +149,11 @@ class EditionController extends Controller
             } else {
                 $volume['inComicteca'] = 0;
             }
+            $totalVol++;
+            $volume['totalVol'] = $totalVol;
         }
-        return Inertia::render('Editions/Show', compact('edition', 'volumes'));
+        // return Inertia::render('Editions/Show', compact('edition', 'volumes'));
+        return Inertia::render('Editions/Show', compact('edition', 'volumes', 'subscriptions'));
     }
 
     /**
@@ -188,5 +215,31 @@ class EditionController extends Controller
             . '&filter=name:' . $request->partialText . '&field_list=id,name,image&limit=5';
         $response = Http::get($theUrl);
         return $response->json();
+    }
+
+    public function checkISBN(Request $request)
+    {
+        $client = new Client();
+        $headers = [
+            'Content-Type' => 'text/xml; charset=utf-8'
+        ];
+
+        $xml = [
+            'soap:Body' => [
+                'IsValidISBN13' => [
+                    '_attributes' => ['xmlns' => "http://webservices.daehosting.com/ISBN"],
+                    'sISBN' => $request->isbn
+                ]
+            ]
+        ];
+
+        $requestBody = ArrayToXml::convert($xml, [
+            'rootElementName' => 'soap:Envelope',
+            '_attributes' => ['xmlns:soap' => "http://schemas.xmlsoap.org/soap/envelope/"]
+        ], true, 'UTF-8');
+        $payload = new \GuzzleHttp\Psr7\Request('POST', 'http://webservices.daehosting.com/services/isbnservice.wso', $headers, $requestBody);
+        $res = $client->sendAsync($payload)->wait();
+        $responseString = XmlToArray::convert($res->getBody()->getContents());
+        return Response()->json($responseString['soap:Body']['m:IsValidISBN13Response']['m:IsValidISBN13Result']);
     }
 }

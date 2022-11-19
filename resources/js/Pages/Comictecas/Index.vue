@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import NotFound from '@/Components/NotFound.vue';
 </script>
 <template>
     <AppLayout title="Comicteca">
@@ -13,8 +14,16 @@ import AppLayout from '@/Layouts/AppLayout.vue';
         </template>
         <div class="pt-3 bg-violet-50">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <p class="font-bold text-xl mb-3 ml-3 mt-2 text-white w-fit bg-violet-700 px-2 rounded-xl">Cantidad de
-                    Volúmenes: {{ cantVol }}</p>
+                <div v-if="cantVol>0" class="font-bold text-xl mb-3 ml-3 mt-2 text-white w-fit bg-violet-700 px-2 rounded-xl">Cantidad de
+                    Volúmenes: {{ cantVol }}</div>
+                <div v-else >
+                    <div class="flex justify-center mb-5">
+                        <p  class="font-bold text-xl mb-3 ml-3 mt-2 text-black px-2 border-double border-b-4 border-violet-700 drop-shadow-md">No tienes volúmenes en Comicteca</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <NotFound class="w-1/2 h-fit"/>
+                    </div>
+                </div>
 
                 <div v-for="edition in allVol" class="divide-y divide-y-1 divide-blue-200">
                     <p class="font-semibold text-lg mt-2 text-center">

@@ -34,3 +34,26 @@ defineProps({
         </div>
     </AppLayout>
 </template>
+<script>
+import axios from 'axios';
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
+export default {
+    mounted(){
+        setTimeout(() =>{
+            this.badge();
+        }, 10);
+    },
+    methods:{
+        badge(){
+            axios.get('/badgeCheck',{params:{badge:'register'}}).then(response=>{
+                if (!response.data){
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.warning('Insignia desbloqueada');    
+                }
+            });
+        }
+    }
+}
+</script>

@@ -3,6 +3,9 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
+import axios from 'axios';
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 
 const props = defineProps({
     volume: Object,
@@ -16,6 +19,13 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('wishlists.store'));
+    axios.post('/wishStatus').then(response=>{
+        if (!response.data){
+            toastr.options.positionClass="toast-bottom-right";
+            toastr.options.progressBar = true;
+            toastr.success('Insignia desbloqueada');    
+        }
+    });
 };
 
 function formatDate(date) {

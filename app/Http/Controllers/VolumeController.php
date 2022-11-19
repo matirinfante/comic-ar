@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\EditionUpdateJob;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Volume;
 use App\Models\Edition;
+use App\Mail\EditionNews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -43,6 +46,7 @@ class VolumeController extends Controller
      */
     public function store(Request $request)
     {
+
         //coverFile has uploaded image
         //coverImage has image by url
         if (!($request->coverImage == null)) {
@@ -103,6 +107,14 @@ class VolumeController extends Controller
         ]);
 
         $volume->save();
+
+        // Busco la edición por su id
+        $edition = Edition::find($request->edition_id);
+        // obtengo los usuarios "suscriptos" a esa edición
+        $usersSubs = $edition->users()->get();
+        
+        // envío de mails a usuarios que quieren recibir novedades de la edición
+        $this->dispatch(new EditionUpdateJob($edition, $volume, $usersSubs));
 
         //return Redirect::route('editions.index');
         return ['redirect' => route('editions.index')];

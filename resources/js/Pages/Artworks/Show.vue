@@ -3,6 +3,8 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import JetNavLink from '@/Components/NavLink.vue';
 import NoArtwork from '../../Components/NoArtwork.vue';
+import Pagination from '../../Components/Pagination.vue';
+
 
 defineProps({
     edition: Object,
@@ -100,24 +102,25 @@ defineProps({
                     </div>
                     <div class="h-12 bg-white shadow-lg flex border-y">
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('editions.show', edition.id)" class="text-base">
+                            <JetNavLink preserve-scroll :href="route('editions.show', edition.id)" class="text-base">
                                 Información
                             </JetNavLink>
                         </div>
                         <div class="align-middle ml-10 my-auto">
-                            <JetNavLink :href="route('artworks.show', edition.id)"
-                                :active="route().current('artworks.show', edition.id)" class="text-base border-purple-400">
+                            <JetNavLink preserve-scroll :href="route('artworks.show', edition.id)"
+                                :active="route().current('artworks.show', edition.id)"
+                                class="text-base border-purple-400">
                                 Artworks
                             </JetNavLink>
                         </div>
                     </div>
 
                     <!-- Artworks -->
-                    <div v-if="artworks.length > 0" class="bg-white">
+                    <div v-if="artworks.data.length > 0" class="bg-white">
                         <section class="overflow-hidden text-gray-700 pb-20">
                             <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
                                 <div class="flex flex-wrap -m-1 md:-m-2">
-                                    <div class="flex flex-wrap w-1/3" v-for="art in artworks" :key="art.id">
+                                    <div class="flex flex-wrap w-1/3" v-for="art in artworks.data" :key="art.id">
                                         <div v-if="modalShow == false" class="w-full p-1 md:p-2 relative cursor-pointer"
                                             @click="showModal(art.imgUrl, art.usr)">
                                             <img class="block object-cover object-center w-full h-40 rounded-lg border-2 bg-slate-300"
@@ -135,6 +138,9 @@ defineProps({
                                 </div>
                             </div>
                         </section>
+                        <div class="p-2">
+                            <Pagination :links="artworks.links" />
+                        </div>
                     </div>
                     <div v-else>
                         <div class="text-gray-800 bg-white py-4 flex flex-row justify-center px-10">

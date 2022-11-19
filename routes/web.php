@@ -8,12 +8,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\VolumeController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EditionController;
 use App\Http\Controllers\ObjectiveController;
 use App\Http\Controllers\ObjnotificationController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ComictecaController;
 use App\Http\Controllers\BooklistController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,11 +69,18 @@ Route::middleware([
     Route::get('/searchList', [BooklistController::class, 'searchBy']);
     Route::get('/searchVol', [VolumeController::class, 'searchBy']);
     Route::get('/characters', [EditionController::class, 'getCharactersFromAPI']);
+    Route::get('/apibooks', function () {return Inertia::render('googlebooks', []);});
+    Route::get('/getStats', [UserController::class, 'getStats']);
+    Route::get('/objMessage', [UserController::class, 'objMessage']);
+    Route::get('/checkISBN', [EditionController::class, 'checkISBN']);
+    Route::post('/edition-subscription', [SubscriptionController::class, 'editionSubscription']);
+    Route::post('/edition-unsubscription', [SubscriptionController::class, 'editionUnsubscription']);
+    Route::get('/badgeCheck',[BadgeController::class,'badgeCheck']);
+    Route::post('/comictecaStatus',[BadgeController::class,'comictecaStatus']);
+    Route::post('/wishStatus',[BadgeController::class,'wishStatus']);
+    Route::get('/showBadges',[BadgeController::class,'showBadges']);
 });
 
 Route::get('/translate', [VolumeController::class, 'translate']);
-Route::get('/apibooks', function () {
-    return Inertia::render('googlebooks', []);
-});
 
 //Route::middleware(['auth:sanctum', 'verified'])->resource('/users',UserController::class);

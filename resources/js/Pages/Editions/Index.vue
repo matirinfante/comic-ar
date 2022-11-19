@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
+import Pagination from '../../Components/Pagination.vue';
 
 defineProps({
     editions: Object,
@@ -21,10 +22,9 @@ defineProps({
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <!-- CONTENIDO CENTRAL -->
-
                 <div class="flex flex-col md:flex-row justify-between mx-6 mb-5">
                     <!-- Buscador -->
-                    <div class="md:w-6/12 px-4 py-2">
+                    <div class="md:w-6/12 px-4">
                         <!-- Buscar... -->
                         <VueMultiselect v-model="value" :options="options" :close-on-select="true" :clear-on-select="false"
                         placeholder="Busca una edición..." label="title" track-by="id" :show-no-options="false"
@@ -42,9 +42,9 @@ defineProps({
                         </Link>
                     </div>
                 </div>
-                <SectionBorder />
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mt-10">
-                    <div v-for="edition in editions" :key="edition.id"
+                <SectionBorder/>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                    <div v-for="edition in editions.data" :key="edition.id"
                         class="w-50 h-60 mx-auto mb-20 md:mb-14 shadow-md hover:shadow-indigo-400 relative">
                         <Link :href="route('editions.show', edition)">
 
@@ -56,6 +56,9 @@ defineProps({
                         </Link>
                     </div>
                 </div>
+                <div class="p-2">
+                    <Pagination :links="editions.links" />
+                </div>
             </div>
         </div>
     </AppLayout>
@@ -64,6 +67,8 @@ defineProps({
 <script>
 import VueMultiselect from 'vue-multiselect'
 import axios from "axios";
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 
 export default {
     components: {VueMultiselect},
@@ -74,6 +79,11 @@ export default {
             isLoading: false,
             selectLabel: "Ver más"
         }
+    },
+    mounted(){
+        setTimeout(() =>{
+            this.badge();
+        }, 10);
     },
     methods: {
         onSearchChange(term) {
@@ -92,6 +102,15 @@ export default {
         },
         onClose(value) {
             this.isLoading = false
+        },
+        badge(){
+            axios.get('/badgeCheck',{params:{badge:'firstEdition'}}).then(response=>{
+                if (!response.data){
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.warning('Insignia desbloqueada');    
+                }
+            });
         }
     }
 }

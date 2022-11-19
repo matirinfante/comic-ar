@@ -23,7 +23,10 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "echarts": "^5.4.0",
         "k-progress-v3": "^1.0.0",
+        "toastr-comicar": "^1.0.0",
+        "vue-echarts": "^6.2.3",
         "vue-ellipse-progress": "^2.1.1",
         "vue-final-modal": "^3.4.4",
         "vue-multiselect": "^3.0.0-alpha.2",
