@@ -42,10 +42,9 @@ const filterBookLists = (id) => {
 <template>
     <AppLayout title="Listas">
         <template #header>
+            <span class="sr-only">Esta es la vista de Listas de comics</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <!-- <span class="text-gray-500"> -->
                     Listas
-                <!-- </span> -->
             </h2>
         </template>
 

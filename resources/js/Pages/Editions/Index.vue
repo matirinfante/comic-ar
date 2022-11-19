@@ -12,10 +12,9 @@ defineProps({
 <template>
     <AppLayout title="Ediciones">
         <template #header>
+            <span class="sr-only">Esta es la vista de ediciones</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <!-- <span class="text-gray-500"> -->
                     Ediciones
-                <!-- </span> -->
             </h2>
         </template>
 
