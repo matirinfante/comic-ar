@@ -48,13 +48,13 @@ const logeado = () =>{
 
         <form @submit.prevent="submit">
             <div>
-                <JetLabel for="email" value="Email" />
+                <JetLabel for="email" value="Correo electrónico" />
                 <JetInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required autofocus />
                 <JetInputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
-                <JetLabel for="password" value="Password" />
+                <JetLabel for="password" value="Contraseña" />
                 <JetInput id="password" v-model="form.password" type="password" class="mt-1 block w-full" required
                     autocomplete="current-password" />
                 <JetInputError class="mt-2" :message="form.errors.password" />
