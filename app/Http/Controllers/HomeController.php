@@ -116,4 +116,24 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function lastest()
+    {
+        $latest = Volume::orderBy('created_at', 'desc')->take(10)->get();
+
+        foreach ($latest as $late) {
+            $image = $late['coverImage'];
+            if ($image != "/assets/cover/default.png") {
+                if (str_contains($image, 'comicar-cover')) {
+                    $late['coverImage'] = asset('/storage/' . $image);
+                } else {
+                    $late['coverImage'] = env('API_URL') . $image;
+                }
+            } else {
+                $late['coverImage'] = env('API_URL') . "/assets/cover/default.png";
+            }
+        }
+
+        return response()->json($latest, 200);
+    }
 }
