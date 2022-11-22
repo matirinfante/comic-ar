@@ -42,6 +42,10 @@ const submit = () => {
         characters: form.characters
     });
 };
+
+function chars(value){
+    form.characters=value;
+}
 </script>
 
 <template>
@@ -132,7 +136,7 @@ const submit = () => {
                     <!-- format -->
                     <div class="mt-4">
                         <EditCharacters @selected="handleSelection" v-model="form.characters"
-                                        :selected-characters="form.characters"/>
+                                        :selected-characters="form.characters" @changeChar="chars"/>
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
