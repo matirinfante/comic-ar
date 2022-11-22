@@ -2143,38 +2143,47 @@ class DatabaseSeeder extends Seeder
         // -------------------------------------------------------------------------------------------------------------------
         Badge::create([
             'name' => 'register',
+            'legend' => '¡Te has registrado!',
             'imgUrl' => '/assets/badges/register.svg'
         ]);
         Badge::create([
             'name' => 'firstBooklist',
+            'legend' => '¡Tu primera Lista!',
             'imgUrl' => '/assets/badges/first_booklist.svg'
         ]);
         Badge::create([
             'name' => 'firstEdition',
+            'legend' => '¡Tu primera Edición!',
             'imgUrl' => '/assets/badges/first_edition.svg'
         ]);
         Badge::create([
             'name' => 'comictecaBronze',
+            'legend' => 'Añadiste 1 cómic a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_bronze.svg'
         ]);
         Badge::create([
             'name' => 'comictecaSilver',
+            'legend' => 'Añadiste 10 cómics a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_silver.svg'
         ]);
         Badge::create([
             'name' => 'comictecaGold',
+            'legend' => 'Añadiste 50 cómics a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_gold.svg'
         ]);
         Badge::create([
             'name' => 'wishlistBronze',
+            'legend' => 'Añadiste 1 cómic a tu Wishlist',
             'imgUrl' => '/assets/badges/wishlist_bronze.svg'
         ]);
         Badge::create([
             'name' => 'wishlistSilver',
+            'legend' => 'Añadiste 10 cómics a tu Wishlist',
             'imgUrl' => '/assets/badges/wishlist_silver.svg'
         ]);
         Badge::create([
             'name' => 'wishlistGold',
+            'legend' => 'Añadiste 50 cómics a tu Wishlist',
             'imgUrl' => '/assets/badges/wishlist_gold.svg'
         ]);
     }
