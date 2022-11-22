@@ -435,9 +435,16 @@ export default {
         }
     },
     mounted() {
-        var option = 1;
-        setTimeout(() =>
-            axios.get('/objnotifications-ask', { params: { option: option } }).then(response => { this.alert = response.data }), 10);
+        setTimeout(() =>{
+            this.notification();
+        }, 10);
+            
+    },
+    methods:{
+        notification(){
+            var option = 1;
+            axios.get('/objnotifications-ask', { params: { option: option } }).then(response => { this.alert = response.data });
+        }
     }
 }
 </script>

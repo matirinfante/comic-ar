@@ -101,12 +101,26 @@ export default {
             ruta: true,
             imgButton: "Subir imagen del ordenador",
             file: null,
-            volumeNum: "",
-            title:this.ftitle,
-            isbn:this.fisbn,
-            idEdition:this.editionid,
-            review:this.freview,
-            img:this.fimg
+            volumeNum: ""
+        }
+    },
+    computed:{
+        title:{
+                get() { return this.ftitle },
+                set(value) {this.$emit('changeTitle',value)}
+            },
+        isbn:{
+            get(){return this.fisbn},
+            set(value){this.$emit('changeIsbn',value)}
+        },
+        idEdition(){return this.editionid},
+        review:{
+            get(){return this.freview},
+            set(value){this.$emit('changeReview',value)}
+        },
+        img:{
+            get(){return this.fimg},
+            set(value){this.$emit('changeImg',value)}
         }
     },
     methods: {
@@ -148,7 +162,9 @@ export default {
 
         },
         fileSelected(event) {
+            var value="";
             this.file = event.target.files[0];
+            this.$emit('changeImg',value);  //Si hay url no toma la imagen del archivo
         }
     }
 }

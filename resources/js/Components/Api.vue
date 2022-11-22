@@ -133,7 +133,7 @@ import NotFound from '@/Components/NotFound.vue';
             </div>
         </div>
 
-        <Modalapi :modal="modal" :editionid="editionid" :ftitle="ftitle" :fisbn="fisbn" :freview="freview" :fimg="fimg"
+        <Modalapi :modal="modal" :editionid="editionid" :ftitle="ftitle" @changeTitle="cTitle" :fisbn="fisbn" @changeIsbn="cIsbn" :freview="freview" @changeReview="cReview" :fimg="fimg" @changeImg="cImg"
                   @close="closeModal"/>
 
     </div>
@@ -242,6 +242,18 @@ export default {
                 this.validated = true
                 this.errors = false
             })
+        },
+        cTitle(value){
+            this.ftitle=value;
+        },
+        cIsbn(value){
+            this.fisbn=value;
+        },
+        cReview(value){
+            this.freview=value;
+        },
+        cImg(value){
+            this.fimg=value;
         }
     },
     computed: {

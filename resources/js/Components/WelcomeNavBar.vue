@@ -1,28 +1,20 @@
 <script setup>
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import BigLogo from '@/Components/BigLogo.vue';
+import Footer from '../Components/Footer.vue';
+import WelcomeNavBar from '../Components/WelcomeNavBar.vue';
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
-import { Head, Link } from '@inertiajs/inertia-vue3';
 import JetApplicationMark from '@/Components/ApplicationMark.vue';
-import JetNavLink from '@/Components/NavLink.vue';
-
 
 defineProps({
-    title: String,
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
 });
 
-const showingNavigationDropdown = ref(false);
 
-const switchToTeam = (team) => {
-    Inertia.put(route('current-team.update'), {
-        team_id: team.id,
-    }, {
-        preserveState: false,
-    });
-};
-
-const logout = () => {
-    Inertia.post(route('logout'));
-};
 </script>
 
 <template>
@@ -30,29 +22,26 @@ const logout = () => {
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex">
+                <div class="">
                     <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
+                    <div class="my-4">
                         <Link :href="route('dashboard')">
                         <JetApplicationMark class="block h-9 w-auto" />
                         </Link>
                     </div>
-
-                    <!-- novedades -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <JetNavLink :href="route('dashboard')">
-                            Novedades
-                        </JetNavLink>
-                    </div>
-
-                    <!-- about -->
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
-                        <JetNavLink :href="route('dashboard')">
-                            Sobre nosotros
-                        </JetNavLink>
-                    </div>
-
                 </div>
+                <div v-if="canLogin" class=" mt-4 px-6 py-4 sm:block dark:bg-blue-200">
+                        <Link v-if="$page.props.user" :href="route('dashboard')"
+                            class="text-sm text-gray-700 dark:text-gray-900 underline">Ir a inicio</Link>
+
+                        <template v-else>
+                            <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Iniciar Sesión</Link>
+
+                            <Link v-if="canRegister" :href="route('register')"
+                                class="ml-6 text-sm text-gray-700 dark:text-gray-500 underline">Registrarse</Link>
+                        </template>
+                    </div>
+                
             </div>
         </div>
     </nav>

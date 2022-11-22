@@ -2,11 +2,13 @@
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Stats from '@/Pages/Users/Stats.vue';
+import Badges from '@/Pages/Users/Badges.vue';
 import NotFound from '@/Components/NotFound.vue';
 </script>
 <template>
     <AppLayout title="Perfil">
         <template #header>
+            <span class="sr-only">Esta es la vista de tu perfil</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Mi Perfil
             </h2>
@@ -79,7 +81,7 @@ import NotFound from '@/Components/NotFound.vue';
                     
                     <!-- INSIGNIAS -->
                     <div v-else-if="option=='badges'">
-                        Insignias
+                        <Badges/>
                     </div>
                 </div>
                 

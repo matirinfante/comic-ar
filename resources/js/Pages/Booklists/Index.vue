@@ -42,10 +42,9 @@ const filterBookLists = (id) => {
 <template>
     <AppLayout title="Listas">
         <template #header>
+            <span class="sr-only">Esta es la vista de Listas de comics</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                <!-- <span class="text-gray-500"> -->
                     Listas
-                <!-- </span> -->
             </h2>
         </template>
 
@@ -179,7 +178,8 @@ const filterBookLists = (id) => {
 <script>
 import VueMultiselect from 'vue-multiselect'
 import axios from "axios";
-
+import toastr from 'toastr-comicar';
+import 'toastr-comicar/build/toastr.min.css'; 
 export default {
     components: {VueMultiselect},
     data() {
@@ -189,6 +189,11 @@ export default {
             isLoading: false,
             selectLabel: "Ver más"
         }
+    },
+    mounted(){
+        setTimeout(() =>{
+            this.badge();
+        }, 10);
     },
     methods: {
         onSearchChange(term) {
@@ -208,6 +213,15 @@ export default {
         },
         onClose(value) {
             this.isLoading = false
+        },
+        badge(){
+            axios.get('/badgeCheck',{params:{badge:'firstBooklist'}}).then(response=>{
+                if (!response.data){
+                    toastr.options.positionClass="toast-bottom-right";
+                    toastr.options.progressBar = true;
+                    toastr.info('Insignia desbloqueada');    
+                }
+            });
         }
     }
 }
