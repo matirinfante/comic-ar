@@ -16,6 +16,11 @@ import Notification from '@/Pages/Objectives/Notification.vue';
             </h2>
         </template>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="bg-violet-200 border-blue-300 shadow-sm text-violet-600 rounded px-4 py-3 mb-5" role="alert">
+                <p class="text-xl font-bold">¿Cómo creo un objetivo de lectura?</p>
+                <p class="text-md">Debes ingresar un nombre y (si quieres) puedes ponerte un límite de días para completarlo. Los tomos a incorporar deben estar en tu Comicteca y no pueden formar parte de otro objetivo.</p>
+                <p class="text-md">Para interactuar con tu objetivo simplemente selecciónalo y desplaza los tomos entre las categorías del tablero.</p>
+            </div>
             <div class="flex justify-between mt-3">
                 <div class="pl-3">
                     <select v-model="selected" v-on:change="changed" class="rounded">

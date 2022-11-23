@@ -50,6 +50,10 @@ const filterBookLists = (id) => {
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+                <div class="bg-blue-200 border-blue-300 shadow-sm text-blue-600 rounded px-4 py-3 mb-5" role="alert">
+                    <p class="text-xl font-bold">¿Qué son las listas?</p>
+                    <p class="text-md">El mundo de los cómics puede llegar a ser tan caótico que se necesitan de guías para no perderse en el orden de lectura. Estas listas también pueden ser creadas con tus propias preferencias y podrán ser vistas por el resto de la comunidad.</p>
+                </div>
                 <!-- CONTENIDO CENTRAL -->
                 <!-- Buscador -->
                 <div class="md:w-6/12 px-4 py-2">
@@ -216,7 +220,7 @@ export default {
         },
         badge(){
             axios.get('/badgeCheck',{params:{badge:'firstBooklist'}}).then(response=>{
-                if (!response.data){
+                if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
                     toastr.info('Insignia desbloqueada');    

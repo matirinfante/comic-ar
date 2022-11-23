@@ -13,31 +13,30 @@ import NotFound from '@/Components/NotFound.vue';
                     Mi Perfil
             </h2>
         </template>
-        <div class="pt-20 px-40" id="container">
+        <div class="md:pt-20 px-1 md:px-40 xl:px-60 2xl:px-80" id="container">
             <div class="" id="profile">
                 <div class="relative" id="user">
-                    <div class="sm:h-28 md:h-32 lg:h-40 overflow-hidden">
+                    <div class="h-20 sm:h-28 md:h-32 lg:h-40 overflow-hidden">
                         <img class="w-screen blur" :src="user.profile_photo_url">
                     </div>
-                    <div class="absolute sm:left-20 md:left-20 lg:left-40 xl:left-52">
-                        <div class="rounded-full sm:-ml-16 sm:-mt-10 sm:h-16 sm:w-16 md:-ml-8 md:-mt-12 md:h-20 md:w-20 lg:-mt-14 lg:h-24 lg:w-24 xl:h-28 xl:w-28 xl:pt-6 bg-black text-center border-x-[1px] border-t-[1px] border-white drop-shadow-xl">
-                            <p class="text-white sm:text-lg md:mt-3 md:text-xl lg:text-2xl xl:text-3xl xl:mt-0 font-semibold">{{amount}}</p> 
-                            <p class="text-white sm:text-sm lg:text-lg">COMICS</p>
+                    <div class="absolute left-6 sm:left-40 md:left-20 lg:left-40 xl:left-40 2xl:left-48">
+                        <div class="rounded-full h-14 w-14 -mt-8 sm:-ml-16 sm:-mt-10 sm:h-16 sm:w-16 md:-ml-8 md:-mt-12 md:h-20 md:w-20 lg:-mt-14 lg:h-24 lg:w-24 xl:h-28 xl:w-28 xl:pt-6 bg-black text-center border-x-[1px] border-t-[1px] border-white drop-shadow-xl">
+                            <p class="text-white mt-1 text-sm sm:text-lg md:mt-3 md:text-xl lg:text-2xl xl:text-3xl xl:mt-0 font-semibold">{{amount}}</p> 
+                            <p class="text-white text-xs sm:text-sm lg:text-lg">COMICS</p>
                         </div>
                     </div>
-                    <div class="absolute sm:left-24 md:left-40 lg:left-72 xl:left-96">
-                        <img class="contrast-125 rounded-full -mt-10 ml-3 md:ml-0 sm:-mt-14 sm:h-28 sm:w-28 md:-mt-16 md:h-32 md:w-32 lg:-mt-20 lg:h-36 lg:w-36 xl:-mt-20 xl:h-40 xl:w-40 2xl:-mt-24 2xl:h-44 2xl:w-44 border-[2px] border-white bg-white drop-shadow-xl" :src="user.profile_photo_url">
-                        <div class="text-center pt-5 font-bold">{{user.name}}</div>
+                    <div class="absolute left-[104px] sm:left-64 md:left-40 lg:left-72 xl:left-80 2xl:left-[365px]" id="pic-name">
+                        <img class="contrast-125 rounded-full -mt-14 ml-3 md:ml-0 h-24 sm:-mt-14 sm:h-28 sm:w-28 md:-mt-16 md:h-32 md:w-32 lg:-mt-20 lg:h-36 lg:w-36 xl:-mt-20 xl:h-40 xl:w-40 2xl:-mt-24 2xl:h-44 2xl:w-44 border-[2px] border-white bg-white drop-shadow-xl object-cover" :src="user.profile_photo_url">
+                        <div class="text-center ml-2 sm:ml-0 pt-2 sm:pt-5 font-bold">{{user.name}}</div>
                         
                     </div>
-                    <div class="sm:h-28 md:h-32 lg:h-40 bg-white"></div>
                 
                 </div>
-                <div class="flex my-3 bg-white py-2 pl-2" id="nav-bar">
+                <div class="flex mt-24 sm:mt-40 sm:my-3 bg-white py-2 pl-2 grid grid-cols-2 md:grid-cols-4" id="nav-bar">
                     <button v-on:click="actividad()" class="mx-2 hover:border-b-2 border-purple-400" :class="{'border-b-2':option=='actividad'}">Actividad</button>
                     <button v-on:click="stats()" class="mx-2 hover:border-b-2 border-purple-400" :class="{'border-b-2':option=='stats'}">Estadísticas</button>
                     <button v-on:click="badges()" class="mx-2 hover:border-b-2 border-purple-400" :class="{'border-b-2':option=='badges'}">Insignias</button>
-                    <Link :href="route('objectives.index')" class="mx-2 hover:border-b-2 border-purple-400">Lectura</Link>
+                    <Link :href="route('objectives.index')" class="mx-2 hover:border-b-2 border-purple-400 text-center">Lectura</Link>
                 </div>
                 <div class="bg-white" id="display">
 
@@ -112,3 +111,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+@media (min-width: 2560px){
+    #container{
+        margin-left:450px ;
+        margin-right:450px ;
+    }
+    #pic-name{
+        left:420px;
+    }
+}
+</style>
