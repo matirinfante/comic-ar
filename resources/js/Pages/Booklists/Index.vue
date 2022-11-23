@@ -216,7 +216,7 @@ export default {
         },
         badge(){
             axios.get('/badgeCheck',{params:{badge:'firstBooklist'}}).then(response=>{
-                if (!response.data){
+                if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
                     toastr.info('Insignia desbloqueada');    
