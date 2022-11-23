@@ -1,5 +1,5 @@
 <template>
-    <div id="container" class="divide-y divide-fuchsia-50">
+    <div id="stats-container" class="divide-y divide-fuchsia-50">
         <div v-if="messageon" class="py-2">
             <p class="text-center text-lg font-semibold">Objetivos Pendientes</p>
             <div class="mt-2 text-left" v-for="mensaje in message">{{mensaje}}</div>

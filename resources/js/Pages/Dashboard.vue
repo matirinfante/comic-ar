@@ -48,7 +48,7 @@ export default {
     methods:{
         badge(){
             axios.get('/badgeCheck',{params:{badge:'register'}}).then(response=>{
-                if (!response.data){
+                if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
                     toastr.warning('Insignia desbloqueada');    

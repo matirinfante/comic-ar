@@ -2143,38 +2143,47 @@ class DatabaseSeeder extends Seeder
         // -------------------------------------------------------------------------------------------------------------------
         Badge::create([
             'name' => 'register',
+            'legend' => 'Hombre de Acero',
             'imgUrl' => '/assets/badges/register.svg'
         ]);
         Badge::create([
             'name' => 'firstBooklist',
+            'legend' => 'Princesa de Temiscira',
             'imgUrl' => '/assets/badges/first_booklist.svg'
         ]);
         Badge::create([
             'name' => 'firstEdition',
+            'legend' => 'Caballero de la noche',
             'imgUrl' => '/assets/badges/first_edition.svg'
         ]);
         Badge::create([
             'name' => 'comictecaBronze',
+            'legend' => 'Comiquero Bronce',
             'imgUrl' => '/assets/badges/comicteca_bronze.svg'
         ]);
         Badge::create([
             'name' => 'comictecaSilver',
+            'legend' => 'Comiquero Plata',
             'imgUrl' => '/assets/badges/comicteca_silver.svg'
         ]);
         Badge::create([
             'name' => 'comictecaGold',
+            'legend' => 'Comiquero Oro',
             'imgUrl' => '/assets/badges/comicteca_gold.svg'
         ]);
         Badge::create([
             'name' => 'wishlistBronze',
+            'legend' => 'Soñador Bronce',
             'imgUrl' => '/assets/badges/wishlist_bronze.svg'
         ]);
         Badge::create([
             'name' => 'wishlistSilver',
+            'legend' => 'Soñador Plata',
             'imgUrl' => '/assets/badges/wishlist_silver.svg'
         ]);
         Badge::create([
             'name' => 'wishlistGold',
+            'legend' => 'Soñador Oro',
             'imgUrl' => '/assets/badges/wishlist_gold.svg'
         ]);
     }
