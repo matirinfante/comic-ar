@@ -52,6 +52,7 @@
                                                     <label for="argument">Reseña:</label>
                                                     <textarea v-model="review" id="argument"
                                                         class="resize-none pb-20 w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500"></textarea>
+                                                    <p class="text-xs">{{review.length}}/999</p>
                                                 </div>
                                                 <div v-if='ruta'>
                                                     <label for="coverImage">Ruta imagen:</label>
@@ -87,6 +88,7 @@
 
 <script>
 import axios from 'axios'
+import Swal from 'sweetalert2'
 export default {
     props: {
         modal: Boolean,
@@ -131,7 +133,11 @@ export default {
         },
         submitForm() {
             if (this.freview.length > 999) {
-                alert('La reseña es muy larga');
+                Swal.fire(
+                    'Atención',
+                    'La reseña es muy larga',
+                    'warning'
+                )
             } else {
                 axios.post('/volumes', {
                     title: this.title,
@@ -147,7 +153,14 @@ export default {
                     },
                 }).then(function (response) {
                     window.location = response.data.redirect + '/' + edition_id.value;
-                }).catch(function (error) { console.log(error); alert('Error en la carga. Revise los datos del formulario.') });
+                }).catch(function (error) { 
+                    Swal.fire({
+                        title: 'Error en la carga!',
+                        text: 'Revise los datos del formulario',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+                });
             }
 
         },
