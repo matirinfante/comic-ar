@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Auth;
 class BadgeController extends Controller
 {
     //  Busca la insignia (badge) y consulta si el usuario actual está relacionado.
-    //  Si esta relacionado retorna true.
-    //  Si no esta relacionado, lo relaciona y luego retorna false.
+    //  Si esta relacionado retorna false.
+    //  Si no esta relacionado, lo relaciona y luego retorna true.
+    // En caso de firstBooklist tiene que comprobar que el usuario haya creado una.
     public function badgeCheck(Request $request){
         $id=Auth::id();
         $regBadge=Badge::where('name',$request->badge)->first();
