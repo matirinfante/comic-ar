@@ -16,9 +16,12 @@
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                 <h3 class="text-lg font-semibold leading-6 text-gray-900" id="modal-title">Datos de Objetivo</h3>
                                 <div class="mt-2">
+                                <h5 class="my-4 text-gray-400 text-center text-xs">Los campos con <span
+                                                    class="text-red-500">*</span> son
+                                                obligatorios</h5>
                                 <form v-on:submit.prevent="submitForm">
                                 <div>
-                                    <label for="name">Nombre:</label>
+                                    <label for="name" class="starlabel">Nombre:</label>
                                     <input v-model="name" id="name" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500" required>
                                 </div>
                                 <div>
@@ -26,7 +29,7 @@
                                     <input v-model="days" id="days" type="text" class="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:ring-1 focus:ring-indigo-500">
                                 </div>
                                 <div class="mt-2">
-                                    <label class="typo__label">Tomos a leer</label>
+                                    <label class="typo__label starlabel">Tomos a leer</label>
                                     <Multiselect
                                         v-model="value"
                                         :options="options"
