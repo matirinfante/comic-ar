@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Badge;
+use App\Models\Booklist;
 use App\Models\Comicteca;
 use App\Models\User;
 use App\Models\Wishlist;
@@ -12,22 +13,35 @@ use Illuminate\Support\Facades\Auth;
 class BadgeController extends Controller
 {
     //  Busca la insignia (badge) y consulta si el usuario actual está relacionado.
-    //  Si esta relacionado retorna true.
-    //  Si no esta relacionado, lo relaciona y luego retorna false.
+    //  Si esta relacionado retorna false.
+    //  Si no esta relacionado, lo relaciona y luego retorna true.
+    // En caso de firstBooklist tiene que comprobar que el usuario haya creado una.
     public function badgeCheck(Request $request){
         $id=Auth::id();
         $regBadge=Badge::where('name',$request->badge)->first();
-        $found=false;
+        $notificate=false;
+        $userFound=false;
         if($regBadge!=null){
             $user=$regBadge->users()->wherePivot('user_id',$id)->first();
             if ($user!=null){
-                $found=true;
+                $userFound=true;
+            }
+            if($regBadge->name=='firstBooklist'){
+                $booklist=Booklist::where('user_id',$id)->first();
+                if($booklist!=null){
+                    if (!$userFound){
+                        $regBadge->users()->attach($id);
+                        $notificate=true;
+                    }
+                }
+            }else{
+                if (!$userFound){
+                    $regBadge->users()->attach($id);
+                    $notificate=true;
+                }
             }
         }
-        if (!$found){
-            $regBadge->users()->attach($id);
-        }
-        return $found;
+        return $notificate;
     }
 
     //  Busca la cantidad de volumenes en la comicteca.

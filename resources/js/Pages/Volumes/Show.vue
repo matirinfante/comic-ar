@@ -48,6 +48,7 @@ function formatDate(date) {
 <template>
     <AppLayout :title="volume[0].title">
         <template #header>
+            <span class="sr-only">Esta es la vista de {{volume[0].title}} tomo {{volume[0].number}}</span>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Tomo de <span class="text-gray-500">{{ volume[0].title }}</span>
             </h2>

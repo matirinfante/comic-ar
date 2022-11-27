@@ -1,7 +1,7 @@
 <template>
     <div>
         <label class="typo__label" for="ajax">Personajes principales</label>
-        <multiselect v-model="selectedCharacters" id="ajax" label="name" track-by="id"
+        <multiselect v-model="selected" id="ajax" label="name" track-by="id"
                      placeholder="Escribe para buscar"
                      open-direction="bottom" :options="characters" :multiple="true" :searchable="true"
                      :loading="isLoading" :internal-search="false" :clear-on-select="false" :close-on-select="false"
@@ -27,6 +27,12 @@ export default {
         return {
             characters: [],
             isLoading: false
+        }
+    },
+    computed:{
+        selected:{
+            get() { return this.selectedCharacters },
+            set(value) {this.$emit('changeChar',value)}
         }
     },
     methods: {

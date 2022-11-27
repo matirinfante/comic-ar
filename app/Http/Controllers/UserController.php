@@ -66,13 +66,12 @@ class UserController extends Controller
         $today=Carbon::now();
         $month=intval($today->isoFormat('OM'));
         $year=intval($today->isoFormat('OY'));
-
-        //$month=12;
+        //initMonth es donde comienzan a tomarse en cuenta los datos, de ahí 6 meses hasta el actual
         if ($month<=6){
-            $initMonth=$month+12-6;
+            $initMonth=$month+12-5;
             $year--;
         }else{
-            $initMonth=$month-6;
+            $initMonth=$month-5;
         }
         $allData=[];
         $values=['Mes','Listas','Objetivos','Deseados'];
