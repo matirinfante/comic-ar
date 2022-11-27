@@ -6,3 +6,14 @@ label.starlabel:after {
     content: ' *';
     color: red;
 }
+
+/* go to top button */
+#pageUp{
+    position: fixed;
+    right: 15px;
+    bottom: 100px;
+    cursor: pointer;
+    transition: all 300ms ease;
+    transform: scale(0);
+    /* display: inline; */
+}
