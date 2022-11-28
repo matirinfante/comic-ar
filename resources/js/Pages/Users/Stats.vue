@@ -1,3 +1,6 @@
+<script setup>
+import LookingFor from '@/Components/LookingFor.vue';
+</script>
 <template>
     <div id="stats-container" class="divide-y divide-fuchsia-50">
         <div v-if="messageon" class="py-2">
@@ -7,7 +10,7 @@
         <div v-else class="py-2">
             <p class="text-center text-lg font-semibold">No posee objetivos pendientes</p>
         </div>
-        <div class="flex grid grid-cols-2">
+        <div class="flex grid grid-cols-1 sm:grid-cols-2">
             <div class="pt-4 pl-8">
                 <p class="text-center font-semibold pb-1 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-amber-500 to-neutral-900 animate-text">Totales</p>
                 <p class="my-4">Agregados a la wishlist: {{totalWish}}</p>
@@ -17,7 +20,17 @@
             </div>
             <div class="pt-4">
                 <p class="text-center font-semibold pb-2 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-fuchsia-500 to-neutral-900 animate-text">Tu progreso en ComicAR</p>
-                <v-chart class="chart flex justify-center" :option="option" />
+                <div v-if="hasInfo">
+                    <v-chart class="chart flex justify-center" :option="option" />
+                </div>
+                <div v-else class="text-center">
+                    <p class="font-semibold">No hay datos para mostrar</p>
+                    <div class="flex justify-center">
+                        <LookingFor class="w-72 h-fit"/>
+                    </div>
+                    
+                </div>
+                
             </div>
         </div>
     </div>
@@ -57,7 +70,8 @@ export default {
             completed:0,
             pendent:0,
             option:{},
-            barData: []
+            barData: [],
+            hasInfo:false
         }
     },
     mounted(){
@@ -89,6 +103,13 @@ export default {
                 this.pendent=response.data.uncompletedObj;
                 this.barData=response.data.allData;
                 this.charts();
+                if (this.completed==0 && this.totalWish==0 && this.totalList==0){
+                    this.hasInfo=false;
+                }else{
+                    this.hasInfo=true;
+                }
+            }).catch(function (error) {
+                this.hasInfo=false;
             });
         },
         charts(){
