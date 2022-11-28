@@ -139,7 +139,7 @@ class HomeController extends Controller
 
     public function popular()
     {
-        $popular = Volume::all()->take(10);
+        $popular = Volume::with('edition')->get()->take(10);
 
         // detectar si posee imagen en storage o usa la predeterminada de public
         // POPULAR
@@ -155,6 +155,7 @@ class HomeController extends Controller
                 $popu['coverImage'] = env("API_URL") . "/assets/cover/default.png";
             }
         }
+
 
         return response()->json($popular);
     }
