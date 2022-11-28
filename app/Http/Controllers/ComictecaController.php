@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Inertia\Response;
+use Psy\Util\Json;
 
 class ComictecaController extends Controller
 {
@@ -252,7 +254,49 @@ class ComictecaController extends Controller
         return Response()->json($query);
     }
 
-    public function addToComicteca(Request $request){
+    public function addToComicteca(Request $request)
+    {
+        $comictecaUser = Comicteca::where('user_id', $request->user_id)->first();
+        $volume = Volume::where('id', $request->volume_id)->first();
+        $checkPresence = $comictecaUser->volumes()->find($request->volume_id);
+        $response = [];
+        if (!$checkPresence) {
+            $comictecaUser->volumes()->attach($volume->id);
+            $response = ['status' => 'Added to comicteca. Volume ID: ' . $comictecaUser->volumes()->find($volume->id)->id];
+            return Response()->json($response, 201);
+        } else {
+            $response = ['error' => "Volume already added in Comicteca!"];
+            return Response()->json($response, 409);
+        }
+    }
 
+    public function comictecaStats(Request $request)
+    {
+        $query = DB::table('comictecas')->where('user_id', $request->id)
+            ->selectRaw('editions.id')
+            ->join('comicteca_volume', 'comicteca_volume.comicteca_id', "=", "comictecas.id")
+            ->join('volumes', 'volumes.id', "=", "comicteca_volume.volume_id")
+            ->join('editions', 'editions.id', "=", 'volumes.edition_id')
+            ->groupBy('editions.id')
+            ->distinct()
+            ->get();
+        $editions = 0;
+        foreach ($query as $edition) {
+            $editions++;
+        }
+        $totalComics = Comicteca::where('user_id', $request->id)->first()->volumes()->get()->count();
+        $response = ['totalComics' => $totalComics, 'editions' => $editions];
+        return Response()->json($response);
+    }
+
+    public function checkAdded(Request $request){
+        $comictecaUser = Comicteca::where('user_id', $request->id)->first();
+        $checkPresence = $comictecaUser->volumes()->find($request->volume_id);
+
+        if ($checkPresence){
+            return Response()->json(true);
+        } else {
+            return Response()->json(false);
+        }
     }
 }

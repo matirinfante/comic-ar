@@ -28,6 +28,8 @@ Route::get('/users/{id}', [UserController::class, 'userInfo']);
 Route::get('/editions/{id}', [EditionController::class, 'editionInfo']);
 Route::post('/comicteca', [ComictecaController::class, 'addToComicteca']);
 Route::get('/comicteca/{id}', [ComictecaController::class, 'comictecaUser']);
+Route::get('/comicteca/stats/{id}', [ComictecaController::class, 'comictecaStats']);
+Route::get('/comicteca/alreadyThere/{id}', [ComictecaController::class, 'checkAdded']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
