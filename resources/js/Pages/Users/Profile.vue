@@ -26,7 +26,7 @@ import NotFound from '@/Components/NotFound.vue';
                         </div>
                     </div>
                     <div class="absolute left-[104px] sm:left-64 md:left-40 lg:left-72 xl:left-80 2xl:left-[365px]" id="pic-name">
-                        <img class="contrast-125 rounded-full -mt-14 ml-3 md:ml-0 h-24 sm:-mt-14 sm:h-28 sm:w-28 md:-mt-16 md:h-32 md:w-32 lg:-mt-20 lg:h-36 lg:w-36 xl:-mt-20 xl:h-40 xl:w-40 2xl:-mt-24 2xl:h-44 2xl:w-44 border-[2px] border-white bg-white drop-shadow-xl object-cover" :src="user.profile_photo_url">
+                        <img class="contrast-125 rounded-full -mt-14 ml-3 md:ml-0 w-24 h-24 sm:-mt-14 sm:h-28 sm:w-28 md:-mt-16 md:h-32 md:w-32 lg:-mt-20 lg:h-36 lg:w-36 xl:-mt-20 xl:h-40 xl:w-40 2xl:-mt-24 2xl:h-44 2xl:w-44 border-[2px] border-white bg-white drop-shadow-xl object-cover" :src="user.profile_photo_url">
                         <div class="text-center ml-2 sm:ml-0 pt-2 sm:pt-5 font-bold">{{user.name}}</div>
                         
                     </div>
@@ -112,6 +112,20 @@ export default {
 }
 </script>
 <style scoped>
+@media (min-width: 1366px){
+    #pic-name{
+        left:350px;
+    }
+}
+@media (min-width: 1920px){
+    #container{
+        margin-left:200px ;
+        margin-right:200px ;
+    }
+    #pic-name{
+        left:350px;
+    }
+}
 @media (min-width: 2560px){
     #container{
         margin-left:450px ;

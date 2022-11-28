@@ -7,16 +7,18 @@
         <div v-else class="py-2">
             <p class="text-center text-lg font-semibold">No posee objetivos pendientes</p>
         </div>
-        <div class="py-2 pl-2">
-            <p class="text-center font-semibold pb-1 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-amber-500 to-neutral-900 animate-text">Totales</p>
-            <p>Agregados a la wishlist: {{totalWish}}</p>
-            <p>Listas creadas: {{totalList}}</p>
-            <p>Objetivos pendientes: {{pendent}}</p>
-            <p>Objetivos completados: {{completed}}</p>
-        </div>
-        <div class="pt-4">
-            <p class="text-center font-semibold pb-2 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-fuchsia-500 to-neutral-900 animate-text">Tu progreso en ComicAR</p>
-            <v-chart class="chart flex justify-center" :option="option" />
+        <div class="flex grid grid-cols-2">
+            <div class="pt-4 pl-8">
+                <p class="text-center font-semibold pb-1 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-amber-500 to-neutral-900 animate-text">Totales</p>
+                <p class="my-4">Agregados a la wishlist: {{totalWish}}</p>
+                <p class="my-4">Listas creadas: {{totalList}}</p>
+                <p class="my-4">Objetivos pendientes: {{pendent}}</p>
+                <p class="my-4">Objetivos completados: {{completed}}</p>
+            </div>
+            <div class="pt-4">
+                <p class="text-center font-semibold pb-2 text-lg bg-gradient-to-r bg-clip-text text-transparent from-neutral-900 via-fuchsia-500 to-neutral-900 animate-text">Tu progreso en ComicAR</p>
+                <v-chart class="chart flex justify-center" :option="option" />
+            </div>
         </div>
     </div>
 </template>
@@ -107,7 +109,32 @@ export default {
 }
 </script>
 <style scoped>
-.chart {
-  height: 120vh;
+@media (min-width: 320px){
+    .chart {
+        height: 40vh;
+    }
 }
+@media (min-width: 425px){
+    .chart {
+        height: 60vh;
+    }
+}
+@media (min-width: 1024px){
+    .chart {
+        height: 40vh;
+    }
+}
+@media (min-width: 1366px){
+    .chart {
+        height: 50vh;
+    }
+}
+@media (min-width: 1920px){
+    .chart {
+        height: 30vh;
+    }
+}
+/* .chart {
+  height: 60vh;
+} */
 </style>
