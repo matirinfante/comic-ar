@@ -87,7 +87,7 @@ class UserController extends Controller
             $lists=Booklist::where('user_id',$id)->where('created_at','like',$year."%".$thisMonth."-%")->get();
             $vol=$wishlist->volumes()->wherePivot('created_at','like',$year."%".$thisMonth."-%")->get();
             $obj=Objective::where('user_id',$id)->where('progress',100)->where('created_at','like',$year."%".$thisMonth."-%")->get();
-            $values=[$name,count($lists),count($vol),count($obj)];
+            $values=[$name,count($lists),count($obj),count($vol)];
             array_push($allData,$values);
         }
 
