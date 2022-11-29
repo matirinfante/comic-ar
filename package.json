@@ -23,6 +23,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "dayjs": "^1.11.6",
         "echarts": "^5.4.0",
         "k-progress-v3": "^1.0.0",
         "toastr-comicar": "^1.0.0",

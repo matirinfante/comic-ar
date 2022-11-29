@@ -94,7 +94,7 @@
             </div>
             <footer class="mb-5 text-sm text-gray-500">
                 <p>Reseñó la edición el
-                    <time datetime="2017-03-03 19:00">{{ this.review.created_at }}</time>
+                    <time datetime="2017-03-03 19:00">{{ formatDate(this.review.created_at) }}</time>
                 </p>
             </footer>
             <p v-if="this.review.description !== ''" class="mb-2 font-light text-gray-500">
@@ -120,7 +120,7 @@
                 </div>
                 <footer class="mb-5 text-sm text-gray-500">
                     <p>Reseñó la edición el
-                        <time datetime="2017-03-03 19:00">{{ review.created_at }}</time>
+                        <time datetime="2017-03-03 19:00">{{ formatDate(review.created_at) }}</time>
                     </p>
                 </footer>
                 <p v-if="review.description !== ''" class="mb-2 font-light text-gray-500 ">
@@ -132,6 +132,8 @@
 <script>
 import {$vfm, VueFinalModal, ModalsContainer} from 'vue-final-modal'
 import StarRating from 'vue-star-rating'
+import dayjs from "dayjs";
+import { es } from "dayjs/locale/es";
 
 
 export default {
@@ -221,6 +223,10 @@ export default {
                     this.editionReviews = response.data
                 }
             })
+        },
+        formatDate(dateString) {
+            const date = dayjs(dateString);
+            return date.locale("es").format('D MMMM, YYYY');
         }
     },
     computed: {
