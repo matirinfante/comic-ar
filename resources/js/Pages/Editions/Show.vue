@@ -344,7 +344,6 @@ export default {
                 this.checkAll()
             });
             axios.post('/comictecaStatus').then(response=>{
-                console.log(response.data);
                 if (!response.data){
                     console.log(response.data);
                     toastr.options.positionClass="toast-bottom-right";

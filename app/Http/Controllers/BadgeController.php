@@ -26,7 +26,7 @@ class BadgeController extends Controller
             if ($user!=null){
                 $userFound=true;
             }
-            if($regBadge->name=='firstBooklist'){
+            if($regBadge->name=='Princesa de Temiscira'){
                 $booklist=Booklist::where('user_id',$id)->first();
                 if($booklist!=null){
                     if (!$userFound){
@@ -56,21 +56,21 @@ class BadgeController extends Controller
         $found=true;
         $isSet=true;
         if($volumes>=1){
-            $badge=Badge::where('name','comictecaBronze')->first();
+            $badge=Badge::where('name','Comiquero Bronce')->first();
             $isSet=BadgeController::addBadge($badge,$id);
         }
         if(!$isSet){
             $found=false;
         }
         if($volumes>=10 && $volumes<50){
-            $badge=Badge::where('name','comictecaSilver')->first();
+            $badge=Badge::where('name','Comiquero Plata')->first();
             $isSet=BadgeController::addBadge($badge,$id);
         }
         if(!$isSet){
             $found=false;
         }
         if($volumes>=50){
-            $badge=Badge::where('name','comictecaGold')->first();
+            $badge=Badge::where('name','Comiquero Oro')->first();
             $isSet=BadgeController::addBadge($badge,$id);            
         }
         if(!$isSet){
@@ -93,13 +93,13 @@ class BadgeController extends Controller
             $badge=null;
             $isSet=true;
             if($volumes>=1 && $volumes<10){
-                $badge=Badge::where('name','wishlistBronze')->first();
+                $badge=Badge::where('name','Soñador Bronce')->first();
                 $isSet=BadgeController::addBadge($badge,$id);
             }elseif($volumes>=10 && $volumes<50){
-                $badge=Badge::where('name','wishlistSilver')->first();
+                $badge=Badge::where('name','Soñador Plata')->first();
                 $isSet=BadgeController::addBadge($badge,$id);
             }elseif($volumes>=50){
-                $badge=Badge::where('name','wishlistGold')->first();
+                $badge=Badge::where('name','Soñador Oro')->first();
                 $isSet=BadgeController::addBadge($badge,$id);            
             }
             if(!$isSet){
