@@ -219,7 +219,7 @@ export default {
             this.isLoading = false
         },
         badge(){
-            axios.get('/badgeCheck',{params:{badge:'firstBooklist'}}).then(response=>{
+            axios.get('/badgeCheck',{params:{badge:'Princesa de Temiscira'}}).then(response=>{
                 if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;

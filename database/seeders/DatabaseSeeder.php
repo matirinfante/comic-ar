@@ -2142,48 +2142,48 @@ class DatabaseSeeder extends Seeder
         // ---------------------------------------B-A-D-G-E-S-----------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------------------------
         Badge::create([
-            'name' => 'register',
-            'legend' => 'Hombre de Acero',
+            'name' => 'Hombre de Acero',
+            'legend' => 'Se desbloquea al registrarse',
             'imgUrl' => '/assets/badges/register.svg'
         ]);
         Badge::create([
-            'name' => 'firstBooklist',
-            'legend' => 'Princesa de Temiscira',
+            'name' => 'Princesa de Temiscira',
+            'legend' => 'Se desbloquea al crear una Lista de lectura',
             'imgUrl' => '/assets/badges/first_booklist.svg'
         ]);
         Badge::create([
-            'name' => 'firstEdition',
-            'legend' => 'Caballero de la noche',
+            'name' => 'Caballero de la noche',
+            'legend' => 'Se desbloquea al visitar la sección de Ediciones',
             'imgUrl' => '/assets/badges/first_edition.svg'
         ]);
         Badge::create([
-            'name' => 'comictecaBronze',
-            'legend' => 'Comiquero Bronce',
+            'name' => 'Comiquero Bronce',
+            'legend' => 'Se desbloquea al agregar 1 cómic a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_bronze.svg'
         ]);
         Badge::create([
-            'name' => 'comictecaSilver',
-            'legend' => 'Comiquero Plata',
+            'name' => 'Comiquero Plata',
+            'legend' => 'Se desbloquea al agregar 10 cómics a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_silver.svg'
         ]);
         Badge::create([
-            'name' => 'comictecaGold',
-            'legend' => 'Comiquero Oro',
+            'name' => 'Comiquero Oro',
+            'legend' => 'Se desbloquea al agregar 50 cómics a tu Comicteca',
             'imgUrl' => '/assets/badges/comicteca_gold.svg'
         ]);
         Badge::create([
-            'name' => 'wishlistBronze',
-            'legend' => 'Soñador Bronce',
+            'name' => 'Soñador Bronce',
+            'legend' => 'Se desbloquea al agregar 1 tomo a la Wishlist',
             'imgUrl' => '/assets/badges/wishlist_bronze.svg'
         ]);
         Badge::create([
-            'name' => 'wishlistSilver',
-            'legend' => 'Soñador Plata',
+            'name' => 'Soñador Plata',
+            'legend' => 'Se desbloquea al agregar 10 tomos a la Wishlist',
             'imgUrl' => '/assets/badges/wishlist_silver.svg'
         ]);
         Badge::create([
-            'name' => 'wishlistGold',
-            'legend' => 'Soñador Oro',
+            'name' => 'Soñador Oro',
+            'legend' => 'Se desbloquea al agregar 50 tomos a la Wishlist',
             'imgUrl' => '/assets/badges/wishlist_gold.svg'
         ]);
     }

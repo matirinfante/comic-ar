@@ -103,7 +103,7 @@ export default {
             this.isLoading = false
         },
         badge(){
-            axios.get('/badgeCheck',{params:{badge:'firstEdition'}}).then(response=>{
+            axios.get('/badgeCheck',{params:{badge:'Caballero de la noche'}}).then(response=>{
                 if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
