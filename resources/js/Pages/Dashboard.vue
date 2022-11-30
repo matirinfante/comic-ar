@@ -47,7 +47,7 @@ export default {
     },
     methods:{
         badge(){
-            axios.get('/badgeCheck',{params:{badge:'register'}}).then(response=>{
+            axios.get('/badgeCheck',{params:{badge:'Hombre de Acero'}}).then(response=>{
                 if (response.data){
                     toastr.options.positionClass="toast-bottom-right";
                     toastr.options.progressBar = true;
