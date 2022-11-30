@@ -49,8 +49,12 @@ class UserController extends Controller
         $lists=Booklist::where('user_id',$id)->get();
         $booklists=count($lists);   //Cant de listas que creo el usuario
         $wishlist=Wishlist::where('user_id',$id)->first();
-        $vol=$wishlist->volumes()->get();
-        $volInWish=count($vol);    //Cantidad de volumenes en la wishlist
+        if ($wishlist!=null){
+            $vol=$wishlist->volumes()->get();
+            $volInWish=count($vol);    //Cantidad de volumenes en la wishlist
+        }else{
+            $volInWish=0;
+        }        
         $objectives=Objective::where('user_id',$id)->get();
         $completedObj=0;  //Objetivos completados
         $uncompletedObj=0;  //Objetivos no completados
@@ -85,7 +89,11 @@ class UserController extends Controller
             $fakeDate=Carbon::create(0,$thisMonth,1,0,0,0);
             $name=$fakeDate->isoFormat('MMM');
             $lists=Booklist::where('user_id',$id)->where('created_at','like',$year."%".$thisMonth."-%")->get();
-            $vol=$wishlist->volumes()->wherePivot('created_at','like',$year."%".$thisMonth."-%")->get();
+            if($wishlist!=null){
+                $vol=$wishlist->volumes()->wherePivot('created_at','like',$year."%".$thisMonth."-%")->get();
+            }else{
+                $vol=[];
+            }
             $obj=Objective::where('user_id',$id)->where('progress',100)->where('created_at','like',$year."%".$thisMonth."-%")->get();
             $values=[$name,count($lists),count($obj),count($vol)];
             array_push($allData,$values);
