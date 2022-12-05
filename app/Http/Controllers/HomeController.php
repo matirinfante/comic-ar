@@ -116,4 +116,49 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function lastest()
+    {
+        $latest = Volume::orderBy('created_at', 'desc')->take(10)->get(["id", "coverImage"]);
+
+        foreach ($latest as $late) {
+            $image = $late['coverImage'];
+            if ($image != "/assets/cover/default.png") {
+                if (str_contains($image, 'comicar-cover')) {
+                    $late['coverImage'] = asset('/storage/' . $image);
+                } else {
+                    $late['coverImage'] = env('API_URL') . $image;
+                }
+            } else {
+                $late['coverImage'] = env('API_URL') . "/assets/cover/default.png";
+            }
+        }
+
+        return response()->json($latest);
+    }
+
+    public function popular()
+    {
+        $popular = Volume::with('edition')->get()->take(10);
+
+        // detectar si posee imagen en storage o usa la predeterminada de public
+        // POPULAR
+        foreach ($popular as $popu) {
+            $image = $popu['coverImage'];
+            if ($image != "/assets/cover/default.png") {
+                if (str_contains($image, 'comicar-cover')) {
+                    $popu['coverImage'] = asset('/storage/' . $image);
+                } else {
+                    $popu['coverImage'] = env("API_URL") . $image;
+                }
+            } else {
+                $popu['coverImage'] = env("API_URL") . "/assets/cover/default.png";
+            }
+        }
+
+
+        return response()->json($popular);
+    }
+
+
 }

@@ -138,7 +138,13 @@ defineProps({
             </div>
         </div>
     </div>
-
+    <div id="pageUp" v-on:click="scrollUp();">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#6875f5" viewBox="0 0 24 24"
+            stroke="white">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+    </div>
     <Footer />
 </template>
 <style>
@@ -173,6 +179,23 @@ export default {
                     this.isloading = false
                 }), 400);
         }
+    }
+}
+
+function scrollUp() {
+    var $currentScroll = document.documentElement.scrollTop; // Obtiene el número de pixels desplazados
+    if ($currentScroll > 0) {
+        window.requestAnimationFrame(scrollUp); // window.requestAnimationFrame informa al navegador que quieres realizar una animación y solicita que el navegador programe el repintado de la ventana para el próximo ciclo de animación. El método acepta como argumento una función a la que llamar antes de efectuar el repintado.
+        window.scrollTo(0, $currentScroll - ($currentScroll / 15)); // Velocidad de scroll
+    }
+}
+
+window.onscroll = function () {
+    var $scroll = document.documentElement.scrollTop;
+    if ($scroll > 300) {
+        document.getElementById('pageUp').style.transform = 'scale(1)';
+    } else {
+        document.getElementById('pageUp').style.transform = 'scale(0)';
     }
 }
 </script>
