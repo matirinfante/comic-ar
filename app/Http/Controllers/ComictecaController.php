@@ -101,13 +101,23 @@ class ComictecaController extends Controller
     public function completeEdition(Request $request)
     {
         $userId = Auth::id();
-        $comicteca = Comicteca::where('user_id', $userId)->get();
-        $volumes = Volume::where('edition_id', $request->input('edition_id'))->get();
-        foreach ($volumes as $volume) {
-            $alreadyIn = false;   //Para que no hayan copias del volumen en la comicteca
-            foreach ($comicteca[0]->volumes()->get() as $inComicteca) {
-                if ($volume->id == $inComicteca->id) {
-                    $alreadyIn = true;
+        $comicteca=Comicteca::where('user_id',$userId)->get();
+        $volumes=Volume::where('edition_id',$request->input('edition_id'))->get();
+        foreach($volumes as $volume){
+            if ($volume['coverImage'] != "/assets/cover/default.png") {
+                if (str_contains($volume['coverImage'], 'comicar-cover')) {
+                    $volume['coverImage'] = asset('/storage/' . $volume['coverImage']);
+                } else {
+
+                    $volume['coverImage'] = $volume['coverImage'];
+                }
+            } else {
+                $volume['coverImage'] = "/assets/cover/default.png";
+            }
+            $alreadyIn=false;   //Para que no hayan copias del volumen en la comicteca
+            foreach ($comicteca[0]->volumes()->get() as $inComicteca){
+                if ($volume->id == $inComicteca->id){
+                    $alreadyIn=true;
                 }
             }
             if (!$alreadyIn) {
